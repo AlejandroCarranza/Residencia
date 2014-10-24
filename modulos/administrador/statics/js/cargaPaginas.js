@@ -16,9 +16,6 @@ function inicio(){
             });
         });
 
-<<<<<<< HEAD
-    });
-
     //Botones para el menu de Consultar
     $("#btnConsulta1").click(function (){
         $.post("consultar/consulta1.php","", function(home){
@@ -26,9 +23,6 @@ function inicio(){
             });
         });
 
-=======
-    
->>>>>>> upstream/master
      //Botones para el menu de Administrar
     $("#btnCrearUsuario").click(function (){
         $.post("administrar/crearUsuario.php","", function(home){
@@ -38,7 +32,3 @@ function inicio(){
 
     });
 }
-<<<<<<< HEAD
-  	
-=======
->>>>>>> upstream/master
