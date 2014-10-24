@@ -1,0 +1,51 @@
+body{
+	text-align: center;
+	width: 100%;
+
+}
+.encabezado{
+	height: 5em;
+	border-bottom: 2px solid lightgray;
+}
+.encabezado-logo{
+	height: 5em;
+	float: left;
+	margin-left: 1em;
+}
+
+.formulario{
+	background: lightgray;
+	display: inline-block;
+	border: 1px solid gray;
+	border-radius: 10%; 
+	padding: 2em;
+	margin-top: 2em;
+}
+
+.form-login{
+
+}
+
+.form-usuario, 
+.form-pass{
+	background: white;
+    border: none;
+    display: block;
+    border-radius: 2em;
+    padding: .5em;
+    margin: 0 auto 1em;
+}
+
+.form-btnEnviar{
+	background: #1B8F5B;
+    border-radius: 1em;
+    border: none;
+    color: white;
+    padding: .5em 1em;
+}
+
+@media screen and (min-width:768){
+	body {
+		width: 55%;
+	}
+}
