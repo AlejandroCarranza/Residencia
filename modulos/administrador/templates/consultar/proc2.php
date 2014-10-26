@@ -4,6 +4,7 @@ include 'conexion.php';
 
 $codigo=$_POST['vcod'];
 $con=conexion();
+$Telefono="Telefono";
 
 $sql="select * from contactos where id_contacto='".$codigo."'";
 $res=mysql_query($sql,$con);
@@ -16,23 +17,20 @@ if(mysql_num_rows($res)==0){
 
  $fila=mysql_fetch_array($res); 
 
- echo '<table border="1">';
- //Tabla
- echo '<tr>';
- echo '<th>Id_Contacto</th>';
- echo '<th>Nombre</th>';
- echo '<th>apellido_paterno</th>';
- echo '<th>apellido_materno</th>';
- echo '</tr>';
+ 	echo '<img class="tarjetaFoto" src="consultar/user.png">';
+	echo '<p class="tarjetaNom">'.$fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno'].'</p>';
 
- echo '<tr>';
- echo '<th>'.$fila['id_contacto'].'</th>';
- echo '<th>'.$fila['nombre'].'</th>';
- echo '<th>'.$fila['apellido_paterno'].'</th>';
- echo '<th>'.$fila['apellido_materno'].'</th>';
- echo '</tr>';
+	echo '<p class="tarjetaBasic">'."Telefono: ". " " .$fila['tel_oficina'].'</p>';
+	echo '<p class="tarjetaBasic">' ."E-mail: ". " ".$fila['email'].'</p>';
+	echo '<p class="tarjetaBasic">'."Dirección: ". " " .$fila['calle']. " ".$fila['numero_ext']. " " .$fila['colonia']. " " .$fila['municipio']. '</p>';
+	?> 
+	<a href="#" onclick="verMas('mostrarMas')">Leer más</a>
 
- echo '</table>';
-
+	<div style="display:none" id="mostrarMas"> 
+<?php
+	echo '<p class="tarjetaBasic">' ."Numero Int:  ". " ".$fila['numero_int'].'</p>';
+?> 
+</div>
+<?php
 }
 ?>
