@@ -16,8 +16,8 @@ if(mysql_num_rows($res)==0){
 }else{
 
  $fila=mysql_fetch_array($res); 
-
- 	echo '<img class="tarjetaFoto" src="consultar/user.png">';
+ 	$rutaFoto='../statics/images/contactos/'.$fila['id_contacto'].'.jpg';
+ 	echo '<img class="tarjetaFoto" src="'.$rutaFoto.'">';
 	echo '<p class="tarjetaNom">'.$fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno'].'</p>';
 
 	echo '<p class="tarjetaBasic">'."Telefono: ". " " .$fila['tel_oficina'].'</p>';

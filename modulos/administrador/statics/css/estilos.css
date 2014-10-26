@@ -161,7 +161,10 @@ body #contenido{
 }
 
 .inputBusc{
-	background: white;
+	background-image:url('../images/search.png');
+ 	background-size:25px 23px;/*tamano imagen*/
+ 	background-repeat:no-repeat;
+ 	background-position:right;
     display: inline-block;
     border-radius: 2em;
     border: 1px solid #8e8e8e;
@@ -177,10 +180,10 @@ body #contenido{
 .tarjetaFoto{
 	display: inline-block;
 	border-radius: 50%;
-	width: 50px;
-	height: 50px;
+	width: 70px;
+	height: 70px;
 	border: 1px solid #e8e8e8;
-	margin: 0.5em 1em 1em 1em;
+	margin: 0.5em 1em 0 1em;
 }
 .tarjetaNom{
 	display: inline-block;
