@@ -1,21 +1,22 @@
 <?php
-
-include 'conexion.php';
+$con=mysqli_connect("localhost","root","root","directorio");
+// Check connection
+if (mysqli_connect_errno()) {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
 
 $codigo=$_POST['vcod'];
-$con=conexion();
 $Telefono="Telefono";
 
-$sql="select * from contactos where id_contacto='".$codigo."'";
-$res=mysql_query($sql,$con);
 
-if(mysql_num_rows($res)==0){
+$result=mysqli_query($con,"SELECT * FROM contactos where id_contacto='".$codigo."' ");
+if($result === FALSE) {
+    die(mysqli_error()); // TODO: better error handling
+}
 
- echo '<b>No hay dato</b>';
+while($fila = mysqli_fetch_array($result))
+{
 
-}else{
-
- $fila=mysql_fetch_array($res); 
  	$rutaFoto='../statics/images/contactos/'.$fila['id_contacto'].'.jpg';
  	echo '<img class="tarjetaFoto" src="'.$rutaFoto.'">';
 	echo '<p class="tarjetaNom">'.$fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno'].'</p>';
@@ -33,4 +34,6 @@ if(mysql_num_rows($res)==0){
 </div>
 <?php
 }
+mysqli_free_result($result);
+mysqli_close($con);
 ?>
