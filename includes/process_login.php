@@ -11,13 +11,13 @@ if (isset($_POST['usuario'], $_POST['p'])) {
     if (login($usuario, $password, $mysqli) == true) {
         // Login success
         if ($_SESSION['type'] == '0') {
-        header('Location: ../modulos/usuario/templates/index0.php');
+        header('Location: ../modulos/templates/usuario/index0.php');
         }
         if ($_SESSION['type'] == '1') {
         header('Location: ../templates/index1.php');
         }
         if ($_SESSION['type'] == '2') {
-        header('Location: ../modulos/administrador/templates/admin.php');
+        header('Location: ../modulos/templates/administrador/admin.php');
         }
 
     } else {

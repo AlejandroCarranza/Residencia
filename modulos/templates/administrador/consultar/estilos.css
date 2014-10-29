@@ -1,0 +1,11 @@
+
+#lista{ 
+ margin:0px;
+ width:200px;         
+}
+
+.sugerencias:hover{
+ background-color:#D3D3D3;
+ cursor:default; 
+}
+
