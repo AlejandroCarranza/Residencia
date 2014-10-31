@@ -46,8 +46,8 @@ sec_session_start();
                 <div class="sub">
                     <ul class="ul_submenu">
                         <li><a href="#" id="btnConsulta1">Conulta1</a></li>
-                        <li><a href="#">Consulta2</a></li>
-						<li><a href="#">Consulta3</a></li>
+                        <li><a href="#" id="btnConsulta2">Consulta2</a></li>
+						<li><a href="#">Dependencia</a></li>
                     </ul>
                 </div>
             </li>

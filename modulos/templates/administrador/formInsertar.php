@@ -1,16 +1,21 @@
 <?php
 include_once 'register.con.php';
+include_once '../../includes/db_connect.php';
+include_once '../../includes/psl-config.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Insertar</title>
 <script type="text/javascript">
 function validateForm() {
     var nombre = document.forms["formContacto"]["nombre"].value;
     var apellidoP = document.forms["formContacto"]["apellidoP"].value;
     var apellidoM = document.forms["formContacto"]["apellidoM"].value;
+    var numInt = document.forms["formContacto"]["numInt"].value;
+
 
     if (nombre == null || nombre == "" ||
     	apellidoP == null || apellidoP == ""||
@@ -19,7 +24,13 @@ function validateForm() {
         alert("Datos de nombre incompletos");
         return false;
     }
+    else if( isNaN(numInt) ) {
+    	alert('"Número interior" debe ser un número');
+    	return false;
+    }
     else return true;
+
+
 }
 </script>
 <script type="text/javascript">
@@ -28,10 +39,10 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
         if(validateForm()){                               // Primero validará el formulario.
             $.post("register.con.php",$('#formContacto').serialize(),function(res){
                 if(res == "1"){
-                	alert("Contacto Guardado"+res);
+                	alert("Contacto Guardado");
                 	document.formContacto.reset();
                 } else {
-                	alert("Error. Contacto no guardado"+res);
+                	alert("Error. Contacto no guardado");
                 	document.formContacto.reset();
                 }
             });
@@ -39,13 +50,39 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
     });    
 });
 </script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#sub").change(function(){
+            $( "select option:selected").each(function(){
+                if($(this).attr("value")=="1"){
+                	$("div.tipo").hide();
+                    $("#TipoEducacion").show();
+                }
+                if($(this).attr("value")=="2"){
+                	$("div.tipo").hide();
+                    $("#exito1").show();
+                }
+                if($(this).attr("value")=="3"){
+                	$("div.tipo").hide();
+                    $("#exito2").show();
+                }
+                if($(this).attr("value")=="4"){
+                	$("div.tipo").hide();
+                    $("#exito3").show();
+                }
+            });
+        }).change();
+    });
+</script>
 </head>
 <body>
 	<div id="formInsert">
 		<form 
 			method="post"
-			name='formContacto'
-			id='formContacto'
+			name="formContacto"
+			id="formContacto"
+			accept-charset="utf-8"
+			enctype="multipart/form-data">
 			<span class="categorias">Nombre</span>
 			<input type="text" class="input" id="nombre" name="nombre" placeholder="Nombre(s)">
 			<input type="text" class="input" id="apellidoP" name="apellidoP" placeholder="Apellido Paterno">
@@ -55,14 +92,16 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 				<option value="C">C.</option>
 				<option value="Ing">Ing.</option>
 				<option value="Lic">Lic.</option>
+				<option value="Dr">Dr.</option>
 			</select>
 			<span class="categorias">Dirección</span>
-			<input type="text" class="input" name="calle" placeholder="Calle">
-			<input type="text" class="input" name="numInt" placeholder="Numero int">
-			<input type="text" class="input" name="numExt" placeholder="Numero ext">
-			<input type="text" class="input" name="colonia" placeholder="Colonia">
+			<input type="text" class="input" id ="calle" name="calle" placeholder="Calle">
+			<input type="text" class="input" id="numInt" name="numInt" placeholder="Número int">
+			<input type="text" class="input" id="numExt" name="numExt" placeholder="Número ext">
+			<input type="text" class="input" id="colonia"  name="colonia" placeholder="Colonia">
 			<!--<input type="text" class="input" name="municipio" placeholder="Municipio">-->
-			<select name="municipio">
+			<select name="municipio" id="municipio" >
+				<option value="" disabled selected>Municipio</option>
 				<option value="Canatlán">Canatlán</option>
 				<option value="Canelas">Canelas</option>
 				<option value="Coneto de Comonfort">Cuencamé</option>
@@ -102,11 +141,55 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 				<option value="Topia">Topia</option>
 				<option value="Vicente Guerrero">Vicente Guerrero</option>
 			</select>
-			<input type="text" class="input" name="localidad" placeholder="Localidad">
+			<input type="text" class="input" id="localidad" name="localidad" placeholder="Localidad">
+			<span class="categorias">Contacto</span>
+			<input type="text" class="input" id="TelOfc" name="TelOfc" placeholder="Teléfono Oficina">
+			<input type="text" class="input" id="TelCel" name="TelCel" placeholder="Teléfono Celular">
+			<input type="text" class="input" id="Email" name="Email" placeholder="Email">
 			<br>
+			<?php
+			$consultaSub = $mysqli->prepare("SELECT id_subcomision, nombre_subcomision FROM subcomisiones");
+			$consultaSub->execute();
+			$consultaSub->bind_result($id_subcomision,$nombre_subcomision);
+			$consultaSub->store_result();
+			echo "<select name='sub' id='sub'>";
+			echo "<option value='' disabled selected>Tipo de usuario</option>";
+			while($consultaSub->fetch()){?>
+			<p><?php echo '<option value="'.$id_subcomision.'">'.$nombre_subcomision.'</option>'; ?></p>
+			<?php }
+			echo "</select>";
+			?>
+			<br>
+			<div id="TipoEducacion" style="display:none" class="tipo">
+			<?php
+			$consulta = $mysqli->prepare("SELECT nombre_dependencia FROM dependecias where tipo_dependencia=1");
+			$consulta->execute();
+			$consulta->bind_result($nombre_dependencia);
+			$consulta->store_result();
+			echo "<select name='dep1' id='dep1'>";
+			echo "<option value='' disabled selected>Dependencia</option>";
+			while($consulta->fetch()){?>
+			<p><?php echo '<option value="'.$nombre_dependencia.'">'.$nombre_dependencia.'</option>'; ?></p>
+			<?php }
+			echo "</select>";
+			?>
+			<input type="text" class="input" id="Cargo1" name="Cargo1" placeholder="Cargo">
+
+        	</div>
+			<div id="exito1" style="display:none" class="tipo">
+            <input type="text" class="input" id="cel" name="cel" placeholder="Teléfono Celular">
+        	</div>
+			<div id="exito2" style="display:none" class="tipo">
+            Adios
+        	</div>
+			<div id="exito3" style="display:none" class="tipo">
+            No
+        	</div>
 			<input id="boton1" name="boton1" type="button"
 			value="Registrar"/> 
 		</form>
 	</div>
+	<script src="../../statics/js/jquery-2.1.0.min.js"></script>
+   	<script src="../../statics/js/AJAX.js"></script>
 </body>
 </html>

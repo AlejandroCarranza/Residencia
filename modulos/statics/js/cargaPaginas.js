@@ -22,6 +22,12 @@ function inicio(){
             $("#contenido").html(home);
             });
         });
+    $("#btnConsulta2").click(function (){
+        $.post("consultar/consulta2.php","", function(home){
+            $("#contenido").html(home);
+            });
+        });
+
 
      //Botones para el menu de Administrar
     $("#btnCrearUsuario").click(function (){
