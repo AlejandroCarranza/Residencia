@@ -16,7 +16,6 @@ if($result === FALSE) {
  echo '<td>Id_Contacto</td>';
  echo '<td>Nombre</td>';
  echo '<td>Subcomite</td>';
- echo '<td>Dependencia</td>';
  echo '<td>Link</td>';
  echo '</tr>';
 
@@ -25,9 +24,8 @@ while($fila = mysqli_fetch_array($result))
 
  echo '<tr>';
  echo '<td>'.$fila['id_contacto'].'</td>';
- echo '<td>'.$fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno'].'';
+ echo '<td>' .utf8_encode(($fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno']).'');
  echo '<td>'.$fila['fk_id_subcomision'].'</td>';
- echo '<td>'.$fila['fk_id_dependencia'].'</td>';
  
  ?>
 <td><a href="#" onclick="myFunction3(<?php echo $fila['id_contacto']; ?>)">Ver más</a></td>

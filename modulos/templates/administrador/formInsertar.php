@@ -187,8 +187,7 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 				<option value="Vicente Guerrero">Vicente Guerrero</option>
 			</select>
 			<input type="text" class="input" id="localidad" name="localidad" placeholder="Localidad">
-
-			
+			<br>
 			<input id="boton1" name="boton1" type="button"
 			value="Registrar"/> 
 		</form>
@@ -196,4 +195,5 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 	<script src="../../statics/js/jquery-2.1.0.min.js"></script>
    	<script src="../../statics/js/AJAX.js"></script>
 </body>
+
 </html>
