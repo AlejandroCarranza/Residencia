@@ -14,6 +14,7 @@ sec_session_start();
 
 <body>
 	<?php if ((login_check($mysqli) == true) && ($_SESSION['type'] == '2')): ?>
+	
 	<input type="text" class="inputBusc" id="bus" onkeyup="myFunction()" size="30" required="required" autofocus="autofocus" placeholder="Buscar" />
 	<div id="lista" class="lista"></div>
 	<br>

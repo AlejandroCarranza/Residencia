@@ -1,12 +1,11 @@
 <?php
-$con=mysqli_connect("localhost","root","root","directorio");
+$con=mysqli_connect("localhost","unUsuario","5twPJM2G5pmt65r","directorio");
 // Check connection
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
 $codigo=$_POST['vcod'];
-$Telefono="Telefono";
 
 
 $result=mysqli_query($con,"SELECT * FROM contactos where id_contacto='".$codigo."' ");
@@ -16,7 +15,8 @@ if($result === FALSE) {
 
 while($fila = mysqli_fetch_array($result))
 {
-
+	
+	echo '<a href="#" class="cancelar icon-cancel-circle" onclick="ocultarCon()"></a>';
  	$rutaFoto='../statics/images/contactos/'.$fila['id_contacto'].'.jpg';
  	echo '<img class="tarjetaFoto" src="'.$rutaFoto.'">';
 	echo '<p class="tarjetaNom">'.$fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno'].'</p>';

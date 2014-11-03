@@ -1,6 +1,6 @@
 <?php
 
-$con=mysqli_connect("localhost","root","root","directorio");
+$con=mysqli_connect("localhost","unUsuario","5twPJM2G5pmt65r","directorio");
 // Check connection
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
