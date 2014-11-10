@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('../fonts/icomoon.eot?-s4pqd');
-	src:url('../fonts/icomoon.eot?#iefix-s4pqd') format('embedded-opentype'),
-		url('../fonts/icomoon.woff?-s4pqd') format('woff'),
-		url('../fonts/icomoon.ttf?-s4pqd') format('truetype'),
-		url('../fonts/icomoon.svg?-s4pqd#icomoon') format('svg');
+	src:url('../fonts/icomoon.eot?72miry');
+	src:url('../fonts/icomoon.eot?#iefix72miry') format('embedded-opentype'),
+		url('../fonts/icomoon.woff?72miry') format('woff'),
+		url('../fonts/icomoon.ttf?72miry') format('truetype'),
+		url('../fonts/icomoon.svg?72miry#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,6 +23,9 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.icon-pencil:before {
+	content: "\e60e";
+}
 .icon-books:before {
 	content: "\e60c";
 }
@@ -65,6 +68,7 @@
 .icon-study:before {
 	content: "\e602";
 }
+
 
 
 header {
@@ -198,11 +202,6 @@ body #contenido{
 	margin: 2em 2em 0 2em;
 }
 
-#contenido form{
-	margin-left: 10%;
-	margin-right: 10%;
-}
-
 .input{
 	background: white;
     display: inline-block;
@@ -239,6 +238,7 @@ body #contenido{
     border: 1px solid #8e8e8e;
     padding: .5em;
 }
+
 /* Tarjeta de contacto*/
 .tarjetaCon{
 	background: white;
@@ -314,6 +314,7 @@ body #contenido{
 	display: inline-block;
 
 }
+/*Botones en la parte derecha de la tarjeta*/
 .cancelar{
 	font-size: 1.4em;
 	color: #8e8e8e;
@@ -323,7 +324,55 @@ body #contenido{
 .cancelar:hover{
 	color: #B40404;
 }
+.editar{
+	font-size: 1.4em;
+	color: #8e8e8e;
+	float: right;
+	text-decoration: none;
+	padding-right: 0.3em
+}
+.editar:hover{
+	color: #f10;
+}
 
+/*Tarjeta de editar*/
+#formCon{
+	text-align: center;
+}
+#formUpdate{
+	margin: .5em ;
+	text-align: left;
+}
+.etiquetas{
+	display: inline-block;
+	text-align: left;
+	margin-right: 0.2em;
+}
+.etiquetaTit{
+	display: block;
+	text-align: center;
+	font-weight: bold;
+	margin: 1em;
+}
+.tarjetaNomAct{
+	font-weight: bold;
+	font-style: italic;
+}
+.inputAct{
+	background: white;
+    display: inline-block;
+    border-radius: 2em;
+    border: 1px solid #8e8e8e;
+    padding: .5em;
+}
+.btnEnviar{
+	background: #1B8F5B;
+    border-radius: 1em;
+    border: none;
+    color: white;
+    padding: .5em;
+    text-decoration: none;
+}
 
 @media screen and (max-width:320px){
 	header .titular{

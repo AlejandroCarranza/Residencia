@@ -18,10 +18,7 @@ sec_session_start();
 	<div id="lista" class="lista"></div>
 	<br>
 	<div id="pers" class="tarjetaCon"></div>
-
-	<img src="" alt="">
-	<p></p>
-	<label class="tarjetaBasicLabel"></label>
+	
 
 	<?php else : ?>
         <p>

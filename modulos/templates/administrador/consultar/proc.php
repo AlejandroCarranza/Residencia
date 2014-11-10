@@ -15,7 +15,7 @@ if($result === FALSE) {
 
 while($fila = mysqli_fetch_array($result))
 {
-echo '<div class="sugerencias" onclick="myFunction2('.$fila["id_contacto"].')"> '.$fila['titulo'].' '.$fila['nombre'].' '.$fila['apellido_paterno'].' '.$fila['apellido_materno'].'</div>';
+echo '<div class="sugerencias" onclick="myFunction2('.$fila["id_contacto"].')"> '.utf8_encode($fila['titulo'].' '.$fila['nombre'].' '.$fila['apellido_paterno'].' '.$fila['apellido_materno'].' ').'</div>';
 }
 
 mysqli_free_result($result);

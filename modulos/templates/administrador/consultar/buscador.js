@@ -156,3 +156,36 @@ document.getElementById('pers').style.display = 'none';
 function mostrarCon(){
 document.getElementById('pers').style.display = 'inline-block';
 }
+
+/* Funcion para lanzar editar en la tarjeta*/
+function myFunction4(id){
+  var idContact = id;
+  $('#idCon').val(idContact);
+        $(document).ready(function() {
+        $.post(
+        "consultar/proc4.php", $("#idCon").serialize(),function(a){
+          mostrarCon();
+        $('#pers').html(a);
+        });
+  });  
+}
+
+function actualizar(){
+  $(document).ready( function() {  
+    $('#actualizar').click( function() {   
+        if(validaFormulario()){                           
+            $.post("consultar/actualizar.php",$('#formUpdate').serialize(),function(res){
+                $('#formCon').fadeOut('slow');   
+                if(res == 1){
+                    $('#yay').delay(500).fadeIn('slow');
+                } else {
+                    $('#fail').delay(500).fadeIn('slow');
+                }
+            });
+        }
+    });    
+});
+}
+function validaFormulario(){
+  return true;
+}

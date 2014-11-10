@@ -1,5 +1,7 @@
 <?php
-$con=mysqli_connect("localhost","unUsuario","5twPJM2G5pmt65r","directorio");
+include_once '../../../includes/psl-config.php';
+
+$con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 // Check connection
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -16,10 +18,13 @@ if($result === FALSE) {
 while($fila = mysqli_fetch_array($result))
 {
 	
-	echo '<a href="#" class="cancelar icon-cancel-circle" onclick="ocultarCon()"></a>';
+	echo '<a href="#" class="cancelar icon-cancel-circle" title="Cerrar" onclick="ocultarCon()"></a>';
+?>
+	<a href="#" class="editar icon-pencil" title="Editar" onclick="myFunction4(<?php echo $fila['id_contacto']; ?>)"></a>
+<?php
  	$rutaFoto='../statics/images/contactos/'.$fila['id_contacto'].'.jpg';
  	echo '<img class="tarjetaFoto" src="'.$rutaFoto.'">';
-	echo '<p class="tarjetaNom">'.$fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno'].'</p>';
+	echo '<p class="tarjetaNom">'.utf8_encode($fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno'].' '). '</p>';
 
 	echo '<p class="tarjetaBasic">'."Telefono: ". " " .$fila['tel_oficina'].'</p>';
 	echo '<p class="tarjetaBasic">' ."E-mail: ". " ".$fila['email'].'</p>';
@@ -32,6 +37,8 @@ while($fila = mysqli_fetch_array($result))
 	echo '<p class="tarjetaBasic">' ."Numero Int:  ". " ".$fila['numero_int'].'</p>';
 ?> 
 </div>
+<input type="hidden" value="" id="idCon" name="idCon" >
+<div id="editarCon"></div>
 <?php
 }
 mysqli_free_result($result);
