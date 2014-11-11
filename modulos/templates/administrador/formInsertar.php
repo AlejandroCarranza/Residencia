@@ -16,6 +16,7 @@ function validateForm() {
     var dep1 = document.forms["formContacto"]["dep1"].value;
     var dep2 = document.forms["formContacto"]["dep2"].value;
     var dep=dep+dep1+dep2;
+
     if (nombre == null || nombre == "" ||
     	apellidoP == null || apellidoP == ""
     	) {
@@ -126,29 +127,29 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 			<br>
 			<div id="TipoEducacion" style="display:none" class="tipo">
 			<?php
-			$consulta = $mysqli->prepare("SELECT nombre_dependencia FROM dependecias where tipo_dependencia=1");
+			$consulta = $mysqli->prepare("SELECT id_dependencia, nombre_dependencia FROM dependencias where tipo_dependencia=1");
 			$consulta->execute();
-			$consulta->bind_result($nombre_dependencia);
+			$consulta->bind_result($id_dependencia,$nombre_dependencia);
 			$consulta->store_result();
 			echo "<select name='dep1' id='dep1'>";
 			echo "<option value='' disabled selected>Dependencia</option>";
 			while($consulta->fetch()){?>
-			<p><?php echo '<option value="'.$nombre_dependencia.'">'.$nombre_dependencia.'</option>'; ?></p>
+			<p><?php echo '<option value="'.$id_dependencia.'">'.$nombre_dependencia.'</option>'; ?></p>
 			<?php }
 			echo "</select>";
 			?>
-			<input type="text" class="input" id="Cargo" name="Cargo" placeholder="Cargo">
+			<input type="text" class="input" id="Cargo1" name="Cargo1" placeholder="Cargo">
         	</div>
 			<div id="TipoSalud" style="display:none" class="tipo">
 			<?php
-			$consulta = $mysqli->prepare("SELECT nombre_dependencia FROM dependecias where tipo_dependencia=2");
+			$consulta = $mysqli->prepare("SELECT id_dependencia, nombre_dependencia FROM dependencias where tipo_dependencia=2");
 			$consulta->execute();
-			$consulta->bind_result($nombre_dependencia);
+			$consulta->bind_result($id_dependencia,$nombre_dependencia);
 			$consulta->store_result();
 			echo "<select name='dep2' id='dep2'>";
 			echo "<option value='' disabled selected>Dependencia</option>";
 			while($consulta->fetch()){?>
-			<p><?php echo '<option value="'.$nombre_dependencia.'">'.$nombre_dependencia.'</option>'; ?></p>
+			<p><?php echo '<option value="'.$id_dependencia.'">'.$nombre_dependencia.'</option>'; ?></p>
 			<?php }
 			echo "</select>";
 			?>
@@ -156,29 +157,30 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
         	</div>
 			<div id="TipoGEMS" style="display:none" class="tipo">
 			<?php
-			$consulta = $mysqli->prepare("SELECT nombre_dependencia FROM dependecias where tipo_dependencia=3");
+			$consulta = $mysqli->prepare("SELECT id_dependencia, nombre_dependencia FROM dependencias where tipo_dependencia=3");
 			$consulta->execute();
-			$consulta->bind_result($nombre_dependencia);
+			$consulta->bind_result($id_dependencia,$nombre_dependencia);
 			$consulta->store_result();
 			echo "<select name='dep3' id='dep3'>";
 			echo "<option value='' disabled selected>Dependencia</option>";
 			while($consulta->fetch()){?>
-			<p><?php echo '<option value="'.$nombre_dependencia.'">'.$nombre_dependencia.'</option>'; ?></p>
+			<p><?php echo '<option value="'.$id_dependencia.'">'.$nombre_dependencia.'</option>'; ?></p>
 			<?php }
 			echo "</select>";
 			?>
 			<input type="text" class="input" id="Cargo3" name="Cargo3" placeholder="Cargo">
         	</div>
+
 			<div id="TipoEMS" style="display:none" class="tipo">
 			<?php
-			$consulta = $mysqli->prepare("SELECT nombre_dependencia FROM dependecias where tipo_dependencia=3");
+			$consulta = $mysqli->prepare("SELECT id_dependencia, nombre_dependencia FROM dependencias where tipo_dependencia=3");
 			$consulta->execute();
-			$consulta->bind_result($nombre_dependencia);
+			$consulta->bind_result($id_dependencia,$nombre_dependencia);
 			$consulta->store_result();
 			echo "<select name='dep4' id='dep4'>";
 			echo "<option value='' disabled selected>Dependencia</option>";
 			while($consulta->fetch()){?>
-			<p><?php echo '<option value="'.$nombre_dependencia.'">'.$nombre_dependencia.'</option>'; ?></p>
+			<p><?php echo '<option value="'.$id_dependencia.'">'.$nombre_dependencia.'</option>'; ?></p>
 			<?php }
 			echo "</select>";
 			?>
@@ -236,14 +238,14 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
         	</div>
 			<div id="TipoDF" style="display:none" class="tipo">
 			<?php
-			$consulta = $mysqli->prepare("SELECT nombre_dependencia FROM dependecias where tipo_dependencia=6");
+			$consulta = $mysqli->prepare("SELECT id_dependencia, nombre_dependencia FROM dependencias where tipo_dependencia=6");
 			$consulta->execute();
-			$consulta->bind_result($nombre_dependencia);
+			$consulta->bind_result($id_dependencia,$nombre_dependencia);
 			$consulta->store_result();
 			echo "<select name='dep5' id='dep5'>";
 			echo "<option value='' disabled selected>Dependencia</option>";
 			while($consulta->fetch()){?>
-			<p><?php echo '<option value="'.$nombre_dependencia.'">'.$nombre_dependencia.'</option>'; ?></p>
+			<p><?php echo '<option value="'.$id_dependencia.'">'.$nombre_dependencia.'</option>'; ?></p>
 			<?php }
 			echo "</select>";
 			?>
