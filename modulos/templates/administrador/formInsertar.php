@@ -127,6 +127,21 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 				<option value="Prfr">Prfr.</option>
 			</select>
 			<br>
+			Fecha de Nacimiento<input type="date" class="input" id="fechaNacimiento" name="fechaNacimiento">
+			<?php
+			$consultaSub = $mysqli->prepare("SELECT id_partido, siglas FROM partidos");
+			$consultaSub->execute();
+			$consultaSub->bind_result($id_partido,$siglas);
+			$consultaSub->store_result();
+			echo "<select name='partido' id='partido'>";
+			echo "<option value='' disabled selected>Partido Político</option>";
+			while($consultaSub->fetch()){?>
+			<p><?php echo '<option value="'.$id_partido.'">'.$siglas.'</option>'; ?></p>
+			<?php }
+			echo "</select>";
+			?>
+			<br>
+
 			<?php
 			$consultaSub = $mysqli->prepare("SELECT id_subcomision, nombre_subcomision FROM subcomisiones");
 			$consultaSub->execute();
@@ -155,6 +170,9 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 			echo "</select>";
 			?>
 			<input type="text" class="input" id="Cargo1" name="Cargo1" placeholder="Cargo">
+			<br>
+			Fecha de Inicio<input type="date" class="input" id="fechaI1" name="fechaI1">
+			Fecha de Término<input type="date" class="input" id="fechaT1" name="fechaT1">
         	</div>
 			<div id="TipoSalud" style="display:none" class="tipo">
 			<?php
@@ -170,6 +188,9 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 			echo "</select>";
 			?>
 			<input type="text" class="input" id="Cargo2" name="Cargo2" placeholder="Cargo">
+			<br>
+			Fecha de Inicio<input type="date" class="input" id="fechaI2" name="fechaI2">
+			Fecha de Término<input type="date" class="input" id="fechaT2" name="fechaT2">
         	</div>
 			<div id="TipoGEMS" style="display:none" class="tipo">
 			<?php
@@ -185,6 +206,9 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 			echo "</select>";
 			?>
 			<input type="text" class="input" id="Cargo3" name="Cargo3" placeholder="Cargo">
+			<br>
+			Fecha de Inicio<input type="date" class="input" id="fechaI3" name="fechaI3">
+			Fecha de Término<input type="date" class="input" id="fechaT3" name="fechaT3">
         	</div>
 
 			<div id="TipoEMS" style="display:none" class="tipo">
@@ -201,6 +225,9 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 			echo "</select>";
 			?>
 			<input type="text" class="input" id="Cargo4" name="Cargo4" placeholder="Cargo">
+			<br>
+			Fecha de Inicio<input type="date" class="input" id="fechaI4" name="fechaI4">
+			Fecha de Término<input type="date" class="input" id="fechaT4" name="fechaT4">
         	</div>
 			<div id="TipoEM" style="display:none" class="tipo">
 			<select name="municipioEM" id="municipioEM" >
@@ -244,6 +271,10 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 				<option value="Topia">Topia</option>
 				<option value="Vicente Guerrero">Vicente Guerrero</option>
 			</select>
+			<br>
+			<br>
+			Fecha de Inicio<input type="date" class="input" id="fechaI5" name="fechaI5">
+			Fecha de Término<input type="date" class="input" id="fechaT5" name="fechaT5">
 			<select name="UAR">
 				<option value="" disabled selected>UAR</option>
 				<option value="1">1</option>
@@ -258,14 +289,17 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 			$consulta->execute();
 			$consulta->bind_result($id_dependencia,$nombre_dependencia);
 			$consulta->store_result();
-			echo "<select name='dep5' id='dep5'>";
+			echo "<select name='dep6' id='dep6'>";
 			echo "<option value='' disabled selected>Dependencia</option>";
 			while($consulta->fetch()){?>
 			<p><?php echo '<option value="'.$id_dependencia.'">'.$nombre_dependencia.'</option>'; ?></p>
 			<?php }
 			echo "</select>";
 			?>
-			<input type="text" class="input" id="Cargo5" name="Cargo5" placeholder="Cargo">
+			<input type="text" class="input" id="Cargo6" name="Cargo6" placeholder="Cargo">
+			<br>
+			Fecha de Inicio<input type="date" class="input" id="fechaI6" name="fechaI6">
+			Fecha de Término<input type="date" class="input" id="fechaT6" name="fechaT6">
 			<input type="text" class="input" id="Secretaria" name="Secretaria" placeholder="Secretaria">
         	</div>
 
@@ -311,6 +345,10 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 				<option value="Topia">Topia</option>
 				<option value="Vicente Guerrero">Vicente Guerrero</option>
 			</select>
+			<br>
+			<br>
+			Fecha de Inicio<input type="date" class="input" id="fechaI7" name="fechaI7">
+			Fecha de Término<input type="date" class="input" id="fechaT7" name="fechaT7">
         	</div>
 
 			<div id="TipoGE" style="display:none" class="tipo">
@@ -319,22 +357,50 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 			$consulta->execute();
 			$consulta->bind_result($id_dependencia,$nombre_dependencia);
 			$consulta->store_result();
-			echo "<select name='dep6' id='dep6'>";
+			echo "<select name='dep8' id='dep8'>";
 			echo "<option value='' disabled selected>Dependencia</option>";
 			while($consulta->fetch()){?>
 			<p><?php echo '<option value="'.$id_dependencia.'">'.$nombre_dependencia.'</option>'; ?></p>
 			<?php }
 			echo "</select>";
 			?>
-			<input type="text" class="input" id="Cargo6" name="Cargo6" placeholder="Cargo">
+			<input type="text" class="input" id="Cargo8" name="Cargo8" placeholder="Cargo">
+			<br>
+			Fecha de Inicio<input type="date" class="input" id="fechaI8" name="fechaI8">
+			Fecha de Término<input type="date" class="input" id="fechaT8" name="fechaT8">
         	</div>
 
         	<div id="TipoRegidores" style="display:none" class="tipo">
-			<input type="text" class="input" id="Cargo7" name="Cargo7" placeholder="Puesto">
+			<input type="text" class="input" id="Cargo9" name="Cargo9" placeholder="Puesto">
+			<br>
+			Fecha de Inicio<input type="date" class="input" id="fechaI9" name="fechaI9">
+			Fecha de Término<input type="date" class="input" id="fechaT9" name="fechaT9">
         	</div>
 
         	<div id="TipoDiputados" style="display:none" class="tipo">
-			<input type="text" class="input" id="Cargo8" name="Cargo8" placeholder="Distrito">
+			<input type="text" class="input" id="Cargo10" name="Cargo10" placeholder="Distrito">
+			<br>
+			Fecha de Inicio<input type="date" class="input" id="fechaI10" name="fechaI10">
+			Fecha de Término<input type="date" class="input" id="fechaT10" name="fechaT10">
+        	</div>
+
+			<div id="TipoGeneral" style="display:none" class="tipo">
+			<?php
+			$consulta = $mysqli->prepare("SELECT id_dependencia, nombre_dependencia FROM dependencias where tipo_dependencia=11");
+			$consulta->execute();
+			$consulta->bind_result($id_dependencia,$nombre_dependencia);
+			$consulta->store_result();
+			echo "<select name='dep11' id='dep11'>";
+			echo "<option value='' disabled selected>Dependencia</option>";
+			while($consulta->fetch()){?>
+			<p><?php echo '<option value="'.$id_dependencia.'">'.$nombre_dependencia.'</option>'; ?></p>
+			<?php }
+			echo "</select>";
+			?>
+			<input type="text" class="input" id="Cargo11" name="Cargo11" placeholder="Cargo">
+			<br>
+			Fecha de Inicio<input type="date" class="input" id="fechaI11" name="fechaI11">
+			Fecha de Término<input type="date" class="input" id="fechaT11" name="fechaT11">
         	</div>
 
         	<br>
