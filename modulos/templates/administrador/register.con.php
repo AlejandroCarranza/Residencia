@@ -56,6 +56,12 @@ if ($sub=="4"&&isset($_POST['dep4'])) {
     $dependencia=filter_input(INPUT_POST, 'dep4', FILTER_SANITIZE_STRING);
     $cargo=filter_input(INPUT_POST, 'Cargo4', FILTER_SANITIZE_STRING);
 }
+if ($sub=="8"&&isset($_POST['dep6'])) {
+    // Sanitize and validate the data passed in
+    $dependencia=filter_input(INPUT_POST, 'dep6', FILTER_SANITIZE_STRING);
+    $cargo=filter_input(INPUT_POST, 'Cargo6', FILTER_SANITIZE_STRING);
+}
+
 
 if ($dependencia!='') {
         // Insert values into the database 
@@ -70,14 +76,89 @@ if ($dependencia!='') {
 
 if ($sub=="5"&&isset($_POST['municipioEM'])) {
     // Sanitize and validate the data passed in
-    $municipioEM=filter_input(INPUT_POST, 'municipioEM', FILTER_SANITIZE_STRING);
+    $EM=filter_input(INPUT_POST, 'municipioEM', FILTER_SANITIZE_STRING);
     $UAR=filter_input(INPUT_POST, 'UAR', FILTER_SANITIZE_STRING);
 
-$temp1='Municipio';
+$temp1='Enlace Municipal';
 $temp2='UAR';
             // Insert values into the database 
-        if ($uno = $mysqli->prepare("INSERT INTO campos (fk_id_contacto, campo, valor) VALUES (?, ?, ?),(?, ?, ?)")) {
-            $uno->bind_param('ssssss', $id_contacto, $temp1, $municipioEM, $id_contacto, $temp2, $UAR);
+        if ($uno = $mysqli->prepare("INSERT INTO puestos (id_contacto, id_subcomision, puesto, extra) VALUES (?, ?, ?, ?)")) {
+            $uno->bind_param('ssss', $id_contacto, $sub, $temp1, $EM);
+            // Execute the prepared query.
+            if (! $uno->execute()) {
+                echo 'Error en sentencia para tabla campos '.$sub;
+            }
+        }
+        if ($uno = $mysqli->prepare("INSERT INTO campos (fk_id_contacto, campo, valor) VALUES (?, ?, ?)")) {
+            $uno->bind_param('sss', $id_contacto, $temp2, $UAR);
+            // Execute the prepared query.
+            if (! $uno->execute()) {
+                echo 'Error en sentencia para tabla campos '.$sub;
+            }
+        }
+}
+
+if ($sub=="6"&&isset($_POST['dep5'])) {
+    // Sanitize and validate the data passed in
+    $dependencia=filter_input(INPUT_POST, 'dep5', FILTER_SANITIZE_STRING);
+    $cargo=filter_input(INPUT_POST, 'Cargo5', FILTER_SANITIZE_STRING);
+    $secretaria=filter_input(INPUT_POST, 'Secretaria', FILTER_SANITIZE_STRING);
+
+$temp1='Secretaria';
+            // Insert values into the database 
+        if ($uno = $mysqli->prepare("INSERT INTO cargos (id_contacto, id_subcomision, cargo, id_dependencia) VALUES (?, ?, ?, ?)")) {
+            $uno->bind_param('ssss', $id_contacto, $sub, $cargo, $dependencia);
+            // Execute the prepared query.
+            if (! $uno->execute()) {
+                echo 'Error en sentencia para tabla campos '.$sub;
+            }
+        }
+        if ($uno = $mysqli->prepare("INSERT INTO campos (fk_id_contacto, campo, valor) VALUES (?, ?, ?)")) {
+            $uno->bind_param('sss', $id_contacto, $temp1, $secretaria);
+            // Execute the prepared query.
+            if (! $uno->execute()) {
+                echo 'Error en sentencia para tabla campos '.$sub;
+            }
+        }
+}
+
+if ($sub=="7"&&isset($_POST['municipioPM'])) {
+    // Sanitize and validate the data passed in
+    $PM=filter_input(INPUT_POST, 'municipioPM', FILTER_SANITIZE_STRING);
+
+$temp1='Presidente Municipal';
+            // Insert values into the database 
+        if ($uno = $mysqli->prepare("INSERT INTO puestos (id_contacto, id_subcomision, puesto, extra) VALUES (?, ?, ?, ?)")) {
+            $uno->bind_param('ssss', $id_contacto, $sub, $temp1, $PM);
+            // Execute the prepared query.
+            if (! $uno->execute()) {
+                echo 'Error en sentencia para tabla campos '.$sub;
+            }
+        }
+}
+
+if ($sub=="9"&&isset($_POST['Cargo7'])) {
+    // Sanitize and validate the data passed in
+    $puesto=filter_input(INPUT_POST, 'Cargo7', FILTER_SANITIZE_STRING);
+
+            // Insert values into the database 
+        if ($uno = $mysqli->prepare("INSERT INTO puestos (id_contacto, id_subcomision, puesto) VALUES (?, ?, ?)")) {
+            $uno->bind_param('sss', $id_contacto, $sub, $puesto);
+            // Execute the prepared query.
+            if (! $uno->execute()) {
+                echo 'Error en sentencia para tabla campos '.$sub;
+            }
+        }
+}
+
+if ($sub=="10"&&isset($_POST['Cargo8'])) {
+    // Sanitize and validate the data passed in
+    $extra=filter_input(INPUT_POST, 'Cargo8', FILTER_SANITIZE_STRING);
+
+$cargo='Diputado';
+            // Insert values into the database 
+        if ($uno = $mysqli->prepare("INSERT INTO puestos (id_contacto, id_subcomision, puesto, extra) VALUES (?, ?, ?, ?)")) {
+            $uno->bind_param('ssss', $id_contacto, $sub, $cargo, $extra);
             // Execute the prepared query.
             if (! $uno->execute()) {
                 echo 'Error en sentencia para tabla campos '.$sub;

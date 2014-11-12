@@ -83,7 +83,23 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
                 }
                 if($(this).attr("value")=="7"){
                 	$("div.tipo").hide();
-                    $("#Tipo").show();
+                    $("#TipoPM").show();
+                }
+                if($(this).attr("value")=="8"){
+                	$("div.tipo").hide();
+                    $("#TipoGE").show();
+                }
+                if($(this).attr("value")=="9"){
+                	$("div.tipo").hide();
+                    $("#TipoRegidores").show();
+                }
+                if($(this).attr("value")=="10"){
+                	$("div.tipo").hide();
+                    $("#TipoDiputados").show();
+                }
+                if($(this).attr("value")=="11"){
+                	$("div.tipo").hide();
+                    $("#TipoGeneral").show();
                 }
             });
         }).change();
@@ -251,6 +267,74 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 			?>
 			<input type="text" class="input" id="Cargo5" name="Cargo5" placeholder="Cargo">
 			<input type="text" class="input" id="Secretaria" name="Secretaria" placeholder="Secretaria">
+        	</div>
+
+			<div id="TipoPM" style="display:none" class="tipo">
+			<select name="municipioPM" id="municipioPM" >
+				<option value="" disabled selected>Municipio</option>
+				<option value="Canatlán">Canatlán</option>
+				<option value="Canelas">Canelas</option>
+				<option value="Coneto de Comonfort">Cuencamé</option>
+				<option value="Durango">Durango</option>
+				<option value="El Oro">El Oro</option>
+				<option value="Gómez Palacio">Gómez Palacio</option>
+				<option value="General Simón Boívar">Gral. Simón Boívar</option>
+				<option value="Guadalupe Victoria">Guadalupe Victoria</option>
+				<option value="Guanaceví">Guanaceví</option>
+				<option value="Hidalgo">Hidalgo</option>
+				<option value="Indé">Indé</option>
+				<option value="Lerdo">Lerdo</option>
+				<option value="Mapimí">Mapimí</option>
+				<option value="Mezquital">Mezquital</option>
+				<option value="Nazas">Nazas</option>
+				<option value="Nombre de Dios">Nombre de Dios</option>
+				<option value="Nuevo Ideal">Nuevo Ideal</option>
+				<option value="Ocampo">Ocampo</option>
+				<option value="Otáez">Otáez</option>
+				<option value="Pánuco de Coronado">Pánuco de Coronado</option>
+				<option value="Peñón Blanco">Peñón Blanco</option>
+				<option value="Poanas">Poanas</option>
+				<option value="Pueblo Nuevo">Pueblo Nuevo</option>
+				<option value="Rodeo">Rodeo</option>
+				<option value="San Bernardo">San Bernardo</option>
+				<option value="San Dimas">San Dimas</option>
+				<option value="San Juan de Guadalupe">San Juan de Guadalupe</option>
+				<option value="San Juan del Río">San Juan del Río</option>
+				<option value="San Luis del Cordero">San Luis del Cordero</option>
+				<option value="San Pedro del Gallo">San Pedro del Gallo</option>
+				<option value="Santa Clara">Santa Clara</option>
+				<option value="Santiago Papasquiaro">Santiago Papasquiaro</option>
+				<option value="Súchil">Súchil</option>
+				<option value="Tamazula">Tamazula</option>
+				<option value="Tepehuanes">Tepehuanes</option>
+				<option value="Tlahualilo">Tlahualilo</option>
+				<option value="Topia">Topia</option>
+				<option value="Vicente Guerrero">Vicente Guerrero</option>
+			</select>
+        	</div>
+
+			<div id="TipoGE" style="display:none" class="tipo">
+			<?php
+			$consulta = $mysqli->prepare("SELECT id_dependencia, nombre_dependencia FROM dependencias where tipo_dependencia=8");
+			$consulta->execute();
+			$consulta->bind_result($id_dependencia,$nombre_dependencia);
+			$consulta->store_result();
+			echo "<select name='dep6' id='dep6'>";
+			echo "<option value='' disabled selected>Dependencia</option>";
+			while($consulta->fetch()){?>
+			<p><?php echo '<option value="'.$id_dependencia.'">'.$nombre_dependencia.'</option>'; ?></p>
+			<?php }
+			echo "</select>";
+			?>
+			<input type="text" class="input" id="Cargo6" name="Cargo6" placeholder="Cargo">
+        	</div>
+
+        	<div id="TipoRegidores" style="display:none" class="tipo">
+			<input type="text" class="input" id="Cargo7" name="Cargo7" placeholder="Puesto">
+        	</div>
+
+        	<div id="TipoDiputados" style="display:none" class="tipo">
+			<input type="text" class="input" id="Cargo8" name="Cargo8" placeholder="Distrito">
         	</div>
 
         	<br>
