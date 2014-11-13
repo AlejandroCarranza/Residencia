@@ -46,9 +46,10 @@ loadDoc("vcod="+cod,"consultar/proc2.php",function(){
 
 function educacion(){
   $('#valor1').val("1");
+  $('#valor2').val("cargos");
       $(document).ready(function() {
         $.post(
-        "consultar/proc3.php", $("#valor1").serialize(),function(a){
+        "consultar/proc3.php", $("#formPref").serialize(),function(a){
         $('#contenidoRes').html(a);
         });
   });
@@ -56,81 +57,90 @@ function educacion(){
 
 function salud(){
   $('#valor1').val("2");
+  $('#valor2').val("cargos");
       $(document).ready(function() {
         $.post(
-        "consultar/proc3.php", $("#valor1").serialize(),function(a){
+        "consultar/proc3.php", $("#formPref").serialize(),function(a){
         $('#contenidoRes').html(a);
         });
   });
 }
 function gems(){
   $('#valor1').val("3");
+  $('#valor2').val("cargos");
       $(document).ready(function() {
         $.post(
-        "consultar/proc3.php", $("#valor1").serialize(),function(a){
+        "consultar/proc3.php", $("#formPref").serialize(),function(a){
         $('#contenidoRes').html(a);
         });
   });
 }
 function ems(){
   $('#valor1').val("4");
+  $('#valor2').val("cargos");
       $(document).ready(function() {
         $.post(
-        "consultar/proc3.php", $("#valor1").serialize(),function(a){
+        "consultar/proc3.php", $("#formPref").serialize(),function(a){
         $('#contenidoRes').html(a);
         });
   });
 }
 function eMunicipales(){
   $('#valor1').val("5");
+  $('#valor2').val("puestos");
       $(document).ready(function() {
         $.post(
-        "consultar/proc3.php", $("#valor1").serialize(),function(a){
+        "consultar/proc3.php", $("#formPref").serialize(),function(a){
         $('#contenidoRes').html(a);
         });
   });
 }
 function dFederales(){
   $('#valor1').val("6");
+  $('#valor2').val("cargos");
       $(document).ready(function() {
         $.post(
-        "consultar/proc3.php", $("#valor1").serialize(),function(a){
+        "consultar/proc3.php", $("#formPref").serialize(),function(a){
         $('#contenidoRes').html(a);
         });
   });
 }
 function pMunicipales(){
   $('#valor1').val("7");
+  $('#valor2').val("puestos");
       $(document).ready(function() {
         $.post(
-        "consultar/proc3.php", $("#valor1").serialize(),function(a){
+        "consultar/proc3.php", $("#formPref").serialize(),function(a){
         $('#contenidoRes').html(a);
         });
   });
 }
 function regidores(){
   $('#valor1').val("8");
+  $('#valor2').val("puestos");
       $(document).ready(function() {
         $.post(
-        "consultar/proc3.php", $("#valor1").serialize(),function(a){
+        "consultar/proc3.php", $("#formPref").serialize(),function(a){
         $('#contenidoRes').html(a);
         });
   });
 }
 function diputados(){
   $('#valor1').val("9");
+  $('#valor2').val("puestos");
       $(document).ready(function() {
         $.post(
-        "consultar/proc3.php", $("#valor1").serialize(),function(a){
+        "consultar/proc3.php", $("#formPref").serialize(),function(a){
         $('#contenidoRes').html(a);
         });
   });
 }
 function gEstado(){
   $('#valor1').val("10");
+  $('#valor2').val("cargos");
       $(document).ready(function() {
         $.post(
-        "consultar/proc3.php", $("#valor1").serialize(),function(a){
+        "consultar/proc3.php", $("#formPref").serialize(),function(a){
         $('#contenidoRes').html(a);
         });
   });

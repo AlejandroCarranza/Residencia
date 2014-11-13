@@ -14,6 +14,10 @@ $result=mysqli_query($con,"SELECT * FROM contactos where id_contacto='".$codigo.
 if($result === FALSE) {
     die(mysqli_error()); // TODO: better error handling
 }
+$result2=mysqli_query($con,"SELECT * FROM subcomisiones ");
+if($result === FALSE) {
+    die(mysqli_error()); // TODO: better error handling
+}
 
 while($fila = mysqli_fetch_array($result))
 {

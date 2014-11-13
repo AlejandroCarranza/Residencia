@@ -6,17 +6,25 @@ $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-$search1=$_POST['valor1'];
+$subcomite = $_POST['valor1'];
+$tabla = $_POST['valor2'];
 
-$result=mysqli_query($con,"SELECT * from contactos where fk_id_subcomision LIKE '".$search1."' ");
+$cargo = "cargos";
+
+//Consulta SQL que busca los contactos desde la tabla cargos o puestos segun el boton que selecciono el usuario
+$consulta = "SELECT * FROM $tabla join contactos on $tabla.id_contacto=contactos.id_contacto WHERE id_subcomision = '".$subcomite."' ";
+
+
+$result=mysqli_query($con, $consulta) or die (mysqli_error($con)); 
 if($result === FALSE) {
     die(mysqli_error()); // TODO: better error handling
 }
+//Despliegue de la lista de contactos que cumplieron las condiciones
  echo '<table border="1">';
  echo '<tr>';
  echo '<td>Id_Contacto</td>';
  echo '<td>Nombre</td>';
- echo '<td>Subcomite</td>';
+ echo '<td>puesto</td>';
  echo '<td>Link</td>';
  echo '</tr>';
 
@@ -25,9 +33,14 @@ while($fila = mysqli_fetch_array($result))
 
  echo '<tr>';
  echo '<td>'.$fila['id_contacto'].'</td>';
- echo '<td>' .utf8_encode(($fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno']).'');
- echo '<td>'.$fila['fk_id_subcomision'].'</td>';
+ echo '<td>'.utf8_encode($fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno'].' '). '</td>';
  
+if ($tabla == $cargo) {
+	 echo '<td>'.$fila['cargo'].'</td>';
+}
+else{
+	echo '<td>'.$fila['puesto'].'</td>';
+}
  ?>
 <td><a href="#" onclick="myFunction3(<?php echo $fila['id_contacto']; ?>)">Ver más</a></td>
 <?php

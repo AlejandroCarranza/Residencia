@@ -20,7 +20,6 @@ sec_session_start();
 			<a href="#" class="listaBotones" onclick="educacion()">
 				<span class=" icon-study"></span>
 				<p class="pSubcom">Educación</p>
-				<input type="hidden" name="valor1" value='VariableJavaScript'>
 			</a>
 		</li>
 		<li>
@@ -56,7 +55,7 @@ sec_session_start();
 		<li>
 			<a href="#" onclick="pMunicipales()" class="listaBotones">
 				<span class=" icon-user22"></span>
-				<p class="pSubcom">Presidentes minicipales</p>
+				<p class="pSubcom">Presidentes municipales</p>
 			</a>
 		</li>
 		<li>
@@ -81,7 +80,10 @@ sec_session_start();
 	<div id="contenidoRes">
 		
 	</div>
+	<form method="post" display="none" id="formPref">
 		<input id="valor1" name="valor1" type="hidden" value="1">
+		<input id="valor2" name="valor2" type="hidden" value="2">
+	</form>
 
 	<?php else : ?>
         <p>
