@@ -14,7 +14,6 @@ $cargo = "cargos";
 //Consulta SQL que busca los contactos desde la tabla cargos o puestos segun el boton que selecciono el usuario
 $consulta = "SELECT * FROM $tabla join contactos on $tabla.id_contacto=contactos.id_contacto WHERE id_subcomision = '".$subcomite."' ";
 
-
 $result=mysqli_query($con, $consulta) or die (mysqli_error($con)); 
 if($result === FALSE) {
     die(mysqli_error()); // TODO: better error handling

@@ -266,6 +266,13 @@ body #contenido{
 	margin: .5em ;
 	text-align: left;
 }
+.tarjetaPartido{
+	float: left;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	border: 1px solid #e8e8e8;
+}
 /*Consulta 2*/
 .items{
 	list-style: none;
