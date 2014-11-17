@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('../fonts/icomoon.eot?72miry');
-	src:url('../fonts/icomoon.eot?#iefix72miry') format('embedded-opentype'),
-		url('../fonts/icomoon.woff?72miry') format('woff'),
-		url('../fonts/icomoon.ttf?72miry') format('truetype'),
-		url('../fonts/icomoon.svg?72miry#icomoon') format('svg');
+	src:url('../fonts/icomoon.eot?-ah4mdj');
+	src:url('../fonts/icomoon.eot?#iefix-ah4mdj') format('embedded-opentype'),
+		url('../fonts/icomoon.woff?-ah4mdj') format('woff'),
+		url('../fonts/icomoon.ttf?-ah4mdj') format('truetype'),
+		url('../fonts/icomoon.svg?-ah4mdj#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -31,6 +31,9 @@
 }
 .icon-library:before {
 	content: "\e603";
+}
+.icon-profile:before {
+	content: "\e60f";
 }
 .icon-user:before {
 	content: "\e606";
@@ -68,7 +71,6 @@
 .icon-study:before {
 	content: "\e602";
 }
-
 
 
 header {
@@ -245,8 +247,13 @@ body #contenido{
 	border: 1px solid #8e8e8e;
     box-shadow: 5px 5px 5px #8e8e8e;
 	display: inline-block;
+	padding-bottom: 1em;
 }
-
+/* Encabezado de la tarjeta*/
+.encabezadoTarj{
+	display: inline-block;
+	vertical-align: 1.5em;
+}
 .tarjetaFoto{
 	display: inline-block;
 	border-radius: 50%;
@@ -256,18 +263,22 @@ body #contenido{
 	margin: 0.5em 1em 0 1em;
 }
 .tarjetaNom{
-	display: inline-block;
+	display: block;
 	font-weight: bold;
 	font-style: italic;
-	margin-right: 1em;
+	margin: 0;
+}
+.tarjetaPuesto{
+	display: block;
+	margin: 0;
 	vertical-align: 2em;
+	color: #8e8e8e;
 }
 .tarjetaBasic{
 	margin: .5em ;
 	text-align: left;
 }
 .tarjetaPartido{
-	float: left;
 	border-radius: 50%;
 	width: 30px;
 	height: 30px;
@@ -340,6 +351,12 @@ body #contenido{
 }
 .editar:hover{
 	color: #f10;
+}
+.icoVerMas{
+	color: #1B8F5B;
+	font-size: 1em;
+	text-decoration: none;
+	font-weight: bold;
 }
 
 /*Tarjeta de editar*/
