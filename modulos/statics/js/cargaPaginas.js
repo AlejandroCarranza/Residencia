@@ -28,6 +28,12 @@ function inicio(){
             });
         });
 
+    //Botones para el menu de reportes
+    $("#btnReporte1").click(function (){
+        $.post("reportes/reporte1.php","", function(home){
+            $("#contenido").html(home);
+            });
+        });
 
      //Botones para el menu de Administrar
     $("#btnCrearUsuario").click(function (){

@@ -54,7 +54,7 @@ sec_session_start();
            	<li class="li_submenu"><a href="#">Reportes</a>
                 <div class="sub">
                     <ul class="ul_submenu">
-                        <li><a href="#" id="btnReporte1">Reporte1</a></li>
+                        <li><a href="#" id="btnReporte1">Subcomité</a></li>
                         <li><a href="#" id="btnReporte2">Reporte2</a></li>
                     </ul>
                 </div>

@@ -398,6 +398,19 @@ body #contenido{
     text-decoration: none;
 }
 
+/*Reportes*/
+.btnEnviar{
+	background: #1B8F5B;
+    border-radius: 1em;
+    border: none;
+    display: block;
+    color: white;
+    padding: .5em;
+    text-decoration: none;
+    margin: auto;
+    margin-top: 1em;
+}
+
 @media screen and (max-width:320px){
 	header .titular{
 		display: none;
