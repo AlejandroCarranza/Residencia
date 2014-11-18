@@ -41,7 +41,11 @@ function inicio(){
             $("#contenido").html(home);
             });
         });
-
+    $("#btnCrearTipos").click(function (){
+        $.post("administrar/crearTipos.php","", function(home){
+            $("#contenido").html(home);
+            });
+        });
     });
 }
 

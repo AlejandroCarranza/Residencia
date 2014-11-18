@@ -13,9 +13,6 @@ function validateForm() {
     var nombre = document.forms["formContacto"]["nombre"].value;
     var apellidoP = document.forms["formContacto"]["apellidoP"].value;
     var numExt = document.forms["formContacto"]["numExt"].value;
-    var dep1 = document.forms["formContacto"]["dep1"].value;
-    var dep2 = document.forms["formContacto"]["dep2"].value;
-    var dep=dep+dep1+dep2;
 
     if (nombre == null || nombre == "" ||
     	apellidoP == null || apellidoP == ""
@@ -26,11 +23,6 @@ function validateForm() {
     else if( isNaN(numExt) ) {
     	alert('"Número exterior" debe ser un número');
     	return false;
-    }
-    else if(dep == null || dep == ""
-    	) {
-        alert("Debe seleccionar dependencia");
-        return false;
     }
     else return true;
 }
@@ -117,7 +109,7 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 			<span class="categorias">Nombre</span>
 			<input type="text" class="input" id="nombre" name="nombre" placeholder="Nombre(s)">
 			<input type="text" class="input" id="apellidoP" name="apellidoP" placeholder="Apellido Paterno">
-			<input type="text" class="input" name="apellidoM" placeholder="Apellido Materno">
+			<input type="text" class="input" id="apellidoM" name="apellidoM" placeholder="Apellido Materno">
 			<!--<input type="text" class="input" name="titulo" placeholder="Título">-->
 			<select name="titulo">
 				<option value="C">C.</option>
