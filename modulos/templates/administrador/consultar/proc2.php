@@ -114,7 +114,7 @@ while($fila4 = mysqli_fetch_array($result4))
 
 	?> 
 
-	<a href="#" class="icoVerMas" onclick="verMas('mostrarMas')">Mostrar/Ocultar</a>
+	<a href="#" class="verMas" onclick="verMas('mostrarMas')">Mostrar/Ocultar</a>
 
 	<div style="display:none" id="mostrarMas"> 
 <?php

@@ -23,8 +23,8 @@ if($result === FALSE) {
  echo '<tr>';
  echo '<td>Id_Contacto</td>';
  echo '<td>Nombre</td>';
- echo '<td>puesto</td>';
- echo '<td>Link</td>';
+ echo '<td>Puesto</td>';
+ echo '<td>    </td>';
  echo '</tr>';
 
 while($fila = mysqli_fetch_array($result))
@@ -41,7 +41,7 @@ else{
 	echo '<td>'.$fila['puesto'].'</td>';
 }
  ?>
-<td><a href="#" onclick="myFunction3(<?php echo $fila['id_contacto']; ?>)">Ver más</a></td>
+<td><a href="#" class="icon-profile icoVerMas" onclick="myFunction3(<?php echo $fila['id_contacto']; ?>)"></a></td>
 <?php
  echo '</tr>';
 
@@ -53,4 +53,4 @@ echo '<div id="pers"></div>';
 echo '</table>';
 mysqli_free_result($result);
 mysqli_close($con);
-?>
+?> 

@@ -352,11 +352,18 @@ body #contenido{
 .editar:hover{
 	color: #f10;
 }
+.verMas{
+	color: #1B8F5B;
+	font-size: 1em;
+	text-decoration: none;
+	font-weight: bold;
+}
 .icoVerMas{
 	color: #1B8F5B;
 	font-size: 1em;
 	text-decoration: none;
 	font-weight: bold;
+	padding-left: 0.4em;
 }
 
 /*Tarjeta de editar*/
