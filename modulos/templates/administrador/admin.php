@@ -62,7 +62,8 @@ sec_session_start();
            	<li class="li_submenu"><a href="#">Administrar</a>
                 <div class="sub">
                     <ul class="ul_submenu">
-                        <li><a href="#" id="btnCrearUsuario">Crear Usuario</a></li>
+                        <li><a href="#" id="btnCrearUsuario">Nuevo Usuario</a></li>
+                        <li><a href="#" id="btnCrearTipos">Nuevas Opciones</a></li>
                     </ul>
                 </div>
             </li>	 	
