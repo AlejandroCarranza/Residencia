@@ -112,11 +112,11 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 			<input type="text" class="input" id="apellidoM" name="apellidoM" placeholder="Apellido Materno">
 			<!--<input type="text" class="input" name="titulo" placeholder="Título">-->
 			<select name="titulo">
-				<option value="C">C.</option>
-				<option value="Ing">Ing.</option>
-				<option value="Lic">Lic.</option>
-				<option value="Dr">Dr.</option>
-				<option value="Prfr">Prfr.</option>
+				<option value="C.">C.</option>
+				<option value="Ing.">Ing.</option>
+				<option value="Lic.">Lic.</option>
+				<option value="Dr.">Dr.</option>
+				<option value="Prfr.">Prfr.</option>
 			</select>
 			<br>
 			Fecha de Nacimiento<input type="date" class="input" id="fechaNacimiento" name="fechaNacimiento">
@@ -451,8 +451,7 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 			</select>
 			<input type="text" class="input" id="localidad" name="localidad" placeholder="Localidad">
 			<br>
-			<input id="boton1" name="boton1" type="button"
-			value="Registrar"/> 
+			<input id="boton1" name="boton1" type="button" value="Registrar"/> 
 		</form>
 	</div>
 	<script src="../../statics/js/jquery-2.1.0.min.js"></script>

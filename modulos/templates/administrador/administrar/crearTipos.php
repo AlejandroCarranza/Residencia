@@ -84,6 +84,7 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
                 if(res == "1"){
                     alert("Datos Guardados");
                     document.formTipos.reset();
+                    $("div.tipo").hide();
                 } else {
                     alert("Error. Datos no guardados.");
                 }

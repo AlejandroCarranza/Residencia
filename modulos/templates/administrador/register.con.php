@@ -99,6 +99,13 @@ if ($dependencia!='') {
                 echo 'Error en sentencia para tabla campos ';
             }
         }
+        if ($uno = $mysqli->prepare("UPDATE contactos SET pc = '1' WHERE id_contacto = ?")) {
+            $uno->bind_param('s', $id_contacto);
+            // Execute the prepared query.
+            if (! $uno->execute()) {
+                echo 'Error en sentencia para tabla campos ';
+            }
+        }
 }
 if ($sub=="6"&&isset($_POST['Secretaria'])) {
     $secretaria=filter_input(INPUT_POST, 'Secretaria', FILTER_SANITIZE_STRING);
@@ -136,6 +143,13 @@ $temp2='UAR';
                 echo 'Error en sentencia para tabla campos '.$sub;
             }
         }
+        if ($uno = $mysqli->prepare("UPDATE contactos SET pc = '0' WHERE id_contacto = ?")) {
+            $uno->bind_param('s', $id_contacto);
+            // Execute the prepared query.
+            if (! $uno->execute()) {
+                echo 'Error en sentencia para tabla campos ';
+            }
+        }
 }
 
 
@@ -156,6 +170,13 @@ $temp1='Presidente Municipal';
                 echo 'Error en sentencia para tabla campos '.$sub;
             }
         }
+        if ($uno = $mysqli->prepare("UPDATE contactos SET pc = '0' WHERE id_contacto = ?")) {
+            $uno->bind_param('s', $id_contacto);
+            // Execute the prepared query.
+            if (! $uno->execute()) {
+                echo 'Error en sentencia para tabla campos ';
+            }
+        }
 }
 
 if ($sub=="9"&&isset($_POST['Cargo9'])) {
@@ -171,6 +192,13 @@ $cargo='Regidor';
             // Execute the prepared query.
             if (! $uno->execute()) {
                 echo 'Error en sentencia para tabla campos '.$sub;
+            }
+        }
+        if ($uno = $mysqli->prepare("UPDATE contactos SET pc = '0' WHERE id_contacto = ?")) {
+            $uno->bind_param('s', $id_contacto);
+            // Execute the prepared query.
+            if (! $uno->execute()) {
+                echo 'Error en sentencia para tabla campos ';
             }
         }
 }
@@ -190,7 +218,15 @@ $cargo='Diputado';
                 echo 'Error en sentencia para tabla campos '.$sub;
             }
         }
+        if ($uno = $mysqli->prepare("UPDATE contactos SET pc = '0' WHERE id_contacto = ?")) {
+            $uno->bind_param('s', $id_contacto);
+            // Execute the prepared query.
+            if (! $uno->execute()) {
+                echo 'Error en sentencia para tabla campos ';
+            }
+        }
 }
+
 
 }
 

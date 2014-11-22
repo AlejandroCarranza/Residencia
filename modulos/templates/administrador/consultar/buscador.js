@@ -181,19 +181,22 @@ function myFunction4(id){
 }
 
 function actualizar(){
-  $(document).ready( function() {  
-    $('#actualizar').click( function() {   
+  $(document).ready( function() {
         if(validaFormulario()){                           
-            $.post("consultar/actualizar.php",$('#formUpdate').serialize(),function(res){
-                $('#formCon').fadeOut('slow');   
+            $.post("consultar/actualizar.php",$('#formUpdate').serialize(),function(res){  
                 if(res == 1){
-                    $('#yay').delay(500).fadeIn('slow');
+                    alert("Contacto Actualizado");
                 } else {
-                    $('#fail').delay(500).fadeIn('slow');
+                    alert("Error. Contacto no actualizado");
                 }
             });
         }
-    });    
+});
+}
+
+function actualizarPuesto(){
+  $(document).ready( function() {
+        $("#NuevoPuesto").show();
 });
 }
 function validaFormulario(){
