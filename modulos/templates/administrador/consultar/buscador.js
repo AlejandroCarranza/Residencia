@@ -180,6 +180,17 @@ function myFunction4(id){
   });  
 }
 
+function myFunction5(id){
+  var idFoto = id;
+  $('#idFoto').val(idFoto);
+        $(document).ready(function() {
+        $.post("consultar/proc5.php", $("#idFoto").serialize(),function(a){
+          mostrarCon();
+        $('#pers').html(a);
+        });
+  });  
+}
+
 function actualizar(){
   $(document).ready( function() {
         if(validaFormulario()){                           

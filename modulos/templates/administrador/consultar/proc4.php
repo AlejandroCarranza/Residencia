@@ -83,11 +83,19 @@ while($fila = mysqli_fetch_array($result))
     <div id="formCon">
       <form method="POST" id="formUpdate" accept-charset="utf-8" enctype="multipart/form-data">
         <?php
-        $rutaFoto='../statics/images/contactos/'.$fila['id_contacto'].'.jpg';
+        $foto = $fila['foto'];
+
+        if ($foto > 0 ) {
+        $rutaFoto='../../statics/images/contactos/'.$fila['id_contacto'].'.jpg';
+        }
+        else{
+        $rutaFoto='../../statics/images/contactos/user.png';
+        }
         $pc=$fila['pc'];
 
 
         echo '<img class="tarjetaFoto" src="'.$rutaFoto.'">';
+        echo '<input type="button" class="btnEnviar" value="Subir foto" onclick="myFunction5('.$fila['id_contacto'].')"></input>';
         echo '<p class="tarjetaNom">'.utf8_encode($fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno'].' '). '</p>';
         if($pc==1){
             $consulta = $mysqli->prepare("SELECT cargos.id_dependencia, cargos.cargo, nombre_dependencia FROM cargos
@@ -453,6 +461,7 @@ while($fila = mysqli_fetch_array($result))
 
 		</form>
 	</div>
+    <input type="hidden" value="" id="idFoto" name="idFoto" >
 </body>
 </html>
 <?php 
