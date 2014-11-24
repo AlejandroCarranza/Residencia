@@ -213,3 +213,37 @@ function actualizarPuesto(){
 function validaFormulario(){
   return true;
 }
+
+function myFunction6(){
+$(document).ready(function() {
+      $.post(
+      "administrar/listas.php", $("#catalago").serialize(),function(a){
+      $('#listas').html(a);
+      });
+   });
+}
+
+function myFunction7(id){
+  var idRegistro = id;
+  $('#valor1').val(idRegistro);
+      $(document).ready(function() {
+        $.post(
+        "administrar/actualizarDato.php", $("#formPref").serialize(),function(a){
+        $('#listas').html(a);
+        });
+  });
+}
+function actualizar2(){
+  $(document).ready( function() {
+        if(validaFormulario()){                           
+            $.post("administrar/actualizar.php",$('#formUpdate').serialize(),function(res){  
+                if(res == 1){
+                    alert("Registro Actualizado");
+                } else {
+                    alert("Error. Registro no actualizado");
+                }
+            });
+        }
+});
+}
+

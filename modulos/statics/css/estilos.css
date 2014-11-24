@@ -374,6 +374,10 @@ body #contenido{
 	margin: .5em ;
 	text-align: left;
 }
+#formUpdate2{
+	margin: .5em ;
+	text-align: center;
+}
 .etiquetas{
 	display: inline-block;
 	text-align: left;
@@ -416,6 +420,21 @@ body #contenido{
     text-decoration: none;
     margin: auto;
     margin-top: 1em;
+}
+
+/*Editar Catalagos*/
+
+.btnEnviar2{
+	background: #1B8F5B;
+    border-radius: 1em;
+    border: none;
+    display: block;
+    color: white;
+    padding: .5em;
+    text-decoration: none;
+    margin: auto;
+    margin-top: 1em;
+    display: inline-block;
 }
 
 @media screen and (max-width:320px){

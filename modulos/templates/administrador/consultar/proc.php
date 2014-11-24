@@ -1,6 +1,8 @@
 <?php
 
-$con=mysqli_connect("localhost","unUsuario","5twPJM2G5pmt65r","directorio");
+include_once '../../../includes/psl-config.php';
+
+$con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 // Check connection
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();

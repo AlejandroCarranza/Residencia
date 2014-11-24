@@ -46,6 +46,11 @@ function inicio(){
             $("#contenido").html(home);
             });
         });
+    $("#btnActualizarCat").click(function (){
+        $.post("administrar/actualizarCat.php","", function(home){
+            $("#contenido").html(home);
+            });
+        });
     });
 }
 

@@ -24,7 +24,7 @@ if($result === FALSE) {
  echo '<td>Id_Contacto</td>';
  echo '<td>Nombre</td>';
  echo '<td>Puesto</td>';
- echo '<td>    </td>';
+ echo '<td>Editar</td>';
  echo '</tr>';
 
 while($fila = mysqli_fetch_array($result))

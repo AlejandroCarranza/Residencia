@@ -55,7 +55,7 @@ sec_session_start();
                 <div class="sub">
                     <ul class="ul_submenu">
                         <li><a href="#" id="btnReporte1">Subcomité</a></li>
-                        <li><a href="#" id="btnReporte2">Reporte2</a></li>
+                        
                     </ul>
                 </div>
             </li>
@@ -64,6 +64,7 @@ sec_session_start();
                     <ul class="ul_submenu">
                         <li><a href="#" id="btnCrearUsuario">Nuevo Usuario</a></li>
                         <li><a href="#" id="btnCrearTipos">Opciones</a></li>
+                        <li><a href="#" id="btnActualizarCat">Catálogos</a></li>
                     </ul>
                 </div>
             </li>	 	
