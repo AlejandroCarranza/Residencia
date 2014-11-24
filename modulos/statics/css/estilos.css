@@ -436,6 +436,18 @@ body #contenido{
     margin-top: 1em;
     display: inline-block;
 }
+.listas{
+	text-align: center;
+	background: white;
+	display: block;
+}
+.listas table{
+	 margin: 0 auto;
+     text-align: left;
+}
+#formReg{
+	display: inline-block;
+}
 
 @media screen and (max-width:320px){
 	header .titular{

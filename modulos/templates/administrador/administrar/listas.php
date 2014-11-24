@@ -25,7 +25,6 @@ if($result === FALSE) {
 
 if ($tabla == "dependencias") {
 	
- echo '<td>Id</td>';
  echo '<td>Nombre</td>';
  echo '<td>Tipo</td>';
  echo '<td>Editar</td>';
@@ -35,7 +34,6 @@ while($fila = mysqli_fetch_array($result))
 {
 
 	echo '<tr>';
-	echo '<td>'.$fila['id_dependencia'].'</td>';
 	echo '<td>'.utf8_encode($fila['nombre_dependencia']).'</td>';
 	echo '<td>'.$fila['tipo_dependencia'].'</td>';
  
@@ -49,7 +47,6 @@ while($fila = mysqli_fetch_array($result))
 //Si selecciono partidos
 elseif ($tabla == "partidos") {
 	
- echo '<td>Id</td>';
  echo '<td>Nombre</td>';
  echo '<td>Siglas</td>';
  echo '<td>Editar</td>';
@@ -59,7 +56,6 @@ while($fila = mysqli_fetch_array($result))
 {
 
 	echo '<tr>';
-	echo '<td>'.$fila['id_partido'].'</td>';
 	echo '<td>'.utf8_encode($fila['nombre_partido']).'</td>';
 	echo '<td>'.$fila['siglas'].'</td>';
  
@@ -74,7 +70,6 @@ while($fila = mysqli_fetch_array($result))
 //Si selecciono Subcomisiones
 elseif ($tabla == "subcomisiones") {
 	
- echo '<td>Id</td>';
  echo '<td>Nombre</td>';
  echo '<td>Editar</td>';
  echo '</tr>';
@@ -83,7 +78,6 @@ while($fila = mysqli_fetch_array($result))
 {
 
 	echo '<tr>';
-	echo '<td>'.$fila['id_subcomision'].'</td>';
 	echo '<td>'.utf8_encode($fila['nombre_subcomision']).'</td>';
  
  ?>

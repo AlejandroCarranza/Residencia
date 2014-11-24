@@ -14,6 +14,6 @@
 		<option value="partidos">Partido</option>
 	</select>
 
-	<div id="listas"></div>
+	<div class="listas" id="listas"></div>
 </body>
 </html>
