@@ -203,6 +203,14 @@ body #contenido{
 	text-align: center;
 	margin: 2em 2em 0 2em;
 }
+select {
+	background: white;
+    display: inline-block;
+    border-radius: 2em;
+    border: 1px solid #8e8e8e;
+    padding: .5em;
+    margin: 0 1em 1em 0;
+}
 
 .input{
 	background: white;

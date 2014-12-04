@@ -1,3 +1,6 @@
+<meta http-equiv="content-type" content="text/html; UTF-8" />
+
+<?php header("Content-type: text/html; charset=utf8"); ?>
 <?php
 
 include_once '../../../includes/psl-config.php';
@@ -7,6 +10,10 @@ $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+
+$acentos = $con->query("SET NAMES 'utf8'");
+mysqli_set_charset($con,"utf8");
+
 
 //Asignacion de valores segun los enviados por el usuario
 $idRegistro= $_POST['valor1'];
@@ -32,7 +39,7 @@ while($fila = mysqli_fetch_array($result)) {
 
 	?>
 	<div id="formReg">
-    <form method="POST" id="formUpdate">
+    <form method="POST" id="formUpdate" accept-charset="utf-8" enctype="multipart/form-data">
         <br>
         <input type="hidden" class="input" name="tabla" value="<?php echo $tabla; ?>">
 	<?php
@@ -78,13 +85,16 @@ while($fila = mysqli_fetch_array($result)) {
         <input type="hidden" class="input" name="tabla" value="<?php echo $tabla; ?>">
         <input type="hidden" class="input" name="id_subcomision" value="<?php echo $fila['id_subcomision']; ?>">
         Nombre: <input type="text" class="input" name="nombre_subcomision" value="<?php echo $fila['nombre_subcomision']; ?>">
-		?>
-		<a href="#" id="actualiza" name="actualiza" class="btnEnviar2" onclick="actualizar2()">Actualizar</a>
-	</form>
-	</div>
+
 	<?php
 	
 	}
+
+	?>
+	<a href="#" id="actualiza" name="actualiza" class="btnEnviar2" onclick="actualizar2()">Actualizar</a>
+	</form>
+	</div>
+	<?php
 }
 mysqli_free_result($result);
 mysqli_close($con);
