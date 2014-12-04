@@ -14,7 +14,15 @@ if ($tabla === "0") {
 else{
 
 //Consulta SQL que busca los contactos desde la tabla cargos o puestos segun el boton que selecciono el usuario
-$consulta = "SELECT * FROM $tabla ";
+if ($tabla == "dependencias") {
+	$consulta = "SELECT * FROM dependencias join subcomisiones on dependencias.tipo_dependencia = subcomisiones.id_subcomision";
+}
+elseif ($tabla == "subcomisiones") {
+	$consulta = "SELECT * FROM subcomisiones";
+}
+else {
+	$consulta = "SELECT * FROM partidos";
+}
 
 $result=mysqli_query($con, $consulta) or die (mysqli_error($con)); 
 if($result === FALSE) {
@@ -35,7 +43,7 @@ while($fila = mysqli_fetch_array($result))
 
 	echo '<tr>';
 	echo '<td>'.utf8_encode($fila['nombre_dependencia']).'</td>';
-	echo '<td>'.$fila['tipo_dependencia'].'</td>';
+	echo '<td>'.utf8_encode($fila['nombre_subcomision'].' '). '</td>';
  
  ?>
 <td><a href="#" class="icon-profile icoVerMas" onclick="myFunction7(<?php echo $fila['id_dependencia']; ?>)"></a></td>
