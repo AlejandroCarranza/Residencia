@@ -21,17 +21,15 @@ if($result === FALSE) {
 //Despliegue de la lista de contactos que cumplieron las condiciones
  echo '<table border="1">';
  echo '<tr>';
- echo '<td>Id_Contacto</td>';
  echo '<td>Nombre</td>';
  echo '<td>Puesto</td>';
- echo '<td>Editar</td>';
+ echo '<td>Más</td>';
  echo '</tr>';
 
 while($fila = mysqli_fetch_array($result))
 {
 
  echo '<tr>';
- echo '<td>'.$fila['id_contacto'].'</td>';
  echo '<td>'.utf8_encode($fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno'].' '). '</td>';
  
 if ($tabla == $cargo) {

@@ -28,7 +28,7 @@ function sec_session_start() {
 
 function login($usuario, $password, $mysqli) {
     // Using prepared statements means that SQL injection is not possible. 
-    if ($stmt = $mysqli->prepare("SELECT id, username, password, salt, type 
+    if ($stmt = $mysqli->prepare("SELECT id, username, nombre, password, salt, type 
         FROM members
        WHERE username = ?
         LIMIT 1")) {
@@ -37,7 +37,7 @@ function login($usuario, $password, $mysqli) {
         $stmt->store_result();
  
         // get variables from result.
-        $stmt->bind_result($user_id, $username, $db_password, $salt, $type);
+        $stmt->bind_result($user_id, $username, $nombre, $db_password, $salt, $type);
         $stmt->fetch();
  
         // hash the password with the unique salt.
@@ -60,6 +60,7 @@ function login($usuario, $password, $mysqli) {
                     // XSS protection as we might print this value
                     $user_id = preg_replace("/[^0-9]+/", "", $user_id);
                     $_SESSION['user_id'] = $user_id;
+                    $_SESSION['nombre'] = $nombre;
                     $_SESSION['type'] = $type;
                     // XSS protection as we might print this value
                     $username = preg_replace("/[^a-zA-Z0-9_\-]+/", 

@@ -7,9 +7,28 @@ class PDF extends FPDF
 {
 }
 
+//Crea conexion al servidor mysql con los datos de psl-config.php
+$con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
+	if (mysqli_connect_errno()) {
+  	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	}
+
 $tabla = "";
+$comite = "";
 
 $subcomite= $_POST['subcomite'];
+
+
+$consulta1 = "SELECT nombre_subcomision FROM subcomisiones WHERE id_subcomision = '".$subcomite."' ";
+$result1=mysqli_query($con, $consulta1) or die (mysqli_error($con)); 
+if($result1 === FALSE) {
+    die(mysqli_error()); // TODO: better error handling
+}
+while($fila1 = mysqli_fetch_array($result1))
+{
+	$comite = $fila1['nombre_subcomision'];
+}
+
 if (($subcomite == 5) or ($subcomite == 7) or ($subcomite == 8) or ($subcomite == 10) ) {
 	$tabla = "puestos";
 }
@@ -32,11 +51,6 @@ $pdf->Cell(0, 5, utf8_decode(''), 0, 1, 'L');
 $pdf->Cell(0, 5, utf8_decode('"Titulo"'), 0, 1, 'C');
 $pdf->Cell(0, 5, utf8_decode('"Algún contenido"'). $subcomite);
 
-//DATOS DE CONECCION
-$con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
-	if (mysqli_connect_errno()) {
-  	echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	}
 
 //MOSTRAMOS LA TABLA
 $pdf->Ln();
@@ -60,6 +74,6 @@ while($fila = mysqli_fetch_array($result))
 }
 
 $pdf->Output();
-//$pdf->Output("Contrato_".$per_Rut."-".$per_DV.".pdf","D");
+//$pdf->Output("Reporte-".$comite.".pdf","D");
 
 ?>

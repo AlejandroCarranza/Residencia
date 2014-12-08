@@ -26,12 +26,12 @@ sec_session_start();
 			<img src="../../statics/images/logo-mini.png" alt="">
 		</figure>
 		<div class="titular">
-			<h2 class="titulo">Sistema</h2>
+			<h2 class="titulo">Sistema para la administración de contactos</h2>
 		</div>
 		<div class="info">
 			<img src="../../statics/images/user.png" alt="usuario" class="avatar">
 			<div class="usuario">
-				<span class="nombre">Administrador</span>
+				<span class="nombre"><?php echo $_SESSION['username']; ?></span>
 				<a class="cerrarSesion" href="../../includes/logout.php">Cerrar Sesión</a>
 			</div>
 		</div>
@@ -46,8 +46,7 @@ sec_session_start();
                 <div class="sub">
                     <ul class="ul_submenu">
                         <li><a href="#" id="btnConsulta1">Nombre</a></li>
-                        <li><a href="#" id="btnConsulta2">Subcomite</a></li>
-						<li><a href="#">Dependencia</a></li>
+                        <li><a href="#" id="btnConsulta2">Subcomité</a></li>
                     </ul>
                 </div>
             </li>

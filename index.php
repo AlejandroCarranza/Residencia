@@ -39,7 +39,6 @@ if (login_check($mysqli) == true) {
             <input type="submit" value="Entrar" class="form-btnEnviar" onclick="formhash(this.form, this.form.password);" />
 
         </form>
-        <p>Si nos estás registrado, por favor <a href="register.php">regístrate</a>.</p>
 
     </body>
 </html>

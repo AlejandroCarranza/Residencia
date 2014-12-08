@@ -136,7 +136,7 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
         </div>
 
         <br>
-            <input id="boton3" name="boton3" type="button" value="Registrar"/>
+            <input class="btnEnviar" id="boton3" name="boton3" type="button" value="Registrar"/>
             <br>             
         </form>
     </div>

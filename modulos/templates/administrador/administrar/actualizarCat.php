@@ -6,11 +6,11 @@
 	<script src="consultar/buscador.js"></script>
 </head>
 <body>
-
+	<p class="etiquetaTit">Seleccione un catálogo a editar</p>
 	<select name="catalago" id="catalago" onclick="myFunction6()">
 		<option value="0">...</option>
 		<option value="dependencias">Dependencia</option>
-		<option value="subcomisiones">Subcomite</option>
+		<option value="subcomisiones">Subcomité</option>
 		<option value="partidos">Partido</option>
 	</select>
 

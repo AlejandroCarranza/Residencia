@@ -111,7 +111,7 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
             <input type="password" class="input" id="password" name="password" placeholder="Contraseña"/>
             <input type="password" class="input" id="confirmarpwd" name="confirmarpwd" placeholder="Confirmar contraseña"/>
             <br>
-            <input id="boton2" name="boton2" type="button" value="Registrar"/> 
+            <input class="btnEnviar" id="boton2" name="boton2" type="button" value="Registrar"/> 
         </form>
     </div>
     <script src="../../statics/js/jquery-2.1.0.min.js"></script>

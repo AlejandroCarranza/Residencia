@@ -49,7 +49,7 @@ while($fila = mysqli_fetch_array($result)) {
 	?>
         <input type="hidden" class="input" name="id_dependencia" value="<?php echo $fila['id_dependencia']; ?>">
         Nombre: <input type="text" class="input" name="nombre_dependencia" value="<?php echo $fila['nombre_dependencia']; ?>">
-		Tipo: <input type="text" class="input" name="tipo_dependencia" value="<?php echo $fila['tipo_dependencia']; ?>">
+		Tipo:
 		
 	<?php
 		//Se crea un combo y lo llenamos con subcomites de manera dinamica desde la base de datos
@@ -64,10 +64,10 @@ while($fila = mysqli_fetch_array($result)) {
 			$compara_sub = $fila2['id_subcomision'];
 			//Comparacion para seleccionar el subcomite que tiene asignado el registro
 			if($tipo_dep == $compara_sub ){
-				echo '<option selected value="'.$fila2['id_subcomision'].'"> '.utf8_encode($fila2['nombre_subcomision']).'</option>';
+				echo '<option selected value="'.$fila2['id_subcomision'].'"> '.$fila2['nombre_subcomision'].'</option>';
 			}
 			else
-			echo '<option value="'.$fila2['id_subcomision'].'"> '.utf8_encode($fila2['nombre_subcomision']).'</option>';
+			echo '<option value="'.$fila2['id_subcomision'].'"> '.$fila2['nombre_subcomision'].'</option>';
 		}
 		echo '</select>';
 		mysqli_free_result($result2);

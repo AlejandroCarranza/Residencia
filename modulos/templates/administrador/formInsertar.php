@@ -119,7 +119,7 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 				<option value="Prfr.">Prfr.</option>
 			</select>
 			<br>
-			Fecha de Nacimiento<input type="date" class="input" id="fechaNacimiento" name="fechaNacimiento">
+			Fecha de Nacimiento:<input type="date" class="input" id="fechaNacimiento" name="fechaNacimiento">
 			<?php
 			$consultaSub = $mysqli->prepare("SELECT id_partido, siglas FROM partidos");
 			$consultaSub->execute();
@@ -451,7 +451,7 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 			</select>
 			<input type="text" class="input" id="localidad" name="localidad" placeholder="Localidad">
 			<br>
-			<input id="boton1" name="boton1" type="button" value="Registrar"/> 
+			<input id="boton1" class="btnEnviar" name="boton1" type="button" value="Registrar"/> 
 		</form>
 	</div>
 	<script src="../../statics/js/jquery-2.1.0.min.js"></script>
