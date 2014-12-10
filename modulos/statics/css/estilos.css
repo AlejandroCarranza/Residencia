@@ -212,6 +212,28 @@ select {
     margin: 0 1em 1em 0;
 }
 
+/*Inicio*/
+.cumpleanos{
+	display: inline-block;
+	vertical-align: center;
+}
+.cumpleanosMensajes{
+	display: inline-block;
+	text-align: center;
+    vertical-align: top;
+}
+.cumpleMensaje{
+	display: block;
+	text-align: center;
+	font-weight: bold;
+	margin: 1em;
+}
+.globos{
+	width: 50px;
+	display: inline-block;
+}
+/**/
+
 .input{
 	background: white;
     display: inline-block;
@@ -456,6 +478,7 @@ select {
 #formReg{
 	display: inline-block;
 }
+
 
 @media screen and (max-width:320px){
 	header .titular{

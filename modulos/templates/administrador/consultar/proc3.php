@@ -12,17 +12,23 @@ $tabla = $_POST['valor2'];
 $cargo = "cargos";
 
 //Consulta SQL que busca los contactos desde la tabla cargos o puestos segun el boton que selecciono el usuario
-$consulta = "SELECT * FROM $tabla join contactos on $tabla.id_contacto=contactos.id_contacto WHERE id_subcomision = '".$subcomite."' ";
+//$consulta = "SELECT * FROM $tabla join contactos on $tabla.id_contacto=contactos.id_contacto WHERE id_subcomision = '".$subcomite."' ";
+$consulta = " SELECT *
+FROM $tabla sub
+INNER JOIN contactos c ON sub.id_contacto =  c.id_contacto
+INNER JOIN dependencias d ON sub.id_dependencia =  d.id_dependencia
+WHERE id_subcomision = '".$subcomite."' ";
 
 $result=mysqli_query($con, $consulta) or die (mysqli_error($con)); 
 if($result === FALSE) {
     die(mysqli_error()); // TODO: better error handling
 }
-//Despliegue de la lista de contactos que cumplieron las condiciones
+//Despliegue de la lista de contactos que cumplieron las condiciones en una tabla
  echo '<table border="1">';
  echo '<tr>';
  echo '<td>Nombre</td>';
  echo '<td>Puesto</td>';
+ echo '<td>Lugar</td>';
  echo '<td>Más</td>';
  echo '</tr>';
 
@@ -38,6 +44,7 @@ if ($tabla == $cargo) {
 else{
 	echo '<td>'.$fila['puesto'].'</td>';
 }
+	echo '<td>'.$fila['nombre_dependencia'].'</td>';
  ?>
 <td><a href="#" class="icon-profile icoVerMas" onclick="myFunction3(<?php echo $fila['id_contacto']; ?>)"></a></td>
 <?php

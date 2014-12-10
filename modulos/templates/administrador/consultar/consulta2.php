@@ -15,63 +15,64 @@ sec_session_start();
 <body>
 	<!-- Código php para dar seguridad y solo permitir que los usuarios autorizados accedan a este archivo-->
 	<?php if ((login_check($mysqli) == true) && ($_SESSION['type'] == '2')): ?>
+	<!-- Lista de botones de subcomites -->
 	<ul class="items">
 		<li>
-			<a href="#" class="listaBotones" onclick="educacion()">
+			<a href="#" onclick="btnsSubcomites(1)" class="listaBotones">
 				<span class=" icon-study"></span>
 				<p class="pSubcom">Educación</p>
 			</a>
 		</li>
 		<li>
-			<a href="#" onclick="salud()" class="listaBotones">
+			<a href="#" onclick="btnsSubcomites(2)" class="listaBotones">
 				<span class=" icon-heart"></span>
 				<p class="pSubcom">Salud</p>
 			</a>
 		</li>
 		<li>
-			<a href="#" onclick="gems()" class="listaBotones">
+			<a href="#" onclick="btnsSubcomites(3)" class="listaBotones">
 				<span class=" icon-library"></span>
 				<p class="pSubcom">GEMS</p>
 			</a>
 		</li>
 		<li>
-			<a href="#" onclick="ems()" class="listaBotones">
+			<a href="#" onclick="btnsSubcomites(4)" class="listaBotones">
 				<span class=" icon-books"></span>
 				<p class="pSubcom">EMS</p>
 			</a>
 		</li>
 		<li>
-			<a href="#" onclick="eMunicipales()" class="listaBotones">
+			<a href="#" onclick="btnsSubcomites(5)" class="listaBotones">
 				<span class=" icon-user"></span>
 				<p class="pSubcom">Enlaces Municipales</p>
 			</a>
 		</li>
 		<li>
-			<a href="#" onclick="dFederales()" class="listaBotones">
+			<a href="#" onclick="btnsSubcomites(6)" class="listaBotones">
 				<span class=" icon-users"></span>
 				<p class="pSubcom">Delegados Federales</p>
 			</a>
 		</li>
 		<li>
-			<a href="#" onclick="pMunicipales()" class="listaBotones">
+			<a href="#" onclick="btnsSubcomites(7)" class="listaBotones">
 				<span class=" icon-user22"></span>
 				<p class="pSubcom">Presidentes municipales</p>
 			</a>
 		</li>
 		<li>
-			<a href="#" onclick="regidores()" class="listaBotones">
+			<a href="#" onclick="btnsSubcomites(8)" class="listaBotones">
 				<span class=" icon-user2"></span>
 				<p class="pSubcom">Regidores</p>
 			</a>
 		</li>
 		<li>
-			<a href="#" onclick="diputados()" class="listaBotones">
+			<a href="#" onclick="btnsSubcomites(9)" class="listaBotones">
 				<span class=" icon-user3"></span>
 				<p class="pSubcom">Diputados</p>
 			</a>
 		</li>
 		<li>
-			<a href="#" onclick="gEstado()" class="listaBotones">
+			<a href="#" onclick="btnsSubcomites(10)" class="listaBotones">
 				<span class=" icon-flag"></span>
 				<p class="pSubcom">Gobierno del estado</p>
 			</a>
