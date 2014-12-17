@@ -21,9 +21,9 @@ WHERE id_subcomision = '".$subcomite."' ";
 
 $result=mysqli_query($con, $consulta) or die (mysqli_error($con)); 
 if($result === FALSE) {
-    die(mysqli_error()); // TODO: better error handling
-}
-//Despliegue de la lista de contactos que cumplieron las condiciones en una tabla
+    die(mysqli_error()); 
+
+//Muestra el encabezado de la tabla
  echo '<table border="1">';
  echo '<tr>';
  echo '<td>Nombre</td>';
@@ -32,30 +32,40 @@ if($result === FALSE) {
  echo '<td>Más</td>';
  echo '</tr>';
 
+//Se almacena el resultado de la consulta en un array (fila)
 while($fila = mysqli_fetch_array($result))
 {
-
+	//Muestra el nombre 
  echo '<tr>';
  echo '<td>'.utf8_encode($fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno'].' '). '</td>';
- 
+ // Comprueba si el contacto tiene asignado un cargo
 if ($tabla == $cargo) {
+	// Muestra el cargo
 	 echo '<td>'.$fila['cargo'].'</td>';
 }
+//Si no tiene un cargo, entonces tiene un puesto
 else{
+	//muestra el puesto
 	echo '<td>'.$fila['puesto'].'</td>';
-}
+}	//Muestra el lugar donde trabaja el contacto
 	echo '<td>'.$fila['nombre_dependencia'].'</td>';
  ?>
+ <!-- Boton para ver mas en la tabla que envia como parametro id_contacto a myFunction3 y esta activa proc2 para mostrar mas informacion del contacto-->
 <td><a href="#" class="icon-profile icoVerMas" onclick="myFunction3(<?php echo $fila['id_contacto']; ?>)"></a></td>
 <?php
  echo '</tr>';
 
 ?>
+<!-- myFunction 3 guarda el valor id_contacto en el input para posteriormente ser enviado por post a proc2-->
 <input type="hidden" value="" id="vcod" name="vcod" >
 <?php
 }
+// Se crea un div donde se cargara proc2 al activar myFunction3
 echo '<div id="pers"></div>';
+//Se cierra la tabla
 echo '</table>';
+//Se liberan recursos
 mysqli_free_result($result);
+//Se cierra la conexion a la base de datos
 mysqli_close($con);
 ?> 

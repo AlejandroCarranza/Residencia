@@ -19,7 +19,6 @@ if (isset($_POST['usuario'], $_POST['p'])) {
         if ($_SESSION['type'] == '2') {
         header('Location: ../modulos/templates/administrador/admin.php');
         }
-
     } else {
         // Login failed 
         header('Location: ../index.php?error=1');

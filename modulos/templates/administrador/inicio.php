@@ -31,9 +31,9 @@ sec_session_start();
   		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 		}
 		//Se crea la consulta mysql que nos obtendra los contactos que cumplan años el dia actual
-		//$query = "SELECT * from contactos WHERE day(fecha_nacimiento)=day(NOW()) and month(fecha_nacimiento)=month(NOW()) ";
+		$query = "SELECT * from contactos WHERE day(fecha_nacimiento)=day(NOW()) and month(fecha_nacimiento)=month(NOW()) ";
 		//Consulta para obtener los cumpleaños de todo el mes
-		$query = "SELECT * from contactos WHERE month(fecha_nacimiento)=month(NOW()) ";	
+		//$query = "SELECT * from contactos WHERE month(fecha_nacimiento)=month(NOW()) ";	
 		if ($result = mysqli_query($con, $query)) {
 
     	/* determinar el número de filas del resultado */
