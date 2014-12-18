@@ -12,14 +12,21 @@ $tabla = $_POST['valor2'];
 
 $cargo = "cargos";
 
+
 //Consulta SQL que busca los contactos desde la tabla cargos o puestos segun el boton que selecciono el usuario
 //$consulta = "SELECT * FROM $tabla join contactos on $tabla.id_contacto=contactos.id_contacto WHERE id_subcomision = '".$subcomite."' ";
 
-$consulta = " SELECT *
+if ($tabla == "cargos") {
+	$consulta = " SELECT *
 FROM $tabla sub
 INNER JOIN contactos c ON sub.id_contacto =  c.id_contacto
 INNER JOIN dependencias d ON sub.id_dependencia =  d.id_dependencia
 WHERE id_subcomision = '".$subcomite."' ";
+}
+else {
+$consulta = "SELECT * FROM $tabla join contactos on $tabla.id_contacto=contactos.id_contacto WHERE id_subcomision = '".$subcomite."' ";
+}
+
 
 $result=mysqli_query($con, $consulta) or die (mysqli_error($con)); 
 if($result === FALSE) {
@@ -44,13 +51,17 @@ while($fila = mysqli_fetch_array($result))
 if ($tabla == $cargo) {
 	// Muestra el cargo
 	 echo '<td>'.$fila['cargo'].'</td>';
+	 //Muestra el lugar donde trabaja el contacto
+	 echo '<td>'.$fila['nombre_dependencia'].'</td>';
 }
 //Si no tiene un cargo, entonces tiene un puesto
 else{
 	//muestra el puesto
 	echo '<td>'.$fila['puesto'].'</td>';
-}	//Muestra el lugar donde trabaja el contacto
-	echo '<td>'.$fila['nombre_dependencia'].'</td>';
+	echo '<td>'.$fila['extra'].'</td>';
+}
+
+	
  ?>
  <!-- Boton para ver mas en la tabla que envia como parametro id_contacto a myFunction3 y esta activa proc2 para mostrar mas informacion del contacto-->
 <td><a href="#" class="icon-profile icoVerMas" onclick="myFunction3(<?php echo $fila['id_contacto']; ?>)"></a></td>
