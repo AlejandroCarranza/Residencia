@@ -1,8 +1,9 @@
 <?php
-include_once '../../../includes/psl-config.php';
-
+//Se enlazan los archivos necesarios
+include_once '../../../../includes/psl-config.php';
+//Se crea una conexion a la base de datos
 $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
-// Check connection
+// comprueba la conexion a la base de datos
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
@@ -13,6 +14,7 @@ $cargo = "cargos";
 
 //Consulta SQL que busca los contactos desde la tabla cargos o puestos segun el boton que selecciono el usuario
 //$consulta = "SELECT * FROM $tabla join contactos on $tabla.id_contacto=contactos.id_contacto WHERE id_subcomision = '".$subcomite."' ";
+
 $consulta = " SELECT *
 FROM $tabla sub
 INNER JOIN contactos c ON sub.id_contacto =  c.id_contacto
@@ -22,7 +24,7 @@ WHERE id_subcomision = '".$subcomite."' ";
 $result=mysqli_query($con, $consulta) or die (mysqli_error($con)); 
 if($result === FALSE) {
     die(mysqli_error()); 
-
+}
 //Muestra el encabezado de la tabla
  echo '<table border="1">';
  echo '<tr>';

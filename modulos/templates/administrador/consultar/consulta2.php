@@ -1,6 +1,6 @@
 <?php
-include_once '../../../includes/db_connect.php';
-include_once '../../../includes/functions.php'; 
+include_once '../../../../includes/db_connect.php';
+include_once '../../../../includes/functions.php'; 
 sec_session_start();
 
 ?>
@@ -10,7 +10,6 @@ sec_session_start();
 <head>
 	<meta charset="UTF-8">
 	<title>Consulta2</title>
-	<script src="consultar/buscador.js"></script>
 </head>
 <body>
 	<!-- Código php para dar seguridad y solo permitir que los usuarios autorizados accedan a este archivo-->
@@ -91,5 +90,6 @@ sec_session_start();
          <span class="error">No estás autorizado para ver esta página.</span>
         </p>
     <?php endif; ?>
+    <script src="../../statics/js/buscador.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <?php header("Content-type: text/html; charset=utf8"); ?>
 <?php
 //Archivo con las configuraciones de la bd
-include_once '../../../includes/psl-config.php';
+include_once '../../../../includes/psl-config.php';
 
 //Crea una conexion a la bd
 $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);

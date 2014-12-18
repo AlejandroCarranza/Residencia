@@ -3,7 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Actualizar catalogos</title>
-	<script src="consultar/buscador.js"></script>
 </head>
 <body>
 	<p class="etiquetaTit">Seleccione un catálogo a editar</p>

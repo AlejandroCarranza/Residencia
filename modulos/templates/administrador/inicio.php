@@ -92,7 +92,5 @@ sec_session_start();
 	<div id="pers" class=""></div>
 	<!--Campo para almacenar el id del contacto seleccionado en la tabla -->
 	<input type="hidden" value="" id="vcod" name="vcod" >
-	<!--Se llaman las librerias js -->
-	<script src="consultar/buscador.js"></script>
 </body>
 </html>

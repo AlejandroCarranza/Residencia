@@ -1,6 +1,6 @@
 <?php
-include_once '../../includes/db_connect.php';
-include_once '../../includes/functions.php';
+include_once '../../../includes/db_connect.php';
+include_once '../../../includes/functions.php';
  
 sec_session_start();
 
@@ -82,6 +82,7 @@ sec_session_start();
 	<script src="../../statics/js/jquery-2.1.0.min.js"></script>
    	<script src="../../statics/js/AJAX.js"></script>
    	<script src="../../statics/js/cargaPaginas.js"></script>
+	<script src="../../statics/js/buscador.js"></script>
 	<!-- Llamamos la función inicio() del archivo cargaPaginas para que nos de las funciones de cambiar entre páginas -->
 	<script type="text/javascript">
 	inicio();

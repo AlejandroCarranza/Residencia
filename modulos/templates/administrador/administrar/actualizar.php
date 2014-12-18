@@ -1,6 +1,6 @@
 <?php
 //Archivo con las configuraciones de la bd
-include_once '../../../includes/psl-config.php';
+include_once '../../../../includes/psl-config.php';
 //Crea una conexion a la bd usando los parametros del archivo psl.config.php
 $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 //Comprueba conexion

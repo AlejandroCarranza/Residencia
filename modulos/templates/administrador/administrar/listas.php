@@ -1,6 +1,6 @@
 <?php
-include_once '../../../includes/psl-config.php';
-
+include_once '../../../../includes/psl-config.php';
+//Se crea conexion a la base de datos
 $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 //Cormprueba la conexion
 if (mysqli_connect_errno()) {

@@ -1,7 +1,7 @@
 <?php 
 
 //Se enlazan los archivos necesarios
-include_once '../../../includes/psl-config.php';
+include_once '../../../../includes/psl-config.php';
 
 //Se crea una conexion a la base de datos usando las variables del archivo psl-config.php
 $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);

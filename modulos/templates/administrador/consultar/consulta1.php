@@ -1,6 +1,6 @@
 <?php
-include_once '../../../includes/db_connect.php';
-include_once '../../../includes/functions.php'; 
+include_once '../../../../includes/db_connect.php';
+include_once '../../../../includes/functions.php'; 
 sec_session_start();
 ?>
 
@@ -8,7 +8,7 @@ sec_session_start();
 <html>
 
 <head>
-	<script src="consultar/buscador.js"></script>
+	
 </head>
 
 <body>
