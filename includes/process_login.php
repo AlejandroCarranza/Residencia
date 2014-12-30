@@ -2,14 +2,14 @@
 include_once 'db_connect.php';
 include_once 'functions.php';
  
-sec_session_start(); // Our custom secure way of starting a PHP session.
+sec_session_start(); // Forma segura de empezar una sesión de PHP
  
 if (isset($_POST['usuario'], $_POST['p'])) {
     $usuario = $_POST['usuario'];
-    $password = $_POST['p']; // The hashed password.
+    $password = $_POST['p']; // La contraseña codificada.
  
     if (login($usuario, $password, $mysqli) == true) {
-        // Login success
+        // Éxito al entrar
         if ($_SESSION['type'] == '0') {
         header('Location: ../modulos/templates/usuario/index0.php');
         }
@@ -20,10 +20,10 @@ if (isset($_POST['usuario'], $_POST['p'])) {
         header('Location: ../modulos/templates/administrador/admin.php');
         }
     } else {
-        // Login failed 
+        // No se pudo entrar
         header('Location: ../index.php?error=1');
     }
 } else {
-    // The correct POST variables were not sent to this page. 
+    // La variables POST correctas no fueron enviadas a esta página.
     echo 'Invalid Request';
 }

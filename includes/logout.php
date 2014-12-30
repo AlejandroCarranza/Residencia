@@ -2,13 +2,13 @@
 include_once 'functions.php';
 sec_session_start();
  
-// Unset all session values 
+// Reasigna todos los valores de sesión.
 $_SESSION = array();
  
-// get session parameters 
+// Obtiene los parámetros de sesión.
 $params = session_get_cookie_params();
  
-// Delete the actual cookie. 
+// Elimina la cookie actual.
 setcookie(session_name(),
         '', time() - 42000, 
         $params["path"], 
@@ -16,6 +16,6 @@ setcookie(session_name(),
         $params["secure"], 
         $params["httponly"]);
  
-// Destroy session 
+// Destruye la sesión.
 session_destroy();
 header('Location: ../index.php');

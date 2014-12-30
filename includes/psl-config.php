@@ -1,15 +1,15 @@
 <?php
 /**
- * These are the database login details
+ * Estos son los valores de login a la base de datos.
  */
-define("HOST", "localhost");     // The host you want to connect to.
-define("USER", "unUsuario");    // The database username. 
-define("PASSWORD", "5twPJM2G5pmt65r");    // The database password. 
-define("DATABASE", "directorio");    // The database name.
+define("HOST", "localhost");     // Host al que se va a conectar.
+define("USER", "unUsuario");    // El nobre de usario de la base de datos.
+define("PASSWORD", "5twPJM2G5pmt65r");    // La contraseña de la based de datos.
+define("DATABASE", "directorio");    // El nombre de la base de datos.
 
  
 define("CAN_REGISTER", "any");
 define("DEFAULT_ROLE", "member");
  
-define("SECURE", FALSE);    // FOR DEVELOPMENT ONLY!!!!
+define("SECURE", FALSE);    // Solo para desarrollo.
 ?>

@@ -5,7 +5,7 @@ include_once 'psl-config.php';
 $error_msg = "";
  
 if (isset($_POST['username'], $_POST['email'], $_POST['p'])) {
-    // Sanitize and validate the data passed in
+    // Saneamiento y validación de los datos recibidos
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     $nombre=filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRING);
     $apellido_paterno=filter_input(INPUT_POST, 'apellido_paterno', FILTER_SANITIZE_STRING);
@@ -13,33 +13,31 @@ if (isset($_POST['username'], $_POST['email'], $_POST['p'])) {
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $email = filter_var($email, FILTER_VALIDATE_EMAIL);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        // Not a valid email
+        // Correo no válido.
         $error_msg .= '<p class="error">The email address you entered is not valid</p>';
     }
  
     $password = filter_input(INPUT_POST, 'p', FILTER_SANITIZE_STRING);
     if (strlen($password) != 128) {
-        // The hashed pwd should be 128 characters long.
-        // If it's not, something really odd has happened
+        // La contraseña codificada debería ser de 128 caracteres de largo
+        // Si no es así, algo muy raro ha pasado
         $error_msg .= '<p class="error">Invalid password configuration.</p>';
     }
- 
-    // Username validity and password validity have been checked client side.
-    // This should should be adequate as nobody gains any advantage from
-    // breaking these rules.
-    //
+
+    // La validiación de nombre de usuario y la contraseña fueron realizadas en el lado del cliente
+    // Esto debería estar bien ya que nadie saca ventaja por romper esas reglas.
  
     $prep_stmt = "SELECT id FROM members WHERE email = ? LIMIT 1";
     $stmt = $mysqli->prepare($prep_stmt);
  
-   // check existing email  
+   // Checa si existe el email
     if ($stmt) {
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $stmt->store_result();
  
         if ($stmt->num_rows == 1) {
-            // A user with this email address already exists
+            // Ya existe un usuario con esta dirección de email.
             $error_msg .= '<p class="error">A user with this email address already exists.</p>';
                         $stmt->close();
         }
@@ -49,7 +47,7 @@ if (isset($_POST['username'], $_POST['email'], $_POST['p'])) {
                 $stmt->close();
     }
  
-    // check existing username
+    // Checha si existe el nombre de usuario
     $prep_stmt = "SELECT id FROM members WHERE username = ? LIMIT 1";
     $stmt = $mysqli->prepare($prep_stmt);
  
@@ -59,7 +57,7 @@ if (isset($_POST['username'], $_POST['email'], $_POST['p'])) {
         $stmt->store_result();
  
                 if ($stmt->num_rows == 1) {
-                        // A user with this username already exists
+                        // Ya existe un usuario con este nombre de usario.
                         $error_msg .= '<p class="error">A user with this username already exists</p>';
                         $stmt->close();
                 }
@@ -69,24 +67,18 @@ if (isset($_POST['username'], $_POST['email'], $_POST['p'])) {
                 $stmt->close();
         }
  
-    // TODO: 
-    // We'll also have to account for the situation where the user doesn't have
-    // rights to do registration, by checking what type of user is attempting to
-    // perform the operation.
- 
     if (empty($error_msg)) {
-        // Create a random salt
-        //$random_salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), TRUE)); // Did not work
+        // Crea una sal random
         $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
  
-        // Create salted password 
+        // Contraseña con sal (salted password)
         $password = hash('sha512', $password . $random_salt);
 
  
-        // Insert the new user into the database 
+        // Inserta el nuevo usuario en la base de datos
         if ($insert_stmt = $mysqli->prepare("INSERT INTO members (username, nombre, apellido_paterno, apellido_materno, email, password, salt) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
             $insert_stmt->bind_param('sssssss', $username, $nombre, $apellido_paterno, $apellido_materno, $email, $password, $random_salt);
-            // Execute the prepared query.
+            // Ejecuta la sentencia preparada.
             if (! $insert_stmt->execute()) {
                 header('Location: ../error.php?err=Registration failure: INSERT');
             }

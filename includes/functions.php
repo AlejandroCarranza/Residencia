@@ -2,75 +2,75 @@
 include_once 'psl-config.php';
  
 function sec_session_start() {
-    $session_name = 'sec_session_id';   // Set a custom session name
+    $session_name = 'sec_session_id';   // Asigna un nombre personalizado para la sesión.
     $secure = SECURE;
-    // This stops JavaScript being able to access the session id.
+    // Esto impide que JavaScript pueda acceder al id de la sesión.
     $httponly = true;
-    // Forces sessions to only use cookies.
+    // Forza a las sesiones a solo usar cookies.
     if (ini_set('session.use_only_cookies', 1) === FALSE) {
         header("Location: ../error.php?err=Could not initiate a safe session (ini_set)");
         exit();
     }
-    // Gets current cookies params.
+    // Obtiene los parámetros de las cookies actuales.
     $cookieParams = session_get_cookie_params();
     session_set_cookie_params($cookieParams["lifetime"],
         $cookieParams["path"], 
         $cookieParams["domain"], 
         $secure,
         $httponly);
-    // Sets the session name to the one set above.
+    // Asigna el nombre de sesión al que se asignó arriba.
     session_name($session_name);
-    session_start();            // Start the PHP session 
-    session_regenerate_id();    // regenerated the session, delete the old one. 
+    session_start();            // Inicia la sesión de PHP.
+    session_regenerate_id();    // Regenera la sesión, elimina la anterior.
 }
 function login($usuario, $password, $mysqli) {
-    // Using prepared statements means that SQL injection is not possible. 
+    // Usar sentencias preparadas significa que no es posible SQL injection.
     if ($stmt = $mysqli->prepare("SELECT id, username, nombre, password, salt, type 
         FROM members
        WHERE username = ?
         LIMIT 1")) {
-        $stmt->bind_param('s', $usuario);  // Bind "$usuario" to parameter.
-        $stmt->execute();    // Execute the prepared query.
+        $stmt->bind_param('s', $usuario);  // Asigna "$usuario" al parámetro.
+        $stmt->execute();    // Ejecuta la sentencia preparada.
         $stmt->store_result();
  
-        // get variables from result.
+        // Obtiene las variables de result.
         $stmt->bind_result($user_id, $username, $nombre, $db_password, $salt, $type);
         $stmt->fetch();
  
-        // hash the password with the unique salt.
+        // hash la contraseña con la salt única.
         $password = hash('sha512', $password . $salt);
         if ($stmt->num_rows == 1) {
-            // If the user exists we check if the account is locked
-            // from too many login attempts 
+            // SI el usuario existe podemos checar si la cuenta está bloqueda
+            // por demasiados intentos de inicio.
  
             if (checkbrute($user_id, $mysqli) == true) {
-                // Account is locked 
-                // Send an email to user saying their account is locked
+                // La cuenta está bloqueada
+                // Aquí se podría mandar un email al usuario para decirle que su cuenta está bloqueda
                 return false;
             } else {
-                // Check if the password in the database matches
-                // the password the user submitted.
+                // Verifica que la contraseña en la base de datos coincida
+                // con la contraseña que se ingresó.
+
                 if ($db_password == $password) {
-                    // Password is correct!
-                    // Get the user-agent string of the user.
+                    // La contraseña es correta!
                     $user_browser = $_SERVER['HTTP_USER_AGENT'];
-                    // XSS protection as we might print this value
+                    // Protección XSS ya que se podría imprimir este valor
                     $user_id = preg_replace("/[^0-9]+/", "", $user_id);
                     $_SESSION['user_id'] = $user_id;
                     $_SESSION['nombre'] = $nombre;
                     $_SESSION['type'] = $type;
-                    // XSS protection as we might print this value
+                    // Protección XSS ya que se podrías imprimir este valor
                     $username = preg_replace("/[^a-zA-Z0-9_\-]+/", 
                                                                 "", 
                                                                 $username);
                     $_SESSION['username'] = $username;
                     $_SESSION['login_string'] = hash('sha512', 
                               $password . $user_browser);
-                    // Login successful.
+                    // Login exitoso.
                     return true;
                 } else {
-                    // Password is not correct
-                    // We record this attempt in the database
+                    // La contraseña no es correcta
+                    // Se guarda este intento en la base de datos.
                     $now = time();
                     $mysqli->query("INSERT INTO login_attempts(user_id, time)
                                     VALUES ('$user_id', '$now')");
@@ -78,16 +78,16 @@ function login($usuario, $password, $mysqli) {
                 }
             }
         } else {
-            // No user exists.
+            // No exist el usuario
             return false;
         }
     }
 }
 function checkbrute($user_id, $mysqli) {
-    // Get timestamp of current time 
+    // Obtiene el timestamp del tiempo actual.
     $now = time();
- 
-    // All login attempts are counted from the past 2 hours. 
+
+    // Todos los intentos de login son contados desde las dos horas anteriores.
     $valid_attempts = $now - (2 * 60 * 60);
  
     if ($stmt = $mysqli->prepare("SELECT time 
@@ -96,11 +96,11 @@ function checkbrute($user_id, $mysqli) {
                             AND time > '$valid_attempts'")) {
         $stmt->bind_param('i', $user_id);
  
-        // Execute the prepared query. 
+        // Ejecuta la sentencia preparada.
         $stmt->execute();
         $stmt->store_result();
  
-        // If there have been more than 5 failed logins 
+        // Si ha habido más de cinco intentos de login
         if ($stmt->num_rows > 5) {
             return true;
         } else {
@@ -109,7 +109,7 @@ function checkbrute($user_id, $mysqli) {
     }
 }
 function login_check($mysqli) {
-    // Check if all session variables are set 
+    // Verifica que todas las variables de sesión estén asignadas.
     if (isset($_SESSION['user_id'], 
                         $_SESSION['username'], 
                         $_SESSION['login_string'])) {
@@ -118,19 +118,19 @@ function login_check($mysqli) {
         $login_string = $_SESSION['login_string'];
         $username = $_SESSION['username'];
  
-        // Get the user-agent string of the user.
+        // Obtiene la string del agente de usuario del usuario
         $user_browser = $_SERVER['HTTP_USER_AGENT'];
  
         if ($stmt = $mysqli->prepare("SELECT password 
                                       FROM members 
                                       WHERE id = ? LIMIT 1")) {
-            // Bind "$user_id" to parameter. 
+            // Asigna "$user_id" al parámetro. 
             $stmt->bind_param('i', $user_id);
-            $stmt->execute();   // Execute the prepared query.
+            $stmt->execute();   // Ejecuta la sentencia preparada.
             $stmt->store_result();
  
             if ($stmt->num_rows == 1) {
-                // If the user exists get variables from result.
+                // Si el usuario existe obtiene las variables de result.
                 $stmt->bind_result($password);
                 $stmt->fetch();
                 $login_check = hash('sha512', $password . $user_browser);
@@ -139,19 +139,19 @@ function login_check($mysqli) {
                     // Logged In!!!! 
                     return true;
                 } else {
-                    // Not logged in 
+                    // No entró al sistema.
                     return false;
                 }
             } else {
-                // Not logged in 
+                // No entró al sistema. 
                 return false;
             }
         } else {
-            // Not logged in 
+            // No entró al sistema.
             return false;
         }
     } else {
-        // Not logged in 
+        // No entró al sistema.
         return false;
     }
 }
@@ -179,7 +179,7 @@ function esc_url($url) {
     $url = str_replace("'", '&#039;', $url);
  
     if ($url[0] !== '/') {
-        // We're only interested in relative links from $_SERVER['PHP_SELF']
+        // Solo interesan links relativos de $_SERVER['PHP_SELF']
         return '';
     } else {
         return $url;
