@@ -51,11 +51,11 @@ sec_session_start();
     		echo '</div>';
 
     		//Encabezado de la tabla
-    		echo '<table border="1">';
+    		echo '<table>';
  			echo '<tr>';
- 			echo '<td>Nombre</td>';
- 			echo '<td>Email</td>';
- 			echo '<td>Más</td>';
+ 			echo '<th>Nombre</td>';
+ 			echo '<th>Email</td>';
+ 			echo '<th>Más</td>';
  			echo '</tr>';
 
     		while($fila = mysqli_fetch_array($result))

@@ -9,7 +9,6 @@ if (mysqli_connect_errno()) {
 }
 $subcomite = $_POST['valor1'];
 $tabla = $_POST['valor2'];
-
 $cargo = "cargos";
 
 
@@ -28,17 +27,20 @@ $consulta = "SELECT * FROM $tabla join contactos on $tabla.id_contacto=contactos
 }
 
 
-$result=mysqli_query($con, $consulta) or die (mysqli_error($con)); 
-if($result === FALSE) {
-    die(mysqli_error()); 
-}
+if ($result = mysqli_query($con, $consulta)) {
+
+    	/* determinar el número de filas del resultado */
+    	$row_cnt = mysqli_num_rows($result);
+
+    	//Pasamos el resultado a un array manipulable
+    	if($row_cnt > 0){
 //Muestra el encabezado de la tabla
  echo '<table border="1">';
  echo '<tr>';
- echo '<td>Nombre</td>';
- echo '<td>Puesto</td>';
- echo '<td>Lugar</td>';
- echo '<td>Más</td>';
+ echo '<th>Nombre</td>';
+ echo '<th>Puesto</td>';
+ echo '<th>Lugar</td>';
+ echo '<th>Más</td>';
  echo '</tr>';
 
 //Se almacena el resultado de la consulta en un array (fila)
@@ -77,6 +79,11 @@ else{
 echo '<div id="pers"></div>';
 //Se cierra la tabla
 echo '</table>';
+}
+else { 
+	echo "Sin registros";
+}
+}
 //Se liberan recursos
 mysqli_free_result($result);
 //Se cierra la conexion a la base de datos

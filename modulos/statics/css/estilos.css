@@ -353,6 +353,7 @@ select {
 #contenidoRes table{
 	 margin: 0 auto;
      text-align: left;
+     border: 2px;
 }
 #pers{
 	text-align: center;
@@ -479,6 +480,22 @@ select {
 	display: inline-block;
 }
 
+table tbody{
+	border: 1px solid #000;
+	border-bottom-left-radius:5px;
+}
+
+table tbody th{
+	background: #8e8e8e;
+	border: 1px solid #000;
+	color: white;
+	text-align: center;
+	padding: 0.2em;
+}
+table tbody td{
+	border: 1px solid #000;
+	padding: 0.1em 1em 0.1em 1em;
+}
 
 @media screen and (max-width:320px){
 	header .titular{

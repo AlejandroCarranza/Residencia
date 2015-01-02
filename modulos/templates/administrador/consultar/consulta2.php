@@ -60,22 +60,29 @@ sec_session_start();
 		</li>
 		<li>
 			<a href="#" onclick="btnsSubcomites(8)" class="listaBotones">
+				<span class=" icon-flag"></span>
+				<p class="pSubcom">Gobierno del estado</p>
+			</a>
+		</li>
+		<li>
+			<a href="#" onclick="btnsSubcomites(9)" class="listaBotones">
 				<span class=" icon-user2"></span>
 				<p class="pSubcom">Regidores</p>
 			</a>
 		</li>
 		<li>
-			<a href="#" onclick="btnsSubcomites(9)" class="listaBotones">
+			<a href="#" onclick="btnsSubcomites(10)" class="listaBotones">
 				<span class=" icon-user3"></span>
 				<p class="pSubcom">Diputados</p>
 			</a>
 		</li>
 		<li>
-			<a href="#" onclick="btnsSubcomites(10)" class="listaBotones">
-				<span class=" icon-flag"></span>
-				<p class="pSubcom">Gobierno del estado</p>
+			<a href="#" onclick="btnsSubcomites(11)" class="listaBotones">
+				<span class=" icon-globe"></span>
+				<p class="pSubcom">General</p>
 			</a>
 		</li>
+		
 	</ul>
 	<div id="contenidoRes">
 		

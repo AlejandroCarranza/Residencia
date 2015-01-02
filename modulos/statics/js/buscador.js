@@ -65,7 +65,7 @@ function btnsSubcomites(id){
   var idSubcom = id;
   var tipoCargo = 0;
   $('#valor1').val(idSubcom);
-  if ((idSubcom == 5) || (idSubcom == 7) || (idSubcom == 8) || (idSubcom == 10)) {
+  if ((idSubcom == 5) || (idSubcom == 7) || (idSubcom == 9) || (idSubcom == 10)) {
     $('#valor2').val("puestos");
   }
   else{
