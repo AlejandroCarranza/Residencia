@@ -8,6 +8,9 @@ $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+//Campos para lograr que utf-8 funcione perfectamente
+$acentos = $con->query("SET NAMES 'utf8'");
+mysqli_set_charset($con,"utf8");
 
 //Se recibe el id del contacto solicitado
 $id_contacto=$_POST['vcod'];
@@ -149,7 +152,7 @@ while($fila4 = mysqli_fetch_array($result4))
 			}	
 
 	//Comprueba si tiene partido politico, e imprimimos el icono del partido
-	if ($partido > 0) {
+	if ($partido > 1) {
 		//crea una ruta para buscar la imagen segun lo almacenado en $partido
 		$rutaPartido='../../statics/images/partidos/'.$partido.'.png';
 		//Muesta la imagen segun la ruta asignada

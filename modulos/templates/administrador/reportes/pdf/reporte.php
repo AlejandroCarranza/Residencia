@@ -1,10 +1,17 @@
 <?php
-
 require "fpdf.php";
 include_once '../../../../../includes/psl-config.php'; 
 
-class PDF extends FPDF
-{
+class PDF extends FPDF {
+	// Pie de página
+	function Footer() {
+    	// Posición: a 1,5 cm del final
+    	$this->SetY(-15);
+    	// Arial italic 8
+    	$this->SetFont('Arial','b',8);
+    	// Número de página
+    	$this->Cell(0,10,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'C');
+	}
 }
 
 //Crea conexion al servidor mysql con los datos de psl-config.php
@@ -22,11 +29,12 @@ $subcomite= $_POST['subcomite'];
 $consulta1 = "SELECT nombre_subcomision FROM subcomisiones WHERE id_subcomision = '".$subcomite."' ";
 $result1=mysqli_query($con, $consulta1) or die (mysqli_error($con)); 
 if($result1 === FALSE) {
-    die(mysqli_error()); // TODO: better error handling
+    die(mysqli_error());
 }
 while($fila1 = mysqli_fetch_array($result1))
 {
 	$comite = $fila1['nombre_subcomision'];
+	utf8_encode($comite);
 }
 
 if (($subcomite == 5) or ($subcomite == 7) or ($subcomite == 8) or ($subcomite == 10) ) {
@@ -45,32 +53,48 @@ $pdf->AddPage();
 
 //DATOS DEL TITULO
 $pdf->SetTextColor(0x00, 0x00, 0x00);
-$pdf->SetFont("Arial", "b", 8);
+$pdf->SetFont("Arial", "b", 12);
+//Logotipo
 $pdf->Cell(30,25,'',0,0,'C',$pdf->Image('../../../../statics/images/logo-mini.png', 20,12, 40));
-$pdf->Cell(0, 5, utf8_decode(''), 0, 1, 'L');
-$pdf->Cell(0, 5, utf8_decode('"Titulo"'), 0, 1, 'C');
-$pdf->Cell(0, 5, utf8_decode('"Algún contenido"'). $subcomite);
-
+//Titulo
+$pdf->SetXY(20, 18);
+$pdf->Cell(0, 5, utf8_decode('Subcomité de ').$comite, 0, 3, 'C');
+//Información
+$pdf->SetFont("Arial", "", 10);
+$pdf->SetXY(20, 34);
+$pdf->Cell(0, 5, utf8_decode('Presentamos un listado con todos los integrantes del subcomité de ').$comite.".", 0, 3, 'L');
 
 //MOSTRAMOS LA TABLA
+$pdf->SetFont("Arial", "b", 8);
+$pdf->SetXY(0, 38);
 $pdf->Ln();
-$pdf->Cell(20, 5, "Id",1,0, 'C');
-$pdf->Cell(25, 5, "Nombre",1,0, 'C');
-$pdf->Cell(55, 5, "Email",1,0, 'C');
-$pdf->Cell(55, 5, utf8_decode("Teléfono"),1,1, 'C');
+$pdf->Cell(55, 5, "Nombre",1,0, 'C');
+$pdf->Cell(45, 5, "Dependencia",1,0, 'C');
+$pdf->Cell(50, 5, "Email",1,0, 'C');
+$pdf->Cell(25, 5, utf8_decode("Teléfono"),1,1, 'C');
 
-
+if ($tabla == "cargos") {
+	$consulta = " SELECT *
+FROM $tabla sub
+INNER JOIN contactos c ON sub.id_contacto =  c.id_contacto
+INNER JOIN dependencias d ON sub.id_dependencia =  d.id_dependencia
+WHERE id_subcomision = '".$subcomite."' ";
+}
+else {
 $consulta = "SELECT * FROM $tabla join contactos on $tabla.id_contacto=contactos.id_contacto WHERE id_subcomision = '".$subcomite."' ";
+}
+
 $result=mysqli_query($con, $consulta) or die (mysqli_error($con)); 
 if($result === FALSE) {
     die(mysqli_error()); // TODO: better error handling
 }
 while($fila = mysqli_fetch_array($result))
 {
-	$pdf->Cell(20, 5, $fila['id_contacto'],1,0, 'L');
-	$pdf->Cell(25, 5, $fila['nombre'],1,0, 'L');
-	$pdf->Cell(55, 5, $fila['email'],1,0, 'L');
-	$pdf->Cell(55, 5, $fila['tel_oficina'],1,1, 'L');
+	$pdf->SetFont("Arial", "", 8);
+	$pdf->Cell(55, 5, $fila['nombre']. " ". $fila['apellido_paterno']." ". $fila['apellido_materno'],1,0, 'L');
+	$pdf->Cell(45, 5, $fila['nombre_dependencia'],1,0, 'L');
+	$pdf->Cell(50, 5, $fila['email'],1,0, 'L');
+	$pdf->Cell(25, 5, $fila['tel_oficina'],1,1, 'L');
 }
 
 $pdf->Output();

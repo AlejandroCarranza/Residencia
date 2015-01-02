@@ -11,10 +11,10 @@ if (isset($_POST['usuario'], $_POST['p'])) {
     if (login($usuario, $password, $mysqli) == true) {
         // Éxito al entrar
         if ($_SESSION['type'] == '0') {
-        header('Location: ../modulos/templates/usuario/index0.php');
+        header('Location: ../modulos/templates/invitado/invitado.php');
         }
         if ($_SESSION['type'] == '1') {
-        header('Location: ../templates/index1.php');
+        header('Location: ../modulos/templates/usuario/usuario.php');
         }
         if ($_SESSION['type'] == '2') {
         header('Location: ../modulos/templates/administrador/admin.php');

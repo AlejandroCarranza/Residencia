@@ -25,6 +25,11 @@ $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+
+//Campos para lograr que utf-8 funcione perfectamente
+$acentos = $con->query("SET NAMES 'utf8'");
+mysqli_set_charset($con,"utf8");
+
         $update = mysqli_query($con, "UPDATE contactos SET tel_oficina = '$tel_oficina', celular = '$celular', 
             email = '$email', calle = '$calle', numero_int = '$numero_int', numero_ext = '$numero_ext',
 			colonia = '$colonia', municipio = '$municipio', localidad = '$localidad', codigo_postal = '$codigo_postal',

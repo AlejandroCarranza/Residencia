@@ -126,7 +126,7 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 			$consultaSub->bind_result($id_partido,$siglas);
 			$consultaSub->store_result();
 			echo "<select name='partido' id='partido'>";
-			echo "<option value='' disabled selected>Partido Político</option>";
+			//echo "<option value='' disabled selected>Partido Político</option>";
 			while($consultaSub->fetch()){?>
 			<p><?php echo '<option value="'.$id_partido.'">'.$siglas.'</option>'; ?></p>
 			<?php }

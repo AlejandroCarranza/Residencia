@@ -1,3 +1,5 @@
+<meta http-equiv="content-type" content="text/html; UTF-8" />
+
 <?php
 include_once '../../../../includes/psl-config.php';
 include_once '../../../../includes/db_connect.php';
@@ -7,6 +9,10 @@ $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+
+//Campos para lograr que utf-8 funcione perfectamente
+$acentos = $con->query("SET NAMES 'utf8'");
+mysqli_set_charset($con,"utf8");
 
 $codigo=$_POST['idCon'];
 
@@ -443,14 +449,19 @@ while($fila = mysqli_fetch_array($result))
         </div>
         <p class="etiquetaTit">Otros</p>
         <p class="etiquetas">Partido:</p><select class="inputAct" name="fk_id_partido" >
-            <option value='<?php echo $fila['fk_id_partido']; ?>'><?php echo $fila['siglas']; ?></option>
             <?php
             $consultaSub = $mysqli->prepare("SELECT id_partido, siglas FROM partidos");
             $consultaSub->execute();
             $consultaSub->bind_result($id_partido,$siglas);
             $consultaSub->store_result();
             while($consultaSub->fetch()){
-            echo '<option value="'.$id_partido.'">'.$siglas.'</option>';
+                if ($fila['fk_id_partido'] == $id_partido) {
+                    echo '<option selected value="'.$id_partido.'">'.$siglas.'</option>';
+                }
+                else{
+                    echo '<option value="'.$id_partido.'">'.$siglas.'</option>';
+                }
+            
             }
             ?>
         </select>
