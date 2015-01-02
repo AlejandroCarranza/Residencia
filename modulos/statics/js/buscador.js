@@ -138,11 +138,13 @@ function myFunction5(id){
         });
   });  
 }
-/* 
-  
+/* Funcion que envia el formulario formUpdate a actualizar.php
+  Envia los datos del formulario a actualizar.php y recibe una respuesta,
+  si la respuesta es uno, lanza un alert con el mensaje "Contacto Actualizado",
+  si la respuesta es 0 o diferente, lanza un alert con un mensaje de error.
 */
 function actualizar(){
-  $(document).ready( function() {
+  $(document).ready(function() {
         if(validaFormulario()){                           
             $.post("consultar/actualizar.php",$('#formUpdate').serialize(),function(res){  
                 if(res == 1){
@@ -164,6 +166,8 @@ function validaFormulario(){
   return true;
 }
 
+/* Funcion que envia el valor del campo catalago a listas.php
+*/
 function myFunction6(){
 $(document).ready(function() {
       $.post(
@@ -173,6 +177,10 @@ $(document).ready(function() {
    });
 }
 
+/* Funcion que envia el formulario formPref a actualizarDato.php para la parte que actualiza los catalagos
+  Recibe el id del registro a modificar, guarda ese valor en la variable idRegistro y establece este valor
+  en el campo valor1, despues envia el formulario a actualizar dato y carga la respuesta en el div listas.
+*/
 function myFunction7(id){
   var idRegistro = id;
   $('#valor1').val(idRegistro);
@@ -183,6 +191,11 @@ function myFunction7(id){
         });
   });
 }
+/* Funcion que envia el formulario formUpdate a actualizar.php
+  Envia los datos del formulario a actualizar.php y recibe una respuesta,
+  si la respuesta es uno, lanza un alert con el mensaje "Contacto Actualizado",
+  si la respuesta es 0 o diferente, lanza un alert con un mensaje de error.
+*/
 function actualizar2(){
   $(document).ready( function() {
         if(validaFormulario()){                           
