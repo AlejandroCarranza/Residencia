@@ -504,4 +504,8 @@ select {
 		display: none;
 	}
 }
-
+@media screen and (max-width: 900px){
+	header .titular{
+		display: none;
+	}
+}

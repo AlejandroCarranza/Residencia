@@ -1,6 +1,6 @@
 <?php
-include_once '../../../includes/psl-config.php';
-include_once '../../../includes/db_connect.php';
+include_once '../../../../includes/psl-config.php';
+include_once '../../../../includes/db_connect.php';
 
 
 $codigo=$_POST['idFoto'];

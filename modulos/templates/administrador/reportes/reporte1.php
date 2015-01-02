@@ -1,7 +1,7 @@
 <?php
-include_once '../../../includes/db_connect.php';
-include_once '../../../includes/functions.php';
-include_once '../../../includes/psl-config.php'; 
+include_once '../../../../includes/db_connect.php';
+include_once '../../../../includes/functions.php';
+include_once '../../../../includes/psl-config.php'; 
 sec_session_start();
 
 ?>

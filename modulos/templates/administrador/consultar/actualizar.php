@@ -13,8 +13,8 @@ $codigo_postal = $_POST['codigo_postal'];
 $fecha_nacimiento = $_POST['fecha_nacimiento'];
 $fk_id_partido = $_POST['fk_id_partido'];
 
-include_once '../../../includes/psl-config.php';
-include_once '../../../includes/db_connect.php';
+include_once '../../../../includes/psl-config.php';
+include_once '../../../../includes/db_connect.php';
 
 $mysqli->set_charset("utf8");
 $dependencia='';

@@ -32,7 +32,7 @@ sec_session_start();
 			<img src="../../statics/images/user.png" alt="usuario" class="avatar">
 			<div class="usuario">
 				<span class="nombre"><?php echo $_SESSION['username']; ?></span>
-				<a class="cerrarSesion" href="../../includes/logout.php">Cerrar Sesión</a>
+				<a class="cerrarSesion" href="../../../includes/logout.php">Cerrar Sesión</a>
 			</div>
 		</div>
 			

@@ -1,6 +1,6 @@
 <?php
-include_once '../../../includes/db_connect.php';
-include_once '../../../includes/psl-config.php';
+include_once '../../../../includes/db_connect.php';
+include_once '../../../../includes/psl-config.php';
 $mysqli->set_charset("utf8");
 $tipo=filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_STRING);
 

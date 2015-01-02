@@ -131,6 +131,7 @@ while($fila4 = mysqli_fetch_array($result4))
 	echo '<p class="tarjetaBasic">' ."No Ext: ". " ".$fila4['numero_ext'].'</p>';
 	echo '<p class="tarjetaBasic">' ."No Int: ". " ".$fila4['numero_int'].'</p>';
 	echo '<p class="tarjetaBasic">' ."Colonia: ". " ".$fila4['colonia'].'</p>';
+	echo '<p class="tarjetaBasic">' ."C.Postal: ". " ".$fila4['codigo_postal'].'</p>';
 	echo '<p class="tarjetaBasic">' ."Municipio: ". " ".$fila4['municipio'].'</p>';
 
 	//Busca si tiene registros en la tabla campos

@@ -1,7 +1,7 @@
 <?php
 
 require "fpdf.php";
-include_once '../../../../includes/psl-config.php'; 
+include_once '../../../../../includes/psl-config.php'; 
 
 class PDF extends FPDF
 {

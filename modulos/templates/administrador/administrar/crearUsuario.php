@@ -1,7 +1,7 @@
 <?php
 include_once 'register.user.php';
-include_once '../../../includes/db_connect.php';
-include_once '../../../includes/psl-config.php';
+include_once '../../../../includes/db_connect.php';
+include_once '../../../../includes/psl-config.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
