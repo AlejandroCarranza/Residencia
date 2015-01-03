@@ -3,6 +3,8 @@ include_once 'register.con.php';
 include_once '../../../includes/db_connect.php';
 include_once '../../../includes/psl-config.php';
 include_once '../../../includes/functions.php';
+
+sec_session_start();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -106,6 +108,7 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 </script>
 </head>
 <body>
+	<?php if ((login_check($mysqli) == true) && ($_SESSION['type'] == '2')): ?>
 	<div id="formInsert">
 		<form 
 			method="post"
@@ -461,6 +464,11 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 		</form>
 	</div>
 </div>
+<?php else : ?>
+    <p>
+    	<span class="error">No estás autorizado para ver esta página.</span>
+    </p>
+<?php endif; ?>
 	<script src="../../statics/js/jquery-2.1.0.min.js"></script>
    	<script src="../../statics/js/AJAX.js"></script>
 </body>

@@ -1,6 +1,13 @@
 <?php
 include_once '../../../../includes/db_connect.php';
 include_once '../../../../includes/psl-config.php';
+include_once '../../../../includes/functions.php';
+
+//Inicia la funncion 
+sec_session_start();
+// Comprueba que la sesion activa corresponda al modulo
+if ((login_check($mysqli) == true) && ($_SESSION['type'] == '2')){
+
 $mysqli->set_charset("utf8");
 $tipo=filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_STRING);
 
@@ -46,5 +53,11 @@ if ($tipo=="3"&&isset($_POST['tiposPartidoNombre'])) {
         } 
 }
 
-
-?>
+}
+// Si no se aprueba la sesion muestra el mensaje
+else{ ?>
+    <p>
+        <span class="error">No estás autorizado para ver esta página.</span>
+    </p>
+<?php
+}

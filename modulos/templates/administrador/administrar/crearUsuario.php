@@ -3,7 +3,9 @@ include_once 'register.user.php';
 include_once '../../../../includes/db_connect.php';
 include_once '../../../../includes/psl-config.php';
 include_once '../../../../includes/functions.php';
+
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -105,6 +107,9 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 </script>
 </head>
 <body>
+<?php 
+// Comprueba que la sesion activa corresponda al modulo
+if ((login_check($mysqli) == true) && ($_SESSION['type'] == '2')): ?>
     <h1>Registro de usuarios</h1>
     <div id="formInsertUsuario">
         <form method="post" name="formUsuario" id="formUsuario" accept-charset="utf-8" enctype="multipart/form-data">
@@ -129,6 +134,13 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
     </div>
     <script src="../../statics/js/jquery-2.1.0.min.js"></script>
     <script src="../../statics/js/AJAX.js"></script>
+    <?php 
+// Si no se aprueba la sesion muestra el mensaje
+else : ?>
+    <p>
+        <span class="error">No estás autorizado para ver esta página.</span>
+    </p>
+<?php endif; ?>
 </body>
 
 </html>

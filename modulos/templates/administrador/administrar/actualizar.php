@@ -1,6 +1,13 @@
 <?php
 //Archivo con las configuraciones de la bd
 include_once '../../../../includes/psl-config.php';
+include_once '../../../../includes/db_connect.php';
+include_once '../../../../includes/functions.php';
+ 
+sec_session_start();
+// Comprueba que la sesion activa corresponda al modulo
+if ((login_check($mysqli) == true) && ($_SESSION['type'] == '2')){
+
 //Crea una conexion a la bd usando los parametros del archivo psl.config.php
 $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 //Comprueba conexion
@@ -70,4 +77,13 @@ else {
 }
 //cierra la conexion
 mysqli_close($con);
+
+}
+// Si no se aprueba la sesion muestra el mensaje
+else{ ?>
+    <p>
+        <span class="error">No estás autorizado para ver esta página.</span>
+    </p>
+<?php
+}
 ?>

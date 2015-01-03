@@ -3,9 +3,15 @@
 <?php
 include_once '../../../../includes/psl-config.php';
 include_once '../../../../includes/db_connect.php';
+include_once '../../../../includes/db_connect.php';
+include_once '../../../../includes/functions.php'; 
+//Inicia la funcion 
+sec_session_start();
+// Comprueba que la sesion activa corresponda al modulo
+if ((login_check($mysqli) == true) && ($_SESSION['type'] == '2')){
 
+//Conexion a la base de datos
 $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
-// Check connection
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
@@ -479,4 +485,13 @@ while($fila = mysqli_fetch_array($result))
 }
 mysqli_free_result($result);
 mysqli_close($con);
+
+}
+// Si no se aprueba la sesion muestra el mensaje
+else{ ?>
+    <p>
+        <span class="error">No estás autorizado para ver esta página.</span>
+    </p>
+<?php
+}
 ?>

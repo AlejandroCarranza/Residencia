@@ -1,6 +1,13 @@
 <?php
 //Se enlazan los archivos necesarios
 include_once '../../../../includes/psl-config.php';
+include_once '../../../../includes/db_connect.php';
+include_once '../../../../includes/functions.php';
+
+//Inicia la funcion 
+sec_session_start();
+// Comprueba que la sesion activa corresponda al modulo
+if ((login_check($mysqli) == true) && ($_SESSION['type'] == '2')){
 
 //Se crea una conexion a la base de datos usando las variables del archivo psl-config.php
 $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
@@ -171,4 +178,13 @@ mysqli_free_result($result2);
 mysqli_free_result($result4);
 mysqli_free_result($result5);
 mysqli_close($con);
+
+}
+// Si no se aprueba la sesion muestra el mensaje
+else{ ?>
+    <p>
+        <span class="error">No estás autorizado para ver esta página.</span>
+    </p>
+<?php
+}
 ?>

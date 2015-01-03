@@ -101,6 +101,10 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 </script>
 </head>
 <body>
+    <?php 
+// Comprueba que la sesion activa corresponda al modulo
+if ((login_check($mysqli) == true) && ($_SESSION['type'] == '2')): ?>
+
     <h1>Registro de opciones</h1>
     <div id="formInsertTipos">
         <form  method="post" name="formTipos" id="formTipos" accept-charset="utf-8" enctype="multipart/form-data">
@@ -148,6 +152,13 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
     </div>
     <script src="../../statics/js/jquery-2.1.0.min.js"></script>
     <script src="../../statics/js/AJAX.js"></script>
+    <?php 
+// Si no se aprueba la sesion muestra el mensaje
+else : ?>
+    <p>
+        <span class="error">No estás autorizado para ver esta página.</span>
+    </p>
+<?php endif; ?>
 </body>
 
 </html>

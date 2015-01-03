@@ -1,6 +1,12 @@
 <?php
 include_once '../../../../includes/psl-config.php';
 include_once '../../../../includes/db_connect.php';
+include_once '../../../../includes/db_connect.php';
+include_once '../../../../includes/functions.php'; 
+//Inicia la funcion 
+sec_session_start();
+// Comprueba que la sesion activa corresponda al modulo
+if ((login_check($mysqli) == true) && ($_SESSION['type'] == '2')){
 
 
 $codigo=$_POST['idFoto'];
@@ -54,5 +60,15 @@ function validarF() {
       <input type="button" value="Cargar" id="boton3" name="boton3" onclick="validarF()"/>
     </div>
   </form>
+<?php
+}
+// Si no se aprueba la sesion muestra el mensaje
+else{ ?>
+    <p>
+        <span class="error">No estás autorizado para ver esta página.</span>
+    </p>
+<?php
+} 
+?>
 </body>
 </html>
