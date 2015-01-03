@@ -4,7 +4,7 @@ include_once '../../../../includes/psl-config.php';
 $mysqli->set_charset("utf8");
 $error="";
 if (isset($_POST['nombreUsuario'], $_POST['username'])) {
-    // Sanitize and validate the data passed in
+    // Saneamiento y recepción de datos
     $username=filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     $nombre=filter_input(INPUT_POST, 'nombreUsuario', FILTER_SANITIZE_STRING);
     $apellido_paterno=filter_input(INPUT_POST, 'apellidoPUsuario', FILTER_SANITIZE_STRING);
@@ -16,14 +16,14 @@ if (isset($_POST['nombreUsuario'], $_POST['username'])) {
     $prep_stmt = "SELECT id FROM members WHERE email = ? LIMIT 1";
     $stmt = $mysqli->prepare($prep_stmt);
  
-   // check existing email  
+   // Verificación de email existente  
     if ($stmt) {
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $stmt->store_result();
  
         if ($stmt->num_rows == 1) {
-            // A user with this email address already exists
+            // Ya existe un usuario con este correo
             $error .= 'Ya existe un usuario con este correo. ';
             $stmt->close();
             echo $error;
@@ -34,14 +34,14 @@ if (isset($_POST['nombreUsuario'], $_POST['username'])) {
     $prep_stmt = "SELECT id FROM members WHERE username = ? LIMIT 1";
     $stmt = $mysqli->prepare($prep_stmt);
  
-   // check existing email  
+   // Verificación de nombre de usuario ya existente 
     if ($stmt) {
         $stmt->bind_param('s', $username);
         $stmt->execute();
         $stmt->store_result();
  
         if ($stmt->num_rows == 1) {
-            // A user with this email address already exists
+            // El nombre de usuario ya está en uso
             $error .= 'Este nombre de usuario ya está en uso. ';
             $stmt->close();
             echo $error;  
@@ -51,11 +51,13 @@ if (isset($_POST['nombreUsuario'], $_POST['username'])) {
     $password = hash('sha512', $password . $random_salt);
 
 if($error==""){
-        // Insert the new user into the database 
+        // Inserta el nuevo usuario en la base de datos
+
+        // Preparación de la sentencia
         if ($insert_stmt = $mysqli->prepare("INSERT INTO members (username, nombre, apellido_paterno, apellido_materno, email, type, password, salt)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
             $insert_stmt->bind_param('ssssssss', $username, $nombre, $apellido_paterno, $apellido_materno, $email, $tipo, $password, $random_salt);
-            // Execute the prepared query.
+            // Ejecución de la sentencia.
             if (! $insert_stmt->execute()) {
                 echo "Error al agregar el usuario";
             } echo "1";

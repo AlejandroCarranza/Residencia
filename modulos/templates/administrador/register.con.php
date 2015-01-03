@@ -2,10 +2,10 @@
 include_once '../../../includes/db_connect.php';
 include_once '../../../includes/psl-config.php';
 $mysqli->set_charset("utf8");
-$dependencia='';
-$val='1';
+$dependencia=''; // Recibirá el nombre de la dependencia, si no lo recibe no insertará el cargo o puesto
+$val='1'; 
 if (isset($_POST['nombre'], $_POST['apellidoP'])) {
-    // Sanitize and validate the data passed in
+    // Saneamiento de los datos recibidos 
     $nombre=filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRING);
     $apellido_paterno=filter_input(INPUT_POST, 'apellidoP', FILTER_SANITIZE_STRING);
     $apellido_materno=filter_input(INPUT_POST, 'apellidoM', FILTER_SANITIZE_STRING);
@@ -23,24 +23,25 @@ if (isset($_POST['nombre'], $_POST['apellidoP'])) {
     $Email=filter_input(INPUT_POST, 'Email', FILTER_SANITIZE_STRING);
     $codigo_postal=filter_input(INPUT_POST, 'codigo_postal', FILTER_SANITIZE_STRING);
 
-    
 
-        // Insert the new user into the database 
+        // Inserta el nuevo contacto únicamente en la tabla de contactos
+        // Primero se prepara la sentencia, se dejan los valores listo para asignarse
         if ($insert_stmt = $mysqli->prepare("INSERT INTO contactos (nombre, apellido_paterno, apellido_materno, titulo, 
             fecha_nacimiento, fk_id_partido, calle, numero_int, numero_ext, colonia, municipio, localidad, tel_Oficina, celular, email, codigo_postal) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+            // Se asignan los valores de las variables a la sentencia
             $insert_stmt->bind_param('ssssssssssssssss', $nombre, $apellido_paterno, $apellido_materno, $titulo, $fechaNacimiento, $partido, $calle, $numInt, $numExt, $colonia, $municipio, $localidad, $TelCel, $TelOfc, $Email, $codigo_postal);
-            // Execute the prepared query.
+            // Ejecuta la sentencia preparada
             if (! $insert_stmt->execute()) {
-                echo "Error al agregar el contacto";
-            } echo "1";
+                echo "Error al agregar el contacto"; // Si ocurrió algún error se enviará como respuesta. Esto no se muestra en la página.
+            } echo "1"; // Si se ejecutó de manera correcta mandará como respuesta "1".
         } 
 
-$id_contacto = $mysqli->insert_id;
-$sub=filter_input(INPUT_POST, 'sub', FILTER_SANITIZE_STRING);
+$id_contacto = $mysqli->insert_id; // Guarda en una variable el id del último contacto guardado
+$sub=filter_input(INPUT_POST, 'sub', FILTER_SANITIZE_STRING); // Recoge el valor del tipo de contacto
 
 if ($sub=="1"&&isset($_POST['dep1'])) {
-    // Sanitize and validate the data passed in
+    // Saneamiento de los datos recibidos
     $dependencia=filter_input(INPUT_POST, 'dep1', FILTER_SANITIZE_STRING);
     $cargo=filter_input(INPUT_POST, 'Cargo1', FILTER_SANITIZE_STRING);
     $fechaI=filter_input(INPUT_POST, 'fechaI1', FILTER_SANITIZE_STRING);
@@ -90,15 +91,16 @@ if ($sub=="11"&&isset($_POST['dep11'])) {
 }
 
 
-if ($dependencia!='') {
-        // Insert values into the database 
+if ($dependencia!='') { // Si se recibió un nombre de dependencia entonces se guardará el cargo del contacto
+        // Preparación de la sentencia
         if ($uno = $mysqli->prepare("INSERT INTO cargos (id_contacto, cargo, id_dependencia,id_subcomision, fecha_inicio, fecha_termino, valido) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
             $uno->bind_param('sssssss', $id_contacto, $cargo, $dependencia, $sub, $fechaI, $fechaT, $val);
-            // Execute the prepared query.
+            // Ejecución de la sentencia.
             if (! $uno->execute()) {
                 echo 'Error en sentencia para tabla campos ';
             }
         }
+        // Aquí se actualiza la tabla de contactos indicando que el contacto tiene un cargo, esto mediante el campo "pc", el '1' significa que es cargo
         if ($uno = $mysqli->prepare("UPDATE contactos SET pc = '1' WHERE id_contacto = ?")) {
             $uno->bind_param('s', $id_contacto);
             // Execute the prepared query.
@@ -107,6 +109,7 @@ if ($dependencia!='') {
             }
         }
 }
+// El tipo de contacto 6 tiene el campo extra secretaria. Aquí se ejecuta una sentencia para agregar este valor.
 if ($sub=="6"&&isset($_POST['Secretaria'])) {
     $secretaria=filter_input(INPUT_POST, 'Secretaria', FILTER_SANITIZE_STRING);
 $temp1='Secretaria';
@@ -162,17 +165,16 @@ if ($sub=="7"&&isset($_POST['municipioPM'])) {
 
 
 $temp1='Presidente Municipal';
-            // Insert values into the database 
+           
         if ($uno = $mysqli->prepare("INSERT INTO puestos (id_contacto, id_subcomision, puesto, extra, fecha_inicio, fecha_termino, valido) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
             $uno->bind_param('sssssss', $id_contacto, $sub, $temp1, $PM, $fechaI, $fechaT, $val);
-            // Execute the prepared query.
+            
             if (! $uno->execute()) {
                 echo 'Error en sentencia para tabla campos '.$sub;
             }
         }
         if ($uno = $mysqli->prepare("UPDATE contactos SET pc = '0' WHERE id_contacto = ?")) {
             $uno->bind_param('s', $id_contacto);
-            // Execute the prepared query.
             if (! $uno->execute()) {
                 echo 'Error en sentencia para tabla campos ';
             }
@@ -180,23 +182,20 @@ $temp1='Presidente Municipal';
 }
 
 if ($sub=="9"&&isset($_POST['Cargo9'])) {
-    // Sanitize and validate the data passed in
     $puesto=filter_input(INPUT_POST, 'Cargo9', FILTER_SANITIZE_STRING);
     $fechaI=filter_input(INPUT_POST, 'fechaI9', FILTER_SANITIZE_STRING);
     $fechaT=filter_input(INPUT_POST, 'fechaT9', FILTER_SANITIZE_STRING);
 
 $cargo='Regidor';
-            // Insert values into the database 
+
         if ($uno = $mysqli->prepare("INSERT INTO puestos (id_contacto, id_subcomision, puesto, extra, fecha_inicio, fecha_termino, valido) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
             $uno->bind_param('sssssss', $id_contacto, $sub, $cargo, $puesto, $fechaI, $fechaT, $val);
-            // Execute the prepared query.
             if (! $uno->execute()) {
                 echo 'Error en sentencia para tabla campos '.$sub;
             }
         }
         if ($uno = $mysqli->prepare("UPDATE contactos SET pc = '0' WHERE id_contacto = ?")) {
             $uno->bind_param('s', $id_contacto);
-            // Execute the prepared query.
             if (! $uno->execute()) {
                 echo 'Error en sentencia para tabla campos ';
             }
@@ -204,23 +203,21 @@ $cargo='Regidor';
 }
 
 if ($sub=="10"&&isset($_POST['Cargo10'])) {
-    // Sanitize and validate the data passed in
+
     $extra=filter_input(INPUT_POST, 'Cargo10', FILTER_SANITIZE_STRING);
     $fechaI=filter_input(INPUT_POST, 'fechaI10', FILTER_SANITIZE_STRING);
     $fechaT=filter_input(INPUT_POST, 'fechaT10', FILTER_SANITIZE_STRING);
 
 $cargo='Diputado';
-            // Insert values into the database 
+
         if ($uno = $mysqli->prepare("INSERT INTO puestos (id_contacto, id_subcomision, puesto, extra, fecha_inicio, fecha_termino, valido) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
             $uno->bind_param('sssssss', $id_contacto, $sub, $cargo, $extra, $fechaI, $fechaT, $val);
-            // Execute the prepared query.
             if (! $uno->execute()) {
                 echo 'Error en sentencia para tabla campos '.$sub;
             }
         }
         if ($uno = $mysqli->prepare("UPDATE contactos SET pc = '0' WHERE id_contacto = ?")) {
             $uno->bind_param('s', $id_contacto);
-            // Execute the prepared query.
             if (! $uno->execute()) {
                 echo 'Error en sentencia para tabla campos ';
             }

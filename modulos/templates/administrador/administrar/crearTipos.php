@@ -2,6 +2,7 @@
 include_once 'register.user.php';
 include_once '../../../../includes/db_connect.php';
 include_once '../../../../includes/psl-config.php';
+include_once '../../../../includes/functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -11,12 +12,13 @@ include_once '../../../../includes/psl-config.php';
     <script type="text/JavaScript" src="../../statics/js/sha512.js"></script>
 </script>
 <script type="text/javascript">
+// Permite el cambio automático de campos en el formulario dependenciendo de la opción que se elija
     $(document).ready(function(){
-        $("#tipo").change(function(){
-            $( "select option:selected").each(function(){
-                if($(this).attr("value")=="1"){
-                    $("div.tipo").hide();
-                    $("#TipoDependencia").show();
+        $("#tipo").change(function(){ // Si cambia el select tipo...
+            $( "select option:selected").each(function(){ // Obtiene el valor del select
+                if($(this).attr("value")=="1"){ // Si es 1...
+                    $("div.tipo").hide(); // Se ocultan los divo de clase "tipo"
+                    $("#TipoDependencia").show(); // Se muestra el div de id "Tipo Dependencia"
                 }
                 if($(this).attr("value")=="2"){
                     $("div.tipo").hide();
@@ -32,7 +34,9 @@ include_once '../../../../includes/psl-config.php';
 </script>
 <script type="text/javascript">
 function validateFormTipos() {
+// Validación del formulario
 
+// Asigna los campos que se deban validar a variables.
     var tipo = document.forms["formTipos"]["tipo"].value;
     var nombreDependencia = document.forms["formTipos"]["tiposDependenciaNombre"].value;
     var subDependencia = document.forms["formTipos"]["subDependencia"].value;
@@ -40,6 +44,8 @@ function validateFormTipos() {
     var nombrePartido = document.forms["formTipos"]["tiposPartidoNombre"].value;
     var siglas = document.forms["formTipos"]["tiposPartidoSiglas"].value;
 
+
+// Lo siguiente verifica que no se deje el campo en blanco
 if(tipo=="1")
 {
     if (nombreDependencia == null || nombreDependencia == "" ||
@@ -78,15 +84,15 @@ else {
 </script>
 <script type="text/javascript">
 $(document).ready( function() {   // Esta parte del código se ejecutará automáticamente cuando la página esté lista.
-    $('#boton3').click( function() {     // Con esto establecemos la acción por defecto de nuestro botón de enviar.
+    $('#boton3').click( function() {     // Con esto establecemos la acción por defecto de nuestro botón.
         if(validateFormTipos()){                               // Primero validará el formulario.
-            $.post("administrar/register.options.php",$('#formTipos').serialize(),function(res){
-                if(res == "1"){
-                    alert("Datos Guardados");
-                    document.formTipos.reset();
-                    $("div.tipo").hide();
+            $.post("administrar/register.options.php",$('#formTipos').serialize(),function(res){ // Si pasa la validación envía los datos del formulario
+                if(res == "1"){ // Se recibirá una respuesta, si es 1...
+                    alert("Datos Guardados"); // mensaje de confirmación
+                    document.formTipos.reset(); // Reinicia el formulario
+                    $("div.tipo").hide(); // Oculta los div de la clase tipo
                 } else {
-                    alert("Error. Datos no guardados.");
+                    alert("Error. Datos no guardados."); // Si la respuesta fue lo que sea a excepción de "1" entonces se muestra una alerta.
                 }
             });
         }
@@ -111,13 +117,13 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
             <span class="categorias">Nueva Dependecia</span>
             <input type="text" class="input" id="tiposDependenciaNombre" name="tiposDependenciaNombre" placeholder="Nombre de dependencia" />
             <?php
-            $consultaSub = $mysqli->prepare("SELECT id_subcomision, nombre_subcomision FROM subcomisiones");
-            $consultaSub->execute();
-            $consultaSub->bind_result($id_subcomision,$nombre_subcomision);
-            $consultaSub->store_result();
+            $consultaSub = $mysqli->prepare("SELECT id_subcomision, nombre_subcomision FROM subcomisiones"); // Preparación de la sentencia.
+            $consultaSub->execute(); // Ejecucíón de la sentencia.
+            $consultaSub->bind_result($id_subcomision,$nombre_subcomision); // Asignación de los resultados a dos variables (una por campo)
+            $consultaSub->store_result(); // Se guardan los resultados.
             echo "<select name='subDependencia' id='subDependencia'>";
             echo "<option value='' disabled selected>Tipo de dependencia</option>";
-            while($consultaSub->fetch()){?>
+            while($consultaSub->fetch()){?> <!-- Ciclo para mostrar los resultados de la consulta-->
             <p><?php echo '<option value="'.$id_subcomision.'">'.$nombre_subcomision.'</option>'; ?></p>
             <?php }
             echo "</select>";

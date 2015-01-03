@@ -2,6 +2,7 @@
 include_once 'register.con.php';
 include_once '../../../includes/db_connect.php';
 include_once '../../../includes/psl-config.php';
+include_once '../../../includes/functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -9,36 +10,40 @@ include_once '../../../includes/psl-config.php';
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Insertar</title>
 <script type="text/javascript">
+// Función para validar el formulario
 function validateForm() {
     var nombre = document.forms["formContacto"]["nombre"].value;
     var apellidoP = document.forms["formContacto"]["apellidoP"].value;
     var numExt = document.forms["formContacto"]["numExt"].value;
 
+// Verifica que el campo de nombre y apellido paterno no estén en blanco
     if (nombre == null || nombre == "" ||
     	apellidoP == null || apellidoP == ""
     	) {
         alert("Datos de nombre incompletos");
         return false;
     }
+// El campo de número exterior solo puede ser un número entero
     else if( isNaN(numExt) ) {
     	alert('"Número exterior" debe ser un número');
     	return false;
     }
+// Si pasa la verificación regresa true
     else return true;
 }
 </script>
 <script type="text/javascript">
 $(document).ready( function() {   // Esta parte del código se ejecutará automáticamente cuando la página esté lista.
-    $('#boton1').click( function() {     // Con esto establecemos la acción por defecto de nuestro botón de enviar.
+    $('#boton1').click( function() {     // Con esto establecemos la acción por defecto de nuestro botón.
         if(validateForm()){                               // Primero validará el formulario.
-            $.post("register.con.php",$('#formContacto').serialize(),function(res){
-                if(res == "1"){
+            $.post("register.con.php",$('#formContacto').serialize(),function(res){ // envía el formulario mediante post a register.con.php
+                if(res == "1"){ // Si la respuesta de register.con.php es 1
                 	alert("Contacto Guardado");
-                	document.formContacto.reset();
-                	$("div.tipo").hide();
-                } else {
-                	alert("Error. Contacto no guardado");
-                	document.formContacto.reset();
+                	document.formContacto.reset(); // Reinicia el formulario
+                	$("div.tipo").hide(); // Oculta los div de la clase "tipo"
+                } else { // Si la respuesta del register.con.php no fue 1 entonces un error ocurrió
+                	alert("Error. Contacto no guardado"); 
+                	document.formContacto.reset(); // Reinicia el formulario
                 }
             });
         }
@@ -46,12 +51,14 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 });
 </script>
 <script type="text/javascript">
+// Permite el cambio automático de campos en el formulario cuando se selecciona un tipo de contacto
+// Todos los campos posibles están presentes en el formulario, se muestran u ocultan dependiendo del tipo de contacto
     $(document).ready(function(){
         $("#sub").change(function(){
-            $( "select option:selected").each(function(){
-                if($(this).attr("value")=="1"){
-                	$("div.tipo").hide();
-                    $("#TipoEducacion").show();
+            $( "select option:selected").each(function(){ // Verifica la opción que se seleccionó 
+                if($(this).attr("value")=="1"){ // Si fue la opción con el valor 1...
+                	$("div.tipo").hide(); // Oculta los div de la clase "tipo"
+                    $("#TipoEducacion").show(); // Muestra el div de id "TipoEducación"
                 }
                 if($(this).attr("value")=="2"){
                 	$("div.tipo").hide();
@@ -110,7 +117,6 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 			<input type="text" class="input" id="nombre" name="nombre" placeholder="Nombre(s)">
 			<input type="text" class="input" id="apellidoP" name="apellidoP" placeholder="Apellido Paterno">
 			<input type="text" class="input" id="apellidoM" name="apellidoM" placeholder="Apellido Materno">
-			<!--<input type="text" class="input" name="titulo" placeholder="Título">-->
 			<select name="titulo">
 				<option value="C.">C.</option>
 				<option value="Ing.">Ing.</option>
@@ -121,13 +127,13 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 			<br>
 			Fecha de Nacimiento:<input type="date" class="input" id="fechaNacimiento" name="fechaNacimiento">
 			<?php
-			$consultaSub = $mysqli->prepare("SELECT id_partido, siglas FROM partidos");
-			$consultaSub->execute();
-			$consultaSub->bind_result($id_partido,$siglas);
-			$consultaSub->store_result();
+			$consultaSub = $mysqli->prepare("SELECT id_partido, siglas FROM partidos"); // Prepara la sentencia
+			$consultaSub->execute(); // Ejecuta la sentencia
+			$consultaSub->bind_result($id_partido,$siglas); // Asigna los resultados a dos variables, una por cada campo de la consulta
+			$consultaSub->store_result(); // Guarda el resultado
 			echo "<select name='partido' id='partido'>";
-			//echo "<option value='' disabled selected>Partido Político</option>";
-			while($consultaSub->fetch()){?>
+			echo "<option value='' disabled selected>Partido Político</option>";
+			while($consultaSub->fetch()){?>;<!-- Muestra los resultados de la consulta -->
 			<p><?php echo '<option value="'.$id_partido.'">'.$siglas.'</option>'; ?></p>
 			<?php }
 			echo "</select>";
@@ -454,6 +460,7 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
 			<input id="boton1" class="btnEnviar" name="boton1" type="button" value="Registrar"/> 
 		</form>
 	</div>
+</div>
 	<script src="../../statics/js/jquery-2.1.0.min.js"></script>
    	<script src="../../statics/js/AJAX.js"></script>
 </body>

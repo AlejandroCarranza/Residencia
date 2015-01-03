@@ -2,6 +2,7 @@
 include_once 'register.user.php';
 include_once '../../../../includes/db_connect.php';
 include_once '../../../../includes/psl-config.php';
+include_once '../../../../includes/functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -11,6 +12,9 @@ include_once '../../../../includes/psl-config.php';
     <script type="text/JavaScript" src="../../statics/js/sha512.js"></script>
 <script type="text/javascript">
 function validateFormUsuario() {
+    // Función para validar los datos del usuario
+
+    // Asignación de los campos del formulario a variables
     var username = document.forms["formUsuario"]["username"].value;
     var nombre = document.forms["formUsuario"]["nombreUsuario"].value;
     var apellidoP = document.forms["formUsuario"]["apellidoPUsuario"].value;
@@ -19,15 +23,19 @@ function validateFormUsuario() {
     var password = document.forms["formUsuario"]["password"].value;
     var password2 = document.forms["formUsuario"]["confirmarpwd"].value;
 
+// El nombre de usuario no debe estar en blanco.
     if (username == null || username == "") {
         alert("Es necesario elegir nombre de usuario");
         return false;
     }
+// El nombre de usuario solo puede tener letras, números y guiones bajos
     re = /^\w+$/; 
     if(!re.test(username)) { 
         alert("El nombre de usuario solo puede tener letras, números y guiones bajos.");
         return false; 
     }
+
+// E nombre del usuario debe estar completo. Nada en blanco.
     if (nombre == null || nombre == "" ||
         apellidoP == null || apellidoP == "" ||
         apellidoM == null || apellidoM == ""
@@ -35,25 +43,30 @@ function validateFormUsuario() {
         alert("Datos de nombre incompletos");
         return false;
     }
+    // Email no debe estar en blanco
         if (email == null || email == "") {
         alert("Es necesario ingresar email");
         return false;
     }
+    // Validación de formato de email correcto
     expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     if ( !expr.test(email) ){
         alert("Email inválido");
         return false;
     }
+    // La contraseña y su confirmación no deben estar en blanco
     if (password == null || password == "" ||
         password2 == null || password2 == ""
         ) {
         alert("Faltan datos de contraseña");
         return false;
     }
+    // Mínimo de longitud de contraseña
     if (password.length < 6) {
         alert('La contraseña debe ser de al menos seis caracteres.');
         return false;
     }
+    // La contraseña debe tener al menos una letra mayúscula, una minúscula y un número
     var re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/; 
     if (!re.test(password)) {
         alert('La contraseña debe tener al menos una letra mayúscula, una minúscula y un número.');
@@ -63,7 +76,7 @@ function validateFormUsuario() {
         alert("La confirmación de la contraseña debe ser igual a la contraseña");
         return false;
     }
-    
+    // Si todo está correcto codifica la contraseña y devuelve true.
     else {
         document.forms["formUsuario"]["password"].value= hex_sha512(password);
         document.forms["formUsuario"]["confirmarpwd"].value= hex_sha512(password);
@@ -77,12 +90,12 @@ $(document).ready( function() {   // Esta parte del código se ejecutará autom�
     $('#boton2').click( function() {     // Con esto establecemos la acción por defecto de nuestro botón de enviar.
         if(validateFormUsuario()){                               // Primero validará el formulario.
             $.post("administrar/register.user.php",$('#formUsuario').serialize(),function(res){
-                if(res == "1"){
-                    alert("Usuario Guardado");
-                    document.formUsuario.reset();
+                if(res == "1"){ // Se recibirá una respuesta, si es "1"...
+                    alert("Usuario Guardado"); // Mensaje de confirmación
+                    document.formUsuario.reset(); // Se reinicia el formulario
                 } else {
-                    alert("Error. Usuario no guardado. "+res);
-                    document.forms["formUsuario"]["password"].value= "";
+                    alert("Error. Usuario no guardado. "+res); // Si la respuesta no es "1" entonces muestra una alerta junto con un mensaje y la respuesta
+                    document.forms["formUsuario"]["password"].value= ""; // Pone la contraseña en blanco
                     document.forms["formUsuario"]["confirmarpwd"].value= "";
                 }
             });
