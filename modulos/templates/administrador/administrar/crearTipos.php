@@ -49,9 +49,9 @@ function validateFormTipos() {
 if(tipo=="1")
 {
     if (nombreDependencia == null || nombreDependencia == "" ||
-    subDependencia == null || subDependencia == ""
+    subDependencia == null || subDependencia == "" // Condición para revisa si los campos están en blanco
     ) {
-    alert("Datos incompletos");
+    alert("Datos incompletos"); // Manda una alerta si se cumple la condición
     return false;
     }
 }
@@ -72,7 +72,7 @@ if(tipo=="3")
     return false;
     }
 }
-if(tipo=="4")
+if(tipo=="4") // No mover esta condición. Si se agrega una condición entonces se deberá pasar ésta al final
 {
     return false;
 }
