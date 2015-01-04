@@ -54,42 +54,36 @@ if ($sub=="1"&&isset($_POST['dep1'])) {
     $fechaT=filter_input(INPUT_POST, 'fechaT1', FILTER_SANITIZE_STRING);
 }
 if ($sub=="2"&&isset($_POST['dep2'])) {
-    // Sanitize and validate the data passed in
     $dependencia=filter_input(INPUT_POST, 'dep2', FILTER_SANITIZE_STRING);
     $cargo=filter_input(INPUT_POST, 'Cargo2', FILTER_SANITIZE_STRING);
     $fechaI=filter_input(INPUT_POST, 'fechaI2', FILTER_SANITIZE_STRING);
     $fechaT=filter_input(INPUT_POST, 'fechaT2', FILTER_SANITIZE_STRING);
 }
 if ($sub=="3"&&isset($_POST['dep3'])) {
-    // Sanitize and validate the data passed in
     $dependencia=filter_input(INPUT_POST, 'dep3', FILTER_SANITIZE_STRING);
     $cargo=filter_input(INPUT_POST, 'Cargo3', FILTER_SANITIZE_STRING);
     $fechaI=filter_input(INPUT_POST, 'fechaI3', FILTER_SANITIZE_STRING);
     $fechaT=filter_input(INPUT_POST, 'fechaT3', FILTER_SANITIZE_STRING);
 }
 if ($sub=="4"&&isset($_POST['dep4'])) {
-    // Sanitize and validate the data passed in
     $dependencia=filter_input(INPUT_POST, 'dep4', FILTER_SANITIZE_STRING);
     $cargo=filter_input(INPUT_POST, 'Cargo4', FILTER_SANITIZE_STRING);
     $fechaI=filter_input(INPUT_POST, 'fechaI4', FILTER_SANITIZE_STRING);
     $fechaT=filter_input(INPUT_POST, 'fechaT4', FILTER_SANITIZE_STRING);
 }
 if ($sub=="6"&&isset($_POST['dep6'])) {
-    // Sanitize and validate the data passed in
     $dependencia=filter_input(INPUT_POST, 'dep6', FILTER_SANITIZE_STRING);
     $cargo=filter_input(INPUT_POST, 'Cargo6', FILTER_SANITIZE_STRING);
     $fechaI=filter_input(INPUT_POST, 'fechaI6', FILTER_SANITIZE_STRING);
     $fechaT=filter_input(INPUT_POST, 'fechaT6', FILTER_SANITIZE_STRING);
 }
 if ($sub=="8"&&isset($_POST['dep8'])) {
-    // Sanitize and validate the data passed in
     $dependencia=filter_input(INPUT_POST, 'dep8', FILTER_SANITIZE_STRING);
     $cargo=filter_input(INPUT_POST, 'Cargo8', FILTER_SANITIZE_STRING);
     $fechaI=filter_input(INPUT_POST, 'fechaI8', FILTER_SANITIZE_STRING);
     $fechaT=filter_input(INPUT_POST, 'fechaT8', FILTER_SANITIZE_STRING);
 }
 if ($sub=="11"&&isset($_POST['dep11'])) {
-    // Sanitize and validate the data passed in
     $dependencia=filter_input(INPUT_POST, 'dep11', FILTER_SANITIZE_STRING);
     $cargo=filter_input(INPUT_POST, 'Cargo11', FILTER_SANITIZE_STRING);
     $fechaI=filter_input(INPUT_POST, 'fechaI11', FILTER_SANITIZE_STRING);
@@ -109,7 +103,6 @@ if ($dependencia!='') { // Si se recibió un nombre de dependencia entonces se g
         // Aquí se actualiza la tabla de contactos indicando que el contacto tiene un cargo, esto mediante el campo "pc", el '1' significa que es cargo
         if ($uno = $mysqli->prepare("UPDATE contactos SET pc = '1' WHERE id_contacto = ?")) {
             $uno->bind_param('s', $id_contacto);
-            // Execute the prepared query.
             if (! $uno->execute()) {
                 echo 'Error en sentencia para tabla campos ';
             }
@@ -121,7 +114,6 @@ if ($sub=="6"&&isset($_POST['Secretaria'])) {
 $temp1='Secretaria';
         if ($uno = $mysqli->prepare("INSERT INTO campos (fk_id_contacto, campo, valor, valido) VALUES (?, ?, ?, ?)")) {
             $uno->bind_param('ssss', $id_contacto, $temp1, $secretaria, $val);
-            // Execute the prepared query.
             if (! $uno->execute()) {
                 echo 'Error en sentencia para tabla campos '.$sub;
             }
@@ -129,7 +121,6 @@ $temp1='Secretaria';
 }
 
 if ($sub=="5"&&isset($_POST['municipioEM'])) {
-    // Sanitize and validate the data passed in
     $EM=filter_input(INPUT_POST, 'municipioEM', FILTER_SANITIZE_STRING);
     $UAR=filter_input(INPUT_POST, 'UAR', FILTER_SANITIZE_STRING);
     $fechaI=filter_input(INPUT_POST, 'fechaI5', FILTER_SANITIZE_STRING);
@@ -137,24 +128,20 @@ if ($sub=="5"&&isset($_POST['municipioEM'])) {
 
 $temp1='Enlace Municipal';
 $temp2='UAR';
-            // Insert values into the database 
         if ($uno = $mysqli->prepare("INSERT INTO puestos (id_contacto, id_subcomision, puesto, extra, fecha_inicio, fecha_termino, valido) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
             $uno->bind_param('sssssss', $id_contacto, $sub, $temp1, $EM, $fechaI, $fechaT, $val);
-            // Execute the prepared query.
             if (! $uno->execute()) {
                 echo 'Error en sentencia para tabla campos '.$sub;
             }
         }
         if ($uno = $mysqli->prepare("INSERT INTO campos (fk_id_contacto, campo, valor, valido) VALUES (?, ?, ?, ?)")) {
             $uno->bind_param('ssss', $id_contacto, $temp2, $UAR, $val);
-            // Execute the prepared query.
             if (! $uno->execute()) {
                 echo 'Error en sentencia para tabla campos '.$sub;
             }
         }
         if ($uno = $mysqli->prepare("UPDATE contactos SET pc = '0' WHERE id_contacto = ?")) {
             $uno->bind_param('s', $id_contacto);
-            // Execute the prepared query.
             if (! $uno->execute()) {
                 echo 'Error en sentencia para tabla campos ';
             }
@@ -164,7 +151,6 @@ $temp2='UAR';
 
 
 if ($sub=="7"&&isset($_POST['municipioPM'])) {
-    // Sanitize and validate the data passed in
     $PM=filter_input(INPUT_POST, 'municipioPM', FILTER_SANITIZE_STRING);
     $fechaI=filter_input(INPUT_POST, 'fechaI7', FILTER_SANITIZE_STRING);
     $fechaT=filter_input(INPUT_POST, 'fechaT7', FILTER_SANITIZE_STRING);
@@ -232,7 +218,6 @@ $cargo='Diputado';
 
 
 }
-
 }
 else{ ?>
     <p>

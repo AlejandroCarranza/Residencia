@@ -1,11 +1,10 @@
 <?php
 include_once '../../../../includes/psl-config.php';
 include_once '../../../../includes/db_connect.php';
-include_once '../../../../includes/db_connect.php';
 include_once '../../../../includes/functions.php'; 
-//Inicia la funcion 
+//Inicia la función 
 sec_session_start();
-// Comprueba que la sesion activa corresponda al modulo
+// Comprueba que la sesión activa corresponda al módulo
 if ((login_check($mysqli) == true) && ($_SESSION['type'] == '1')){
 
 
@@ -18,6 +17,9 @@ $codigo=$_POST['idFoto'];
     <title>Actualizar Foto</title>
 <script type='text/javascript'>
 function validarF() {
+
+    // Validación de la foto
+    // Se explica la función en cada alert
     var input, file;
 
 
@@ -60,7 +62,7 @@ function validarF() {
       <input type="button" value="Cargar" id="boton3" name="boton3" onclick="validarF()"/>
     </div>
   </form>
-<?php
+  <?php
 }
 // Si no se aprueba la sesion muestra el mensaje
 else{ ?>

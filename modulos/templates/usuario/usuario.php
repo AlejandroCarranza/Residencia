@@ -57,8 +57,7 @@ sec_session_start();
                         
                     </ul>
                 </div>
-            </li>
- 	
+            </li> 	
            </ul>
 	</nav>
 	<div id="contenido">
