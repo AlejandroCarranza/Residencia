@@ -111,7 +111,7 @@ while($fila = mysqli_fetch_array($result))
 
         echo '<img class="tarjetaFoto" src="'.$rutaFoto.'">'; // Muestra la foto
         echo '<input type="button" class="btnEnviar" value="Subir foto" onclick="myFunction5('.$fila['id_contacto'].')"></input>'; // Prepara la función para subir foto
-        echo '<p class="tarjetaNom">'.utf8_encode($fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno'].' '). '</p>';
+        echo '<p class="tarjetaNom">'.$fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno']. '</p>';
         if($pc==1){ // Si tiene cargo hace la consulta a la tabla de cargos
             $consulta = $mysqli->prepare("SELECT cargos.id_dependencia, cargos.cargo, nombre_dependencia FROM cargos
                 join dependencias on cargos.id_dependencia = dependencias.id_dependencia
@@ -205,7 +205,7 @@ while($fila = mysqli_fetch_array($result))
             echo "<select name='opcionSubcomision' id='opcionSubcomision'>";
             echo "<option value='' disabled selected>Tipo de usuario</option>";
             while($consultaSub->fetch()){?> <!-- Muestra el resultado de la consulta -->
-            <p><?php echo '<option value="'.$id_subcomision.'">'.utf8_encode($nombre_subcomision).'</option>'; ?></p>
+            <p><?php echo '<option value="'.$id_subcomision.'">'.$nombre_subcomision.'</option>'; ?></p>
             <?php }
             echo "</select>";
             ?>

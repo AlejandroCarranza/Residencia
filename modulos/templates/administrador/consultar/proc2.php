@@ -123,8 +123,8 @@ while($fila4 = mysqli_fetch_array($result4))
  	//Mostramos en la tarjeta la foto segun la ruta asignada
  	echo '<img class="tarjetaFoto" src="'.$rutaFoto.'">';
  	//Muesta el resto de la informacion del contacto obtenida
-	echo '<div class="encabezadoTarj"> <p class="tarjetaNom">'.utf8_encode($fila4['titulo']. " ".$fila4['nombre']. " ".$fila4['apellido_paterno']. " ".$fila4['apellido_materno'].' '). '</p>';
-	echo '<p class="tarjetaPuesto">'.utf8_encode($puesto. " en ".$dependencia.' '). '</p> </div>';
+	echo '<div class="encabezadoTarj"> <p class="tarjetaNom">'.$fila4['titulo']. " ".$fila4['nombre']. " ".$fila4['apellido_paterno']. " ".$fila4['apellido_materno']. '</p>';
+	echo '<p class="tarjetaPuesto">'.$puesto. " en ".$dependencia. '</p> </div>';
 
 	echo '<p class="tarjetaBasic">'."Telefono: ". " " .$fila4['tel_oficina'].'</p>';
 	echo '<p class="tarjetaBasic">'."Celular: ". " " .$fila4['celular'].'</p>';

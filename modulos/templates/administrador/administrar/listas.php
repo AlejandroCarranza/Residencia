@@ -13,6 +13,9 @@ $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+//Campos para lograr que utf-8 funcione perfectamente
+$acentos = $con->query("SET NAMES 'utf8'");
+mysqli_set_charset($con,"utf8");
 //Recibe el catalogo seleccionado
 $tabla= $_POST['catalago'];
 //Si no selecciono ninguno, retorna un mensaje
@@ -51,8 +54,8 @@ while($fila = mysqli_fetch_array($result))
 {
 	//Se despliegan todos los datos de la tabla dependencias
 	echo '<tr>';
-	echo '<td>'.utf8_encode($fila['nombre_dependencia']).'</td>';
-	echo '<td>'.utf8_encode($fila['nombre_subcomision'].' '). '</td>';
+	echo '<td>'.$fila['nombre_dependencia'].'</td>';
+	echo '<td>'.$fila['nombre_subcomision']. '</td>';
  
  ?>
  <!-- Boton en la tabla que activa la funcion myFunction7 enviandole el parametro id_dependencia y nos carga un formulario para editar el campo -->
@@ -75,7 +78,7 @@ while($fila = mysqli_fetch_array($result))
 {
 	//Muestra los registros de la tabla partidos
 	echo '<tr>';
-	echo '<td>'.utf8_encode($fila['nombre_partido']).'</td>';
+	echo '<td>'.$fila['nombre_partido'].'</td>';
 	echo '<td>'.$fila['siglas'].'</td>';
  
  ?>
@@ -100,7 +103,7 @@ while($fila = mysqli_fetch_array($result))
 {
 	//Se muestran los registros de la tabla subcomisiones
 	echo '<tr>';
-	echo '<td>'.utf8_encode($fila['nombre_subcomision']).'</td>';
+	echo '<td>'.$fila['nombre_subcomision'].'</td>';
  ?>
  <!-- Boton en la tabla que activa la funcion myFunction7 enviandole el parametro id_subcomision y nos carga un formulario para editar el campo -->
 <td><a href="#" class="icon-profile icoVerMas" onclick="myFunction7(<?php echo $fila['id_subcomision']; ?>)"></a></td>

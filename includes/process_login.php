@@ -11,13 +11,16 @@ if (isset($_POST['usuario'], $_POST['p'])) {
     if (login($usuario, $password, $mysqli) == true) {
         // Éxito al entrar
         if ($_SESSION['type'] == '0') {
-        header('Location: ../modulos/templates/invitado/invitado.php');
+        header('Location: ../modulos/templates/invitado1/invitado.php');
         }
         if ($_SESSION['type'] == '1') {
         header('Location: ../modulos/templates/usuario/usuario.php');
         }
         if ($_SESSION['type'] == '2') {
         header('Location: ../modulos/templates/administrador/admin.php');
+        }
+        if ($_SESSION['type'] == '3') {
+        header('Location: ../modulos/templates/invitado2/invitado.php');
         }
     } else {
         // No se pudo entrar

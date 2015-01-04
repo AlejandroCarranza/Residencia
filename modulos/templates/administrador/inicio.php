@@ -45,7 +45,7 @@ sec_session_start();
     		echo '<div class="cumpleanos">';
     			echo '<div class="cumpleanosMensajes">';
     				echo '<p class="cumpleMensaje">Compleaños para hoy</p>';
-    				echo '<p class="cumpleMensaje">Enviale un email con tus felicitaciones</p>';
+    				echo '<p class="cumpleMensaje">Envíale un email con tus felicitaciones</p>';
     			echo '</div>';
     		echo '<img src="../../statics/images/globos.png" class="globos">';
     		echo '</div>';
