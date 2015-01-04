@@ -1,4 +1,13 @@
 <?php
+include_once '../../../../includes/psl-config.php';
+include_once '../../../../includes/db_connect.php';
+include_once '../../../../includes/functions.php';
+
+//Inicia la funcion 
+sec_session_start();
+// Comprueba que la sesion activa corresponda al modulo
+if ((login_check($mysqli) == true) && ($_SESSION['type'] == '2')){
+
 // Recepción de datos del formulario
 $id_contacto = $_POST['id_contacto'];
 $tel_oficina = $_POST['tel_oficina'];
@@ -13,9 +22,6 @@ $localidad = $_POST['localidad'];
 $codigo_postal = $_POST['codigo_postal'];
 $fecha_nacimiento = $_POST['fecha_nacimiento'];
 $fk_id_partido = $_POST['fk_id_partido'];
-
-include_once '../../../../includes/psl-config.php';
-include_once '../../../../includes/db_connect.php';
 
 $mysqli->set_charset("utf8");
 $dependencia=''; // Si no cambia su valor entonces no se cambio la dependencia
@@ -261,6 +267,15 @@ $cargo='Diputado';
                 echo 'Error en sentencia para tabla campos ';
             }
         }
+}
+
+}
+// Si no se aprueba la sesion muestra el mensaje
+else{ ?>
+    <p>
+        <span class="error">No estás autorizado para ver esta página.</span>
+    </p>
+<?php
 }
 ?>
 

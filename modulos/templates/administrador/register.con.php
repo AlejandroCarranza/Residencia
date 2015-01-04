@@ -1,6 +1,12 @@
 <?php
 include_once '../../../includes/db_connect.php';
 include_once '../../../includes/psl-config.php';
+include_once '../../../includes/functions.php';
+
+sec_session_start();
+
+if ((login_check($mysqli) == true) && ($_SESSION['type'] == '2')){
+
 $mysqli->set_charset("utf8");
 $dependencia=''; // Recibirá el nombre de la dependencia, si no lo recibe no insertará el cargo o puesto
 $val='1'; 
@@ -212,6 +218,11 @@ $cargo='Diputado';
 
 
 }
-
+}
+else{ ?>
+    <p>
+        <span class="error">No estás autorizado para ver esta página.</span>
+    </p>
+<?php }
 
 ?>
