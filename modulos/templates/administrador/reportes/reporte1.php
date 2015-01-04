@@ -22,6 +22,10 @@ sec_session_start();
 	if (mysqli_connect_errno()) {
   	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
+	//Campos para lograr que utf-8 funcione perfectamente
+	$acentos = $con->query("SET NAMES 'utf8'");
+	mysqli_set_charset($con,"utf8");
+
 	//Consultamos las subcomisiones
 	$consultaSQL1 = "SELECT id_subcomision, nombre_subcomision FROM subcomisiones";
 
@@ -35,7 +39,7 @@ sec_session_start();
 	echo '<option value="">...</option>';
 	while($fila1 = mysqli_fetch_array($result1))
 	{
-		echo '<option value="'.$fila1['id_subcomision'].'"> '.utf8_encode($fila1['nombre_subcomision'].' ').'</option>';
+		echo '<option value="'.$fila1['id_subcomision'].'"> '.$fila1['nombre_subcomision'].'</option>';
 	}
 	echo '</select>';
 	echo '<input class="btnEnviar" type="submit" value="Crear"/>';

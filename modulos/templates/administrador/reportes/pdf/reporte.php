@@ -16,7 +16,7 @@ class PDF extends FPDF {
     	// Arial italic 8
     	$this->SetFont('Arial','b',8);
     	// Número de página
-    	$this->Cell(0,10,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'C');
+    	$this->Cell(0,10,'Página '.$this->PageNo().'/{nb}',0,0,'C');
 	}
 }
 
@@ -25,6 +25,9 @@ $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 	if (mysqli_connect_errno()) {
   	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
+//Campos para lograr que utf-8 funcione perfectamente
+$acentos = $con->query("SET NAMES 'utf8'");
+mysqli_set_charset($con,"utf8");
 
 $tabla = "";
 $comite = "";
@@ -40,7 +43,6 @@ if($result1 === FALSE) {
 while($fila1 = mysqli_fetch_array($result1))
 {
 	$comite = $fila1['nombre_subcomision'];
-	utf8_encode($comite);
 }
 
 if (($subcomite == 5) or ($subcomite == 7) or ($subcomite == 8) or ($subcomite == 10) ) {
@@ -64,11 +66,11 @@ $pdf->SetFont("Arial", "b", 12);
 $pdf->Cell(30,25,'',0,0,'C',$pdf->Image('../../../../statics/images/logo-mini.png', 20,12, 40));
 //Titulo
 $pdf->SetXY(20, 18);
-$pdf->Cell(0, 5, utf8_decode('Subcomité de ').$comite, 0, 3, 'C');
+$pdf->Cell(0, 5, utf8_decode('Subcomité de '.$comite."."), 0, 3, 'C');
 //Información
 $pdf->SetFont("Arial", "", 10);
 $pdf->SetXY(20, 34);
-$pdf->Cell(0, 5, utf8_decode('Presentamos un listado con todos los integrantes del subcomité de ').$comite.".", 0, 3, 'L');
+$pdf->Cell(0, 5, utf8_decode('Presentamos un listado con todos los integrantes del subcomité de '.$comite."."), 0, 3, 'L');
 
 if ($tabla == "cargos") {
 	$consulta = " SELECT *
