@@ -3,31 +3,26 @@
 <?php
 include_once '../../../../includes/psl-config.php';
 include_once '../../../../includes/db_connect.php';
-include_once '../../../../includes/db_connect.php';
-include_once '../../../../includes/functions.php'; 
-//Inicia la funcion 
-sec_session_start();
-// Comprueba que la sesion activa corresponda al modulo
-if ((login_check($mysqli) == true) && ($_SESSION['type'] == '2')){
 
-//Conexion a la base de datos
 $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
+// Check connection
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-//Campos para lograr que utf-8 funcione perfectamente
+// Campos para lograr que utf-8 funcione perfectamente
 $acentos = $con->query("SET NAMES 'utf8'");
 mysqli_set_charset($con,"utf8");
 
-$codigo=$_POST['idCon'];
+$codigo=$_POST['idCon']; // Recepción del id del contacto a editar
 
 
+// Consulta para obtener los datos del contacto
 $result=mysqli_query($con,"SELECT * FROM contactos 
     join partidos on contactos.fk_id_partido = partidos.id_partido
     where id_contacto='".$codigo."' ");
 if($result === FALSE) {
-    die(mysqli_error()); // TODO: better error handling
+    die(mysqli_error());
 }
 
 
@@ -40,12 +35,13 @@ while($fila = mysqli_fetch_array($result))
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Actualizar</title>
 <script type="text/javascript">
+// Lo siguiente es para cambiar los campos automáticamente cuando se elige la subcomisión del contacto
     $(document).ready(function(){
-        $("#opcionSubcomision").change(function(){
-                var select = $("#opcionSubcomision option:selected").val();
-                if(select=="1"){
-                    $("div.tipo").hide();
-                    $("#TipoEducacion").show();
+        $("#opcionSubcomision").change(function(){ // Al cambiar el select con id "opcionSubcomision"...
+                var select = $("#opcionSubcomision option:selected").val(); // ... se obtiene el valor seleccionado
+                if(select=="1"){ // Si el valor es 1...
+                    $("div.tipo").hide(); //... oculta los div de la clase "tipo"
+                    $("#TipoEducacion").show(); // muestra el div de id "TipoEducación"
                 }
                 if(select=="2"){
                     $("div.tipo").hide();
@@ -95,21 +91,21 @@ while($fila = mysqli_fetch_array($result))
     <div id="formCon">
       <form method="POST" id="formUpdate" accept-charset="utf-8" enctype="multipart/form-data">
         <?php
-        $foto = $fila['foto'];
+        $foto = $fila['foto']; // Se revisa si el contacto tiene foto. "1" significa que sí.
 
-        if ($foto > 0 ) {
+        if ($foto > 0 ) { // Si tiene foto hace la ruta de ésta tomando el id del contacto
         $rutaFoto='../../statics/images/contactos/'.$fila['id_contacto'].'.jpg';
         }
-        else{
+        else{ // Si no tiene muestra una imagen por defecto
         $rutaFoto='../../statics/images/contactos/user.png';
         }
-        $pc=$fila['pc'];
+        $pc=$fila['pc']; // Revisa si el contacto tiene puesto o cargo. "0" significa puesto y "1" es cargo
 
 
-        echo '<img class="tarjetaFoto" src="'.$rutaFoto.'">';
-        echo '<input type="button" class="btnEnviar" value="Subir foto" onclick="myFunction5('.$fila['id_contacto'].')"></input>';
+        echo '<img class="tarjetaFoto" src="'.$rutaFoto.'">'; // Muestra la foto
+        echo '<input type="button" class="btnEnviar" value="Subir foto" onclick="myFunction5('.$fila['id_contacto'].')"></input>'; // Prepara la función para subir foto
         echo '<p class="tarjetaNom">'.utf8_encode($fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno'].' '). '</p>';
-        if($pc==1){
+        if($pc==1){ // Si tiene cargo hace la consulta a la tabla de cargos
             $consulta = $mysqli->prepare("SELECT cargos.id_dependencia, cargos.cargo, nombre_dependencia FROM cargos
                 join dependencias on cargos.id_dependencia = dependencias.id_dependencia
                 where id_contacto='".$codigo."' and valido='1'");
@@ -120,7 +116,7 @@ while($fila = mysqli_fetch_array($result))
                 echo $cargo." en ".$nombre_dependencia;
             }
         }
-        if($pc==0){
+        if($pc==0){ // Si tiene puesto hace la consulta a la tabla de puestos
             $consulta = $mysqli->prepare("SELECT puestos.puesto, puestos.extra FROM puestos
                 where id_contacto='".$codigo."' and valido='1'");
             $consulta->execute();
@@ -194,13 +190,14 @@ while($fila = mysqli_fetch_array($result))
         <div id="NuevoPuesto" name="NuevoPuesto" style="display:none">
 
             <?php
-            $consultaSub = $mysqli->prepare("SELECT id_subcomision, nombre_subcomision FROM subcomisiones");
-            $consultaSub->execute();
-            $consultaSub->bind_result($id_subcomision,$nombre_subcomision);
-            $consultaSub->store_result();
+            // Consulta a la base de datos para ver las subcomisiones
+            $consultaSub = $mysqli->prepare("SELECT id_subcomision, nombre_subcomision FROM subcomisiones"); // Preparación de la consulta
+            $consultaSub->execute(); // Ejecución de la consulta
+            $consultaSub->bind_result($id_subcomision,$nombre_subcomision); // Asignación de resultados a variables
+            $consultaSub->store_result(); // Guarda resultados
             echo "<select name='opcionSubcomision' id='opcionSubcomision'>";
             echo "<option value='' disabled selected>Tipo de usuario</option>";
-            while($consultaSub->fetch()){?>
+            while($consultaSub->fetch()){?> <!-- Muestra el resultado de la consulta -->
             <p><?php echo '<option value="'.$id_subcomision.'">'.utf8_encode($nombre_subcomision).'</option>'; ?></p>
             <?php }
             echo "</select>";
@@ -485,13 +482,4 @@ while($fila = mysqli_fetch_array($result))
 }
 mysqli_free_result($result);
 mysqli_close($con);
-
-}
-// Si no se aprueba la sesion muestra el mensaje
-else{ ?>
-    <p>
-        <span class="error">No estás autorizado para ver esta página.</span>
-    </p>
-<?php
-}
 ?>
