@@ -10,6 +10,10 @@ if ((login_check($mysqli) == true) && ($_SESSION['type'] == '2')){
 
 // Recepción de datos del formulario
 $id_contacto = $_POST['id_contacto'];
+$nombre = $_POST['nombre'];
+$apellido_paterno = $_POST['apellido_paterno'];
+$apellido_materno = $_POST['apellido_materno'];
+$titulo = $_POST['titulo'];
 $tel_oficina = $_POST['tel_oficina'];
 $celular = $_POST['celular'];
 $email = $_POST['email'];
@@ -37,8 +41,8 @@ $acentos = $con->query("SET NAMES 'utf8'");
 mysqli_set_charset($con,"utf8");
 
 // Realiza la actualización de datos en la base de datos conforme a lo que se recibió en las variables
-        $update = mysqli_query($con, "UPDATE contactos SET tel_oficina = '$tel_oficina', celular = '$celular', 
-            email = '$email', calle = '$calle', numero_int = '$numero_int', numero_ext = '$numero_ext',
+        $update = mysqli_query($con, "UPDATE contactos SET nombre='$nombre', apellido_paterno='$apellido_paterno', apellido_materno='$apellido_materno',tel_oficina = '$tel_oficina', celular = '$celular', 
+            email = '$email', titulo='$titulo', calle = '$calle', numero_int = '$numero_int', numero_ext = '$numero_ext',
 			colonia = '$colonia', municipio = '$municipio', localidad = '$localidad', codigo_postal = '$codigo_postal',
             fecha_nacimiento='$fecha_nacimiento', fk_id_partido = '$fk_id_partido'
             WHERE id_contacto = '$id_contacto' ")

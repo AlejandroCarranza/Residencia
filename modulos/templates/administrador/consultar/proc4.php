@@ -136,6 +136,19 @@ while($fila = mysqli_fetch_array($result))
         ?>
         <br>
         <input name="id_contacto" type="hidden" value="<?php echo $fila['id_contacto']; ?>">
+        <p class="etiquetaTit">Nombre</p>
+        <p class="etiquetas">Nombre:</p><input class="inputAct" name="nombre" type="text" value="<?php echo $fila['nombre'];?>">
+        <p class="etiquetas">Apellido Paterno:</p><input class="inputAct" name="apellido_paterno" type="text" value="<?php echo $fila['apellido_paterno']; ?>">
+        <p class="etiquetas">Apellido Materno:</p><input class="inputAct" name="apellido_materno" type="text" value="<?php echo $fila['apellido_materno']; ?>">
+        <p class="etiquetas">Título:</p>
+            <select name="titulo" >
+                <option value="<?php echo $fila['titulo']; ?>"><?php echo $fila['titulo']; ?></option>
+                <option value="C.">C.</option>
+                <option value="Ing.">Ing.</option>
+                <option value="Lic.">Lic.</option>
+                <option value="Dr.">Dr.</option>
+                <option value="Prfr.">Prfr.</option>
+            </select>
         <p class="etiquetaTit">Contactos</p>
         <p class="etiquetas">Tel. Oficina:</p><input class="inputAct" name="tel_oficina" type="text" value="<?php echo $fila['tel_oficina'];?>">
         <p class="etiquetas">Celular:</p><input class="inputAct" name="celular" type="text" value="<?php echo $fila['celular']; ?>">
