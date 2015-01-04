@@ -14,6 +14,10 @@ $con=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+//Campos para lograr que utf-8 funcione perfectamente
+$acentos = $con->query("SET NAMES 'utf8'");
+mysqli_set_charset($con,"utf8");
+
 $subcomite = $_POST['valor1'];
 $tabla = $_POST['valor2'];
 $cargo = "cargos";
@@ -55,7 +59,7 @@ while($fila = mysqli_fetch_array($result))
 {
 	//Muestra el nombre 
  echo '<tr>';
- echo '<td>'.utf8_encode($fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno'].' '). '</td>';
+ echo '<td>'.$fila['titulo']. " ".$fila['nombre']. " ".$fila['apellido_paterno']. " ".$fila['apellido_materno']. '</td>';
  // Comprueba si el contacto tiene asignado un cargo
 if ($tabla == $cargo) {
 	// Muestra el cargo

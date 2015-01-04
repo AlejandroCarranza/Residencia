@@ -95,7 +95,7 @@ if($result === FALSE) {
 while($fila = mysqli_fetch_array($result))
 {
 	$pdf->SetFont("Arial", "", 8);
-	$pdf->Cell(55, 5, $fila['nombre']. " ". $fila['apellido_paterno']." ". $fila['apellido_materno'],1,0, 'L');
+	$pdf->Cell(55, 5, utf8_decode($fila['nombre'].' '.$fila['apellido_paterno'].' '.$fila['apellido_materno']),1,0, 'L');
 	$pdf->Cell(45, 5, $fila['nombre_dependencia'],1,0, 'L');
 	$pdf->Cell(50, 5, $fila['email'],1,0, 'L');
 	$pdf->Cell(25, 5, $fila['tel_oficina'],1,1, 'L');
@@ -121,7 +121,7 @@ if($result === FALSE) {
 while($fila = mysqli_fetch_array($result))
 {
 	$pdf->SetFont("Arial", "", 8);
-	$pdf->Cell(55, 5, $fila['nombre']. " ". $fila['apellido_paterno']." ". $fila['apellido_materno'],1,0, 'L');
+	$pdf->Cell(55, 5, utf8_decode($fila['nombre']. " ". $fila['apellido_paterno']." ". $fila['apellido_materno']),1,0, 'L');
 	$pdf->Cell(45, 5, $fila['extra'],1,0, 'L');
 	$pdf->Cell(50, 5, $fila['email'],1,0, 'L');
 	$pdf->Cell(25, 5, $fila['tel_oficina'],1,1, 'L');

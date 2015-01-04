@@ -124,7 +124,7 @@ if ((login_check($mysqli) == true) && ($_SESSION['type'] == '2')): ?>
                 <option value="2">Administrador</option>
                 <option value="1">Usuario</option>
                 <option value="0">Invitado</option>
-                <option value="4">Invitado Tipo 2</option>
+                <option value="3">Invitado Tipo 2</option>
             </select>
             <input type="password" class="input" id="password" name="password" placeholder="Contraseña"/>
             <input type="password" class="input" id="confirmarpwd" name="confirmarpwd" placeholder="Confirmar contraseña"/>
