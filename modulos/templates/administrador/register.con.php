@@ -97,14 +97,14 @@ if ($dependencia!='') { // Si se recibió un nombre de dependencia entonces se g
             $uno->bind_param('sssssss', $id_contacto, $cargo, $dependencia, $sub, $fechaI, $fechaT, $val);
             // Ejecución de la sentencia.
             if (! $uno->execute()) {
-                echo 'Error en sentencia para tabla campos ';
+                echo 'Error en sentencia para tabla cargos ';
             }
         }
         // Aquí se actualiza la tabla de contactos indicando que el contacto tiene un cargo, esto mediante el campo "pc", el '1' significa que es cargo
         if ($uno = $mysqli->prepare("UPDATE contactos SET pc = '1' WHERE id_contacto = ?")) {
             $uno->bind_param('s', $id_contacto);
             if (! $uno->execute()) {
-                echo 'Error en sentencia para tabla campos ';
+                echo 'Error en sentencia para tabla cargos ';
             }
         }
 }
@@ -131,7 +131,7 @@ $temp2='UAR';
         if ($uno = $mysqli->prepare("INSERT INTO puestos (id_contacto, id_subcomision, puesto, extra, fecha_inicio, fecha_termino, valido) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
             $uno->bind_param('sssssss', $id_contacto, $sub, $temp1, $EM, $fechaI, $fechaT, $val);
             if (! $uno->execute()) {
-                echo 'Error en sentencia para tabla campos '.$sub;
+                echo 'Error en sentencia para tabla puestos '.$sub;
             }
         }
         if ($uno = $mysqli->prepare("INSERT INTO campos (fk_id_contacto, campo, valor, valido) VALUES (?, ?, ?, ?)")) {
@@ -143,7 +143,7 @@ $temp2='UAR';
         if ($uno = $mysqli->prepare("UPDATE contactos SET pc = '0' WHERE id_contacto = ?")) {
             $uno->bind_param('s', $id_contacto);
             if (! $uno->execute()) {
-                echo 'Error en sentencia para tabla campos ';
+                echo 'Error en sentencia para tabla contactos ';
             }
         }
 }
@@ -162,13 +162,13 @@ $temp1='Presidente Municipal';
             $uno->bind_param('sssssss', $id_contacto, $sub, $temp1, $PM, $fechaI, $fechaT, $val);
             
             if (! $uno->execute()) {
-                echo 'Error en sentencia para tabla campos '.$sub;
+                echo 'Error en sentencia para tabla puestos '.$sub;
             }
         }
         if ($uno = $mysqli->prepare("UPDATE contactos SET pc = '0' WHERE id_contacto = ?")) {
             $uno->bind_param('s', $id_contacto);
             if (! $uno->execute()) {
-                echo 'Error en sentencia para tabla campos ';
+                echo 'Error en sentencia para tabla contactos ';
             }
         }
 }
@@ -183,13 +183,13 @@ $cargo='Regidor';
         if ($uno = $mysqli->prepare("INSERT INTO puestos (id_contacto, id_subcomision, puesto, extra, fecha_inicio, fecha_termino, valido) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
             $uno->bind_param('sssssss', $id_contacto, $sub, $cargo, $puesto, $fechaI, $fechaT, $val);
             if (! $uno->execute()) {
-                echo 'Error en sentencia para tabla campos '.$sub;
+                echo 'Error en sentencia para tabla puestos '.$sub;
             }
         }
         if ($uno = $mysqli->prepare("UPDATE contactos SET pc = '0' WHERE id_contacto = ?")) {
             $uno->bind_param('s', $id_contacto);
             if (! $uno->execute()) {
-                echo 'Error en sentencia para tabla campos ';
+                echo 'Error en sentencia para tabla contactos ';
             }
         }
 }
@@ -205,13 +205,13 @@ $cargo='Diputado';
         if ($uno = $mysqli->prepare("INSERT INTO puestos (id_contacto, id_subcomision, puesto, extra, fecha_inicio, fecha_termino, valido) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
             $uno->bind_param('sssssss', $id_contacto, $sub, $cargo, $extra, $fechaI, $fechaT, $val);
             if (! $uno->execute()) {
-                echo 'Error en sentencia para tabla campos '.$sub;
+                echo 'Error en sentencia para tabla puestos '.$sub;
             }
         }
         if ($uno = $mysqli->prepare("UPDATE contactos SET pc = '0' WHERE id_contacto = ?")) {
             $uno->bind_param('s', $id_contacto);
             if (! $uno->execute()) {
-                echo 'Error en sentencia para tabla campos ';
+                echo 'Error en sentencia para tabla puestos ';
             }
         }
 }
