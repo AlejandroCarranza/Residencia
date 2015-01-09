@@ -149,6 +149,7 @@ while($fila4 = mysqli_fetch_array($result4))
 			}
 
 			echo '<p class="etiquetaTit">Extras</p>';
+			echo '<p class="tarjetaBasic">' ."Cumpleaños: ". " ".$fila4['fecha_nacimiento'].'</p>';
 
 			while($fila5 = mysqli_fetch_array($result5))
 			{	
