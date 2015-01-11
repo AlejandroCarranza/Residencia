@@ -16,17 +16,18 @@ if (isset($_POST['usuario'], $_POST['p'])) {
     if (login($usuario, $password, $mysqli) == true) {
         // Login exitoso.
         if ($_SESSION['type'] == '0') {
-        //header('Location: ../modulos/templates/usuario/index0.php');
         $resultado[]=array("logstatus"=>"1","nombre"=>"Alejandro", "apellido"=>"Carranza");
         echo json_encode($resultado);
         }
         if ($_SESSION['type'] == '1') {
-        //header('Location: ../templates/index1.php');
         $resultado[]=array("logstatus"=>"1","nombre"=>"Alejandro", "apellido"=>"Carranza");
         echo json_encode($resultado);
         }
         if ($_SESSION['type'] == '2') {
-        //header('Location: ../modulos/templates/administrador/admin.php');
+        $resultado[]=array("logstatus"=>"1","nombre"=>"Alejandro", "apellido"=>"Carranza");
+        echo json_encode($resultado);
+        }
+        if ($_SESSION['type'] == '3') {
         $resultado[]=array("logstatus"=>"1","nombre"=>"Alejandro", "apellido"=>"Carranza");
         echo json_encode($resultado);
         }
