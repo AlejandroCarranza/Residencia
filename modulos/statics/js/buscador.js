@@ -80,6 +80,33 @@ function btnsSubcomites(id){
   });
 }
 
+/* Funcion para mandar el valor de los botones de consuoltas por subcomite a proc3.php 
+  Recibe el id del contacto y lo almacena en idSubcom e inmeditamente se almacena el valor
+  en el campo valor1 que esta en el html, despues comprueba que la subcomicion se relacione
+  con puestos o con cargos, segun lo que corresponda se cambia el valor del campo valor2 que esta
+  en el html con puestos o cargos, segun se cumpla la condicion.
+
+  Despues se envia el formulario formPref a proc3.php y se carga la respuesta en el div contenidoRes.
+*/
+function btnsSubcomites2(id){
+  var idSubcom = id;
+  var tipoCargo = 0;
+  $('#valor1').val(idSubcom);
+  if ((idSubcom == 5) || (idSubcom == 7) || (idSubcom == 9) || (idSubcom == 10)) {
+    $('#valor2').val("puestos");
+  }
+  else{
+    $('#valor2').val("cargos");
+  };
+  
+      $(document).ready(function() {
+        $.post(
+        "consultar/proc6.php", $("#formPref").serialize(),function(a){
+        $('#contenidoRes').html(a);
+        });
+  });
+}
+
 /* Funcion para la carga de la tarjeta del contacto
   Se recibe el id del contacto, se guarda en id_Contacto, se cambia el valor del campo vcod con el id del contacto
   despues se envia ese campo a proc2.php y se carga la respuesta de proc2.php en el div pers

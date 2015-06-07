@@ -27,6 +27,11 @@ function inicio(){
             $("#contenido").html(home);
             });
         });
+    $("#btnConsulta3").click(function (){
+        $.post("consultar/consulta3.php","", function(home){
+            $("#contenido").html(home);
+            });
+        });
 
     //Botones para el menu de reportes
     $("#btnReporte1").click(function (){
