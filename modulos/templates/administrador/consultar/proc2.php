@@ -194,16 +194,21 @@ while($fila4 = mysqli_fetch_array($result4))
 			echo '<p class="tarjetaBasic">' .$fila7['nombre_subcomision']." de " .$fila7['extra']." | ".$fila7['fecha_inicio']." - ".$fila7['fecha_termino'].'</p>';
 		}
 
-		$consultaSQL8 = "SELECT valor FROM notas where id_contacto ='".$id_contacto."' ";
+		$consultaSQL8 = "SELECT valor, id FROM notas where id_contacto ='".$id_contacto."' ";
 		$result8=mysqli_query($con, $consultaSQL8) or die (mysqli_error($con)); 
 		if($result8 === FALSE) {
-			die(mysqli_error()); 
+			die(mysqli_error());
+			
 		}
 		echo '<p class="etiquetaTit">Notas</p>';
 		echo '<ul>';
 		while($fila8 = mysqli_fetch_array($result8))
 		{	
-			echo '<li class="tarjetaBasic">'.$fila8['valor'].'</li>';
+			echo '<li class="tarjetaBasic">'.$fila8['valor'];
+			echo '<form  method="post" name="formBNota" id="formBNota'.$fila8['id'].'" accept-charset="utf-8" enctype="multipart/form-data">';
+            echo '<a href="#" class="icon-cancel-circle borrarnota" title="Borrar" data-idnota="'.$fila8['id'].'" ></a>';
+            echo '<input type="hidden" value="'.$fila8['id'].'" id="notaid" name="borrarnotaid" >';
+            echo '</form></li>';
 		}
 
 		echo '</ul>';
@@ -223,6 +228,21 @@ while($fila4 = mysqli_fetch_array($result4))
 </div>
 <input type="hidden" value="" id="idCon" name="idCon" >
 <div id="editarCon"></div>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $(".borrarnota").click(function () {
+    var $idnota = $(this).attr("data-idnota");
+
+    myFunction9($idnota);
+ 
+//$(".evento").orderBy(function() {return +$(this).attr("data-index");}).appendTo(".eventosContenedor");
+  });
+});
+</script>
+
+
 <?php
 }
 //Se liberan los recursos y la conexion

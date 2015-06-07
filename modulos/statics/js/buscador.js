@@ -228,8 +228,17 @@ function myFunction8(){
             alert("Error. Nota no guardada."); // Si la respuesta fue lo que sea a excepción de "1" entonces se muestra una alerta.
         }
     });
+}
 
-
+function myFunction9(id){
+    $.post("consultar/borrarnota.php",$('#formBNota'+id).serialize(),function(res){ // Si pasa la validación envía los datos del formulario
+        if(res == "1"){ // Se recibirá una respuesta, si es 1...
+            alert("Nota Borrada"); // mensaje de confirmación
+            location.reload();
+        } else {
+            alert("Error. Nota no guardada."); // Si la respuesta fue lo que sea a excepción de "1" entonces se muestra una alerta.
+        }
+    });
 }
 
 /* Funcion que envia el formulario formUpdate a actualizar.php

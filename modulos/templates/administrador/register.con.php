@@ -29,6 +29,8 @@ if (isset($_POST['nombre'], $_POST['apellidoP'])) {
     $Email=filter_input(INPUT_POST, 'Email', FILTER_SANITIZE_STRING);
     $codigo_postal=filter_input(INPUT_POST, 'codigo_postal', FILTER_SANITIZE_STRING);
 
+    if($partido==''||$partido==null) $partido='1';
+
 
         // Inserta el nuevo contacto únicamente en la tabla de contactos
         // Primero se prepara la sentencia, se dejan los valores listo para asignarse

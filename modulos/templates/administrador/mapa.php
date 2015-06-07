@@ -17,7 +17,7 @@ sec_session_start();
   <link rel="stylesheet" href="../../statics/css/estilos.css">
   <!-- Llamamos a estilos.css para darle el diseño al sitio web -->
   <link rel="stylesheet" href="../../statics/css/normalize.css">
-  <title>Mapa</title>
+  <title>Prospera</title>
     <style type="text/css">
           html, body, #map-canvas {
         height: 400px;
