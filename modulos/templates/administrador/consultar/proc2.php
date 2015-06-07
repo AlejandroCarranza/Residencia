@@ -167,6 +167,33 @@ while($fila4 = mysqli_fetch_array($result4))
 		echo '<img class="tarjetaPartido" src="'.$rutaPartido.'">';
 	
 	}
+	
+	//Historial de cargos
+		$consultaSQL6 = "SELECT * FROM cargos c 
+		INNER JOIN dependencias d ON c.id_dependencia = d.id_dependencia 
+		where id_contacto ='".$id_contacto."' ";
+		$result6=mysqli_query($con, $consultaSQL6) or die (mysqli_error($con)); 
+		if($result6 === FALSE) {
+    		die(mysqli_error()); 
+		}
+			echo '<p class="etiquetaTit">Historial de Puestos</p>';
+			while($fila6 = mysqli_fetch_array($result6))
+		{	
+			echo '<p class="tarjetaBasic">' .$fila6['cargo']." en ".$fila6['nombre_dependencia']." | ".$fila6['fecha_inicio']." - ".$fila6['fecha_termino'].'</p>';
+		}	
+	//Historial de puestos
+		$consultaSQL7 = "SELECT * FROM puestos p 
+		INNER JOIN subcomisiones sb ON p.id_subcomision = sb.id_subcomision
+		where id_contacto ='".$id_contacto."' ";
+		$result7=mysqli_query($con, $consultaSQL7) or die (mysqli_error($con)); 
+		if($result7 === FALSE) {
+    			die(mysqli_error()); 
+		}			
+			while($fila7 = mysqli_fetch_array($result7))
+		{	
+			echo '<p class="tarjetaBasic">' .$fila7['nombre_subcomision']." de " .$fila7['extra']." | ".$fila7['fecha_inicio']." - ".$fila7['fecha_termino'].'</p>';
+		}	
+	
 ?> 
 </div>
 <input type="hidden" value="" id="idCon" name="idCon" >
@@ -178,6 +205,8 @@ mysqli_free_result($result1);
 mysqli_free_result($result2);
 mysqli_free_result($result4);
 mysqli_free_result($result5);
+mysqli_free_result($result6);
+mysqli_free_result($result7);
 mysqli_close($con);
 
 }
