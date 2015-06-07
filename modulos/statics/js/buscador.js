@@ -218,6 +218,20 @@ function myFunction7(id){
         });
   });
 }
+
+function myFunction8(){
+    $.post("consultar/notas.php",$('#formNota').serialize(),function(res){ // Si pasa la validación envía los datos del formulario
+        if(res == "1"){ // Se recibirá una respuesta, si es 1...
+            alert("Nota Guardada"); // mensaje de confirmación
+            document.formNota.reset(); // Reinicia el formulario
+        } else {
+            alert("Error. Nota no guardada."); // Si la respuesta fue lo que sea a excepción de "1" entonces se muestra una alerta.
+        }
+    });
+
+
+}
+
 /* Funcion que envia el formulario formUpdate a actualizar.php
   Envia los datos del formulario a actualizar.php y recibe una respuesta,
   si la respuesta es uno, lanza un alert con el mensaje "Contacto Actualizado",

@@ -192,9 +192,34 @@ while($fila4 = mysqli_fetch_array($result4))
 			while($fila7 = mysqli_fetch_array($result7))
 		{	
 			echo '<p class="tarjetaBasic">' .$fila7['nombre_subcomision']." de " .$fila7['extra']." | ".$fila7['fecha_inicio']." - ".$fila7['fecha_termino'].'</p>';
-		}	
-	
-?> 
+		}
+
+		$consultaSQL8 = "SELECT valor FROM notas where id_contacto ='".$id_contacto."' ";
+		$result8=mysqli_query($con, $consultaSQL8) or die (mysqli_error($con)); 
+		if($result8 === FALSE) {
+			die(mysqli_error()); 
+		}
+		echo '<p class="etiquetaTit">Notas</p>';
+		echo '<ul>';
+		while($fila8 = mysqli_fetch_array($result8))
+		{	
+			echo '<li class="tarjetaBasic">'.$fila8['valor'].'</li>';
+		}
+
+		echo '</ul>';
+?>
+
+		<form  method="post" name="formNota" id="formNota" accept-charset="utf-8" enctype="multipart/form-data">
+        <div id="TipoSubcomision" class="tipo">
+            <br>
+            <span class="categorias">Nueva nota</span>
+            <input type="text" class="input" id="nuevanota" name="nuevanota" placeholder="nota" />
+            <input type="hidden" value="<?php echo $fila4['id_contacto']; ?>" id="notaid" name="notaid" >
+        </div>
+        <br>
+            <input class="btnEnviar" onclick="myFunction8()" name="boton3" type="button" value="Guardar nota"/>
+            <br>             
+        </form>
 </div>
 <input type="hidden" value="" id="idCon" name="idCon" >
 <div id="editarCon"></div>

@@ -67,7 +67,8 @@ sec_session_start();
                         <li><a href="#" id="btnActualizarCat">Catálogos</a></li>
                     </ul>
                 </div>
-            </li>	 	
+            </li>
+            <li><a href="mapa.php" id="btnMapa">Mapa</a></li> 	
            </ul>
 	</nav>
 	<div id="contenido">
