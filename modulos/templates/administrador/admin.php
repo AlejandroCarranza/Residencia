@@ -16,6 +16,7 @@ sec_session_start();
 	<link rel="stylesheet" href="../../statics/css/estilos.css">
 	<!-- Llamamos a estilos.css para darle el diseño al sitio web -->
 	<link rel="stylesheet" href="../../statics/css/normalize.css">
+	<link rel="stylesheet" href="../../statics/css/bootstrap.css">
 	<title>Prospera</title>
 </head>
 <body>
@@ -68,7 +69,8 @@ sec_session_start();
                     </ul>
                 </div>
             </li>
-            <li><a href="mapa.php" id="btnMapa">Mapa</a></li> 	
+            <li><a href="mapa.php" id="btnMapa">Mapa</a></li>
+            <li><a href="#" id="btnArchivos">Repositorio</a></li>
            </ul>
 	</nav>
 	<div id="contenido">
@@ -85,6 +87,8 @@ sec_session_start();
    	<script src="../../statics/js/AJAX.js"></script>
    	<script src="../../statics/js/cargaPaginas.js"></script>
 	<script src="../../statics/js/buscador.js"></script>
+	<script src="../../statics/js/bootstrap.min.js"></script>
+	<script src="../../statics/js/upload.js"></script>
 	<!-- Llamamos la función inicio() del archivo cargaPaginas para que nos de las funciones de cambiar entre páginas -->
 	<script type="text/javascript">
 	inicio();

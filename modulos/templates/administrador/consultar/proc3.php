@@ -46,7 +46,7 @@ if ($result = mysqli_query($con, $consulta)) {
     	//Pasamos el resultado a un array manipulable
     	if($row_cnt > 0){
 //Muestra el encabezado de la tabla
- echo '<table border="1">';
+ echo '<table border="1" class="tablaconmargen">';
  echo '<tr>';
  echo '<th>Nombre</td>';
  echo '<th>Puesto</td>';

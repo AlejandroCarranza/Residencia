@@ -56,6 +56,11 @@ function inicio(){
             $("#contenido").html(home);
             });
         });
+    $("#btnArchivos").click(function (){
+        $.post("administrar/test/index.php","", function(home){
+            $("#contenido").html(home);
+            });
+        });
     });
 }
 
