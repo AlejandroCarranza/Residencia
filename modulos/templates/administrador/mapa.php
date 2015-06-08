@@ -120,7 +120,8 @@ sec_session_start();
                     </ul>
                 </div>
             </li>
-            <li><a href="mapa.php" id="btnMapa">Mapa</a></li>   
+            <li><a href="mapa.php" id="btnMapa">Mapa</a></li>
+            <li><a href="#" id="btnArchivos">Repositorio</a></li> 
            </ul>
   </nav>
 

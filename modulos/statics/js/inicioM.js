@@ -49,13 +49,11 @@ function inicio(){
             $("#contenido").html(home);
             });
         });
-    /*
-    $("#btnMapa").click(function (){
-        $.post("administrar/mapa.php","", function(home){
+    $("#btnArchivos").click(function (){
+        $.post("administrar/test/index.php","", function(home){
             $("#contenido").html(home);
             });
         });
-    */
     });
 }
 
