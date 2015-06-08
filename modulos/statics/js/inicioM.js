@@ -50,7 +50,7 @@ function inicio(){
             });
         });
     $("#btnArchivos").click(function (){
-        $.post("administrar/test/index.php","", function(home){
+        $.post("administrar/repositorio.php","", function(home){
             $("#contenido").html(home);
             });
         });
